@@ -8,17 +8,34 @@
 # include <stdio.h>
 # include "../libft/libft.h"
 
-typedef struct s_map_data
+typedef struct s_data_map
 {
 	char	**map;
-	char	*north;
-	char	*south;
-	char	*east;
-	char	*west;
+	int		north_fd;
+	int		south_fd;
+	int		east_fd;
+	int		west_fd;
 	char	*floor;
 	char	*ceiling;
-}			t_map;
+}			t_data_map;
 
-int	init_struct(t_map *data_map, char *filename);
+typedef struct s_data_paths
+{
+	char		*north;
+	char		*south;
+	char		*east;
+	char		*west;
+	t_data_map	data;
+}				t_map;
+
+//? ENTRY
+int		is_entry_valid(int argc, char **argv);
+
+//? STRUCT
+int		parse_struct(t_map *data, char *filename);
+int		init_struct(t_map *data_map, char *filename);
+
+//? FREE
+void	free_map(t_map *data_map);
 
 #endif
