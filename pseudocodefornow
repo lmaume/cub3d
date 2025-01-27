@@ -1,0 +1,43 @@
+typedef struct s_player
+{
+ int  plyr_x;
+ int  plyr_y;
+ double angle;
+ double fov;
+} t_player;
+
+typedef struct s_ray
+{
+ double ray_angle;
+ double wall_distance;
+ int  flag; // maybe a bool will see
+} t_ray;
+
+void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
+{
+	if (x < 0)
+		return ;
+	else if (x >= WITH)
+		return ;
+	if (y < 0) 
+		return ;
+	else if (y >= HEIGHT)
+		return ;
+	mlx_put_pixel(je sais plus ce qui ya la)
+}
+
+void	rotate_player(t_mlx mlx, int i)  // rotation rapide un peu de la merde mais on verra
+{
+	if (i == 1)
+	{
+		mlx->ply->angle += vitesserot
+		if (mlx->ply->angle > 2 * M_PI)
+			mlx->ply->angle -= 2 * M_PI;
+	}
+	else
+	{
+		mlx->ply->angle -= vitesserot;
+		if (mlx->ply->angle < 0)
+			mlx->ply->angle += 2 * M_PI;
+	}
+}
