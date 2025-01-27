@@ -41,3 +41,15 @@ void	rotate_player(t_mlx mlx, int i)  // rotation rapide un peu de la merde mais
 			mlx->ply->angle += 2 * M_PI;
 	}
 }
+
+void game_loop(void *ml)
+{
+	t_mlx *mlx;
+
+	mlx = ml;
+	mlx_delete_image();
+	mlx->img = mlx_new_image();
+	hooks():
+	cast_rays(mlx);
+	mlx_image_to_window():
+}
