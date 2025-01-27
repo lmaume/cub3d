@@ -28,6 +28,9 @@ typedef struct s_data_paths
 	t_data_map	data;
 }				t_map;
 
+//? PRINTS
+void	print_struct(t_map *data_map);
+
 //? ENTRY
 int		is_entry_valid(int argc, char **argv);
 

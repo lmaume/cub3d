@@ -1,5 +1,39 @@
 #include "parsing.h"
 
+void	print_struct(t_map *data_map)
+{
+	int	i;
+
+	i = 0;
+	//? cardinal directions
+	if (data_map->north != NULL)
+		printf("map->north = %s\n", data_map->north);
+	if (data_map->south != NULL)
+		printf("map->south = %s\n", data_map->south);
+	if (data_map->east != NULL)
+		printf("map->east = %s\n", data_map->east);
+	if (data_map->west != NULL)
+		printf("map->west = %s\n", data_map->west);
+	//? floor & ceiling
+	if (data_map->data.floor != NULL)
+		printf("map->floor = %s\n", data_map->data.floor);
+	if (data_map->data.ceiling != NULL)
+		printf("map->ceiling = %s\n", data_map->data.ceiling);
+	//? cardinal fds
+	printf("north fd = %d\n", data_map->data.north_fd);
+	printf("south fd = %d\n", data_map->data.south_fd);
+	printf("east fd = %d\n", data_map->data.east_fd);
+	printf("west fd = %d\n", data_map->data.west_fd);
+	//? map
+	if (data_map->data.map == NULL)
+		return ;
+	while (data_map->data.map[i] != NULL)
+	{
+		printf("%s", data_map->data.map[i]);
+		i++;
+	}
+}
+
 int	is_entry_valid(int argc, char **argv)
 {
 	if (argv[1] == NULL || ft_strlen(argv[1]) < 5 || argc < 2)
