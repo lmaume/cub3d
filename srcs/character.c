@@ -6,7 +6,7 @@
 /*   By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:41:51 by mlapique          #+#    #+#             */
-/*   Updated: 2025/01/27 18:20:39 by mlapique         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:41:28 by mlapique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int raycasting(mlx_image_t *image, int x, int y, t_player *player)
 	while (i < ANGLE_QUART_CIRCLE)
 	{
 		angle = i;
-		p2.x = ((WIDTH * 2)* cos(angle * PI / ANGLE_QUART_CIRCLE / 2)) ;
-		p2.y = ((HEIGHT * 2) * sin(angle * PI / ANGLE_QUART_CIRCLE / 2));
+		p2.x = ((WIDTH / 2)* cos(angle * PI / ANGLE_QUART_CIRCLE / 2));
+		p2.y = ((HEIGHT / 2) * sin(angle * PI / ANGLE_QUART_CIRCLE / 2));
 		p2.z = 0;
 		test->grad = 0;
 		test->p1 = p1;
@@ -43,7 +43,8 @@ int raycasting(mlx_image_t *image, int x, int y, t_player *player)
 		test->p2.y = angle_y(player, p2.x, p2.y, p2.z) + y;
 		printf("%i\n", test->p2.y);
 		line(test, image);
-		i += 1.5;
+		(void)image;
+		i += 0.5;
 	}
 	return (0);
 }
@@ -64,7 +65,7 @@ int character(mlx_image_t *image, int x, int y, int r)
 			x1 = r * cos(angle * PI / ANGLE_HALF_CIRCLE);
 			y1 = r * sin(angle * PI / ANGLE_HALF_CIRCLE);
 			my_mlx_pixel_put(image, x1 + x, y1 + y, 0x00FFFFFF);
-			i += 0.1;
+			i += 5;
 		}
 		i = 0;
 		r--;

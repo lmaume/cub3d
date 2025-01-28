@@ -6,36 +6,50 @@
 /*   By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:41:51 by mlapique          #+#    #+#             */
-/*   Updated: 2025/01/27 18:41:08 by mlapique         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:13:38 by mlapique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void draw_wall(char **str, int i, int j)
+void draw_wall(int i, int j, mlx_image_t *image)
 {
-    t_point *p1;
-    t_point *p2;
-    
-    if ()
+	int	a;
+	int b;
+
+	a = 0;
+	b = 0;
+	while (a < 100)
+	{
+		while (b < 100)
+		{
+			my_mlx_pixel_put(image, i + a, j + b, 0xFF0000FF);
+			b++;
+		}
+		b = 0;
+		a++;
+	}
 }
 
-int wall(char **str)
+int wall(char **str, mlx_image_t *image)
 {
-    int i;
-    int j;
+	int i;
+	int j;
+	int decal;
 
-    j = 0;
-    i = 0;
-    while (str[i])
-    {
-        while (str[i][j])
-        {
-            if (str[i][j] == '1')
-                draw_wall(str, i, j);
-            j++;
-        }
-        i++;
-    }
-    
+	decal = 100;
+	j = 0;
+	i = 0;
+	while (str[i])
+	{
+		while (str[i][j])
+		{
+			if (str[i][j] == '1')
+				draw_wall(i * decal, j * decal, image);
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	return (0);
 }
