@@ -1,5 +1,6 @@
 #include "parsing.h"
 
+//TODO CHANGER POUR RENDRE COMPATIBLE AVEC LA MLX
 int	open_texture(t_map *data_map)
 {
 	data_map->data.north_fd = open(data_map->north, O_RDONLY);
@@ -25,7 +26,7 @@ int	init_var(char **tab, char **str, char *opt)
 	if (ft_tabcmp(tab, opt) != NULL)
 		tmp = &ft_tabcmp(tab, opt)[ft_strlen(opt)];
 	if (tmp == NULL)
-		return (printf("One or more identifier is not reconized.\n"), 1);
+		return (printf("One or more identifier is not recoGnized.\n"), 1);
 	tmp[ft_strlen(tmp) - 1] = '\0';
 	*str = tmp;
 	return (0);
@@ -50,11 +51,24 @@ int	get_map_line(char **tab)
 	return (0);
 }
 
+int	map_alloc(t_map *data_map, char ***tab)
+{
+	data_map->data.map = ft_calloc(sizeof(char **), 1);
+	data_map->map_cpy = ft_calloc(sizeof(char **), 1);
+	data_map->data.map = &(*tab)[get_map_line(*tab)];
+	data_map->map_cpy = &(*tab)[get_map_line(*tab)];
+	if (data_map->data.map == NULL || data_map->map_cpy == NULL)
+		return (free(*tab), 1);
+	return (0);
+}
+
 int	init_struct(t_map *data_map, char *filename)
 {
 	char	**tab;
 
 	tab = ft_file_to_tab(filename);
+	if (tab == NULL)
+		return (printf("File '%s' not found.\n", filename), 1);
 	if (init_var(tab, &data_map->north, "NO ") == 1)
 		return (free(tab), 1);
 	if (init_var(tab, &data_map->south, "SO ") == 1)
@@ -69,11 +83,10 @@ int	init_struct(t_map *data_map, char *filename)
 		return (free(tab), 1);
 	if (data_map->data.floor == NULL || data_map->data.ceiling == NULL)
 		return (free(tab), 1);
-	data_map->data.map = &tab[get_map_line(tab)];
-	if (data_map->data.map == 0)
-		return (free(tab), 1);
-	open_texture(data_map);
-	print_struct(data_map);
+	if (map_alloc(data_map, &tab) == 1)
+		return (1);
+	if (open_texture(data_map) == 1)
+		return (printf("One or more file not found.\n"), 1);
 	free(tab);
 	return (0);
 }

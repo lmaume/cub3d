@@ -21,10 +21,13 @@ typedef struct s_data_map
 
 typedef struct s_data_paths
 {
+	char		**map_cpy;
 	char		*north;
 	char		*south;
 	char		*east;
 	char		*west;
+	int			last_x;
+	int			last_y;
 	t_data_map	data;
 }				t_map;
 
@@ -39,6 +42,6 @@ int		parse_struct(t_map *data, char *filename);
 int		init_struct(t_map *data_map, char *filename);
 
 //? FREE
-void	free_map(t_map *data_map);
+void	close_textures(t_data_map data_map);
 
 #endif

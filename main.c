@@ -8,6 +8,10 @@ int	main(int argc, char **argv)
 	if (is_entry_valid(argc, argv) != 0)
 		return (1);
 	parse_struct(&data_map, argv[1]);
-	//free_map(&data_map);
+	close_textures(data_map.data);
+	// free_tab(data_map.map_cpy);
+	// free(data_map.map_cpy);
+	// free_tab(data_map.data.map);
+	// free(data_map.data.map);
 	return (0);
 }
