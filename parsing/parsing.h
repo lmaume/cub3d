@@ -11,6 +11,8 @@
 typedef struct s_data_map
 {
 	char	**map;
+	int		height;
+	int		width;
 	int		north_fd;
 	int		south_fd;
 	int		east_fd;

@@ -26,7 +26,7 @@ void	print_struct(t_map *data_map)
 	printf("\n\n");
 	while (data_map->data.map[i] != NULL)
 	{
-		printf("map | %s", data_map->data.map[i]);
+		printf("map | %s\n", data_map->data.map[i]);
 		i++;
 	}
 	i = 0;
@@ -35,7 +35,7 @@ void	print_struct(t_map *data_map)
 	printf("\n\n");
 	while (data_map->map_cpy[i] != NULL)
 	{
-		printf("copy | %s", data_map->map_cpy[i]);
+		printf("copy | %s\n", data_map->map_cpy[i]);
 		i++;
 	}
 }
@@ -66,18 +66,17 @@ static int	floodfill(int x, int y, char **map)
 	int	end;
 
 	end = 0;
-	printf("floodfill iteration\n");
 	if (isset(map[x][y], "10NSEW") == 0)
-		return (printf("Invalid char in map.\n"), -1);
-	
+		return (printf("Invalid char in map (%c)[%s].\n", map[x][y], map[x]), -1);
+
 	map[x][y] = '1';
-	if (isset(map[x + 1][y], "0NSEW") == 1)
+	if (isset(map[x + 1][y], "1 \t") == 0)
 		end += floodfill(x + 1, y, map);
-	if (isset(map[x - 1][y], "0NSEW") == 1)
+	if (isset(map[x - 1][y], "1 \t") == 0)
 		end += floodfill(x - 1, y, map);
-	if (isset(map[x][y + 1], "0NSEW") == 1)
+	if (isset(map[x][y + 1], "1 \t") == 0)
 		end += floodfill(x, y + 1, map);
-	if (isset(map[x][y - 1], "0NSEW") == 1)
+	if (isset(map[x][y - 1], "1 \t") == 0)
 		end += floodfill(x, y - 1, map);
 	else
 		end++;
@@ -114,9 +113,9 @@ int	parse_struct(t_map *data, char *filename)
 {
 	if (init_struct(data, filename) == 1)
 		return (1);
+	print_struct(data);
 	if (is_map_surrounded_by_walls(data) == 1)
 		return (printf("Map not surrounded by walls.\n"), 1);
-	print_struct(data);
 
 	return (0);
 }
