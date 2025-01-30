@@ -40,7 +40,7 @@ static int	get_map_width(char **map, int start)
 	return (w_max);
 }
 
-int	get_map_size(t_map *data_map, char **map, int start)
+static int	get_map_size(t_map *data_map, char **map, int start)
 {
 	int	i;
 	int	j;

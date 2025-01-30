@@ -33,17 +33,17 @@ typedef struct s_data_paths
 	t_data_map	data;
 }				t_map;
 
-//? PRINTS
-void	print_struct(t_map *data_map);
+//?		PRINTS
 
-//? ENTRY
+//?		ENTRY
 int		is_entry_valid(int argc, char **argv);
 
-//? STRUCT
-int		parse_struct(t_map *data, char *filename);
+//?		STRUCT
 int		init_struct(t_map *data_map, char *filename);
+int		parse_struct(t_map *data, char *filename);
 
-//? FREE
+//?		MEMORY
+int		map_alloc(t_map *data_map, char **tab);
 void	close_textures(t_data_map data_map);
 
 #endif

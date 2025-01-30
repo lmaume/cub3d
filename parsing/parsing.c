@@ -2,8 +2,10 @@
 
 int	is_entry_valid(int argc, char **argv)
 {
-	if (argv[1] == NULL || ft_strlen(argv[1]) < 5 || argc < 2)
-		return (1);
+	if (argv[1] == NULL || argc < 2)
+		return (printf("Please select a level.\n"), 1);
+	if (ft_strlen(argv[1]) < 5)
+		return (printf("Incorrect map name. (ex. 'map.cub'.)\n"), 1);
 	if (ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4], ".cub", 4) != 0)
 		return (printf("Map extension is not .cub.\n"), 1);
 	return (0);

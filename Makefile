@@ -8,6 +8,7 @@ LIBS	= -Iinclude -ldl -lglfw -pthread -lm
 
 SRCS =	main.c \
 		parsing/init_map.c \
+		parsing/get_map.c \
 		parsing/parsing.c 
 
 PRINTF = ./libft/libft.a
