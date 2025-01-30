@@ -80,9 +80,9 @@ int	get_map_size(t_map *data_map, char **map, int start)
 
 	i = start;
 	j = 0;
-	while (map[i] != NULL && (map[i][0] != '\0' && map[i][0] != '\n'))
+	while (map[i] != NULL && (map[i][0] != '\0'))
 	{
-		while (isset(map[i][j], "10NSEW") == 0)
+		while (isset(map[i][j], "10NSEW") == 0 && map[i][j] != '\0') //! probleme si trop de \n en fin de fichier
 			j++;
 		j = 0;
 		i++;
@@ -103,8 +103,8 @@ int	map_alloc(t_map *data_map, char **tab)
 	j = 0;
 	i = get_map_line(tab);
 	size = get_map_size(data_map, tab, i);
-	data_map->data.map = ft_calloc(sizeof(char **), size - i);
-	data_map->map_cpy = ft_calloc(sizeof(char **), size - i);
+	data_map->data.map = ft_calloc(sizeof(char **), size - (i - 1));
+	data_map->map_cpy = ft_calloc(sizeof(char **), size - (i - 1));
 	while (i < size)
 	{
 		len = ft_strlen(tab[i]);
