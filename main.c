@@ -9,7 +9,7 @@ int	main(int argc, char **argv)
 		return (1);
 	parse_struct(&data_map, argv[1]);
 	close_textures(data_map.data);
-	// free_tab(data_map.map_cpy);
-	// free_tab(data_map.data.map);
+	free_tab(data_map.map_cpy);
+	free_tab(data_map.data.map);
 	return (0);
 }
