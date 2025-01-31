@@ -41,6 +41,7 @@ int		is_entry_valid(int argc, char **argv);
 //?		STRUCT
 int		init_struct(t_map *data_map, char *filename);
 int		parse_struct(t_map *data, char *filename);
+int		player_count(t_map *data_map);
 
 //?		MEMORY
 int		map_alloc(t_map *data_map, char **tab);

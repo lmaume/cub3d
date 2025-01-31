@@ -63,6 +63,8 @@ int	parse_struct(t_map *data, char *filename)
 {
 	if (init_struct(data, filename) == 1)
 		return (1);
+	if (player_count(data) != 1)
+		return (printf("One player is needed, no more or less.\n"), 1);
 	if (is_map_surrounded_by_walls(data) == 1)
 		return \
 		(printf("Map not surrounded by walls or invalid character.\n"), 1);

@@ -44,6 +44,29 @@ static int	init_var(char **tab, char **str, char *opt)
 	return (0);
 }
 
+int	player_count(t_map *data_map)
+{
+	int	player_count;
+	int	i;
+	int	j;
+
+	j = 0;
+	i = 0;
+	player_count = 0;
+	while (data_map->map_cpy[i] != NULL)
+	{
+		while (data_map->map_cpy[i][j] != '\0')
+		{
+			if (isset(data_map->map_cpy[i][j], "NSEW") == 1)
+				player_count++;
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	return (player_count);
+}
+
 int	init_struct(t_map *data_map, char *filename)
 {
 	char	**tab;
