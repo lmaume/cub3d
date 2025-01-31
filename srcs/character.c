@@ -6,7 +6,7 @@
 /*   By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:41:51 by mlapique          #+#    #+#             */
-/*   Updated: 2025/01/31 16:40:11 by mlapique         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:06:23 by mlapique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void game(void *param, t_player *player, t_data_map map)
 	mlx_image_t *image;
 
 	image = param;
-	character(image, player->plyr_x, player->plyr_y, 10);
+	character(image, player->plyr_x, player->plyr_y, PLAYER_WEIGHT);
 	raycasting(image, player, map);
 	
 }
