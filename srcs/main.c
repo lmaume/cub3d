@@ -35,15 +35,15 @@ bool	my_mlx_pixel_put(mlx_image_t *image, int x, int y, unsigned int color)
 	if ((y * image->width + x) * 4 > 0 && (y * image->width + x) * 4 < HEIGHT * WIDTH * 4)
 	{
 		pixelstart = &image->pixels[(y * image->width + x) * 4];
-		// if (pixelstart++ == 0 && pixelstart++ == 0 && pixelstart++ == 0 && pixelstart == 0)
+		if ((uint8_t)pixelstart[0] == 0 && (uint8_t)pixelstart[1] == 0 && (uint8_t)pixelstart[2] == 0 && (uint8_t)pixelstart[3] == 0)
 		{
 			*(pixelstart++) = color >> 24;
 			*(pixelstart++) = color >> 16;
 			*(pixelstart++) = color >> 8;
 			*(pixelstart) = color;
 		}
-		// else
-		// 	return (true);
+		else
+			return (true);
 	}
 	return (false);
 }
@@ -84,16 +84,16 @@ void ft_hook(void* param)
 
 void map(char **str)
 {
-	str[0] = "1111111111";
-	str[1] = "1000000001";
-	str[2] = "1000000001";
-	str[3] = "1000000001";
-	str[4] = "1000110001";
-	str[5] = "1000110001";
-	str[6] = "1000000001";
-	str[7] = "1000000001";
-	str[8] = "1000000001";
-	str[9] = "1111111111";
+	str[0] = "111111111111111111111111111111111111111";
+	str[1] = "100000000000000000000000000000000000001";
+	str[2] = "100000000000000000000000000000000000011";
+	str[3] = "100000000000000000000000000000000000011";
+	str[4] = "100011000000000011100000000000000000111";
+	str[5] = "100011000000000000000000000000000000011";
+	str[6] = "100000000000000000000010000000000000011";
+	str[7] = "100000000000000000000010000000000000001";
+	str[8] = "100000000000011110000100000000000001111";
+	str[9] = "111111111111111111111111111111111111111";
 	str[10] = NULL;
 }
 
@@ -108,7 +108,7 @@ void game_loop(void *ev)
 	mlx_delete_image(eve->mlx->mlx, eve->mlx->image);
 	eve->mlx->image = mlx_new_image(eve->mlx->mlx, HEIGHT, WIDTH);
 	wall(mape, eve->mlx->image);
-	game(eve->mlx->image, eve->player);
+	game(eve->mlx->image, eve->player, mape);
 	mlx_image_to_window(eve->mlx->mlx, eve->mlx->image, 0, 0);
 }
 // -----------------------------------------------------------------------------

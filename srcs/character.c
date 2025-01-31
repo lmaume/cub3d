@@ -6,45 +6,53 @@
 /*   By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:41:51 by mlapique          #+#    #+#             */
-/*   Updated: 2025/01/28 17:41:28 by mlapique         ###   ########.fr       */
+/*   Updated: 2025/01/31 13:47:17 by mlapique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 #include "limits.h"
 
+void get_p2(t_player *player, char **map, double i)
+{
+	// t_point	p2;
+	(void)map;
+	double a;
 
-int raycasting(mlx_image_t *image, int x, int y, t_player *player)
+	a = cos(player->anglez) - ((i + FOV) / 2);
+	printf("angle = %f", a);
+}
+
+int raycasting(mlx_image_t *image, t_player *player, char **map)
 {
 	t_point p1;
 	t_point p2;
 	double i;
 	double angle;
-	t_line_necessary *test;
+	t_line_necessary *draw_line;
 
-	test = ft_calloc(sizeof(t_line_necessary), 1);
-	p1.x = x;
-	p1.y = y;
+	draw_line = ft_calloc(sizeof(t_line_necessary), 1);
+	p1.x = player->plyr_x;
+	p1.y = player->plyr_y;
 	p1.z = 0;
 	p1.color = "0xFF0000FF";
 	p2.color = "0xFF0000FF";
 	i = 0;
-	while (i < ANGLE_QUART_CIRCLE)
+	while (i < FOV)
 	{
 		angle = i;
-		p2.x = ((WIDTH / 2)* cos(angle * PI / ANGLE_QUART_CIRCLE / 2));
-		p2.y = ((HEIGHT / 2) * sin(angle * PI / ANGLE_QUART_CIRCLE / 2));
+		p2.x = ((WIDTH / 2) * cos(angle * PI / ANGLE_HALF_CIRCLE));
+		p2.y = ((HEIGHT / 2) * sin(angle * PI / ANGLE_HALF_CIRCLE));
 		p2.z = 0;
-		test->grad = 0;
-		test->p1 = p1;
-		test->p2 = p2;
-		test->p2.z = angle_z(player, p2.x, p2.y, p2.z);
-		test->p2.x = angle_x(player, p2.x, p2.y, p2.z) + x;
-		test->p2.y = angle_y(player, p2.x, p2.y, p2.z) + y;
-		printf("%i\n", test->p2.y);
-		line(test, image);
-		(void)image;
-		i += 0.5;
+		draw_line->grad = 0;
+		draw_line->p1 = p1;
+		draw_line->p2 = p2;
+		get_p2(player, map, i);
+		draw_line->p2.z = angle_z(player, p2.x, p2.y, p2.z);
+		draw_line->p2.x = angle_x(player, p2.x, p2.y, p2.z) + player->plyr_x;
+		draw_line->p2.y = angle_y(player, p2.x, p2.y, p2.z) + player->plyr_y;
+		line(draw_line, image);
+		i += 1;
 	}
 	return (0);
 }
@@ -73,12 +81,12 @@ int character(mlx_image_t *image, int x, int y, int r)
 	return (0);
 }
 
-void game(void *param, t_player *player)
+void game(void *param, t_player *player, char **map)
 {
 	mlx_image_t *image;
 
 	image = param;
 	character(image, player->plyr_x, player->plyr_y, 10);
-	raycasting(image, player->plyr_x, player->plyr_y, player);
+	raycasting(image, player, map);
 	
 }

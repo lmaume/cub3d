@@ -6,7 +6,7 @@
 /*   By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:33:03 by mlapique          #+#    #+#             */
-/*   Updated: 2025/01/28 17:36:44 by mlapique         ###   ########.fr       */
+/*   Updated: 2025/01/29 17:19:36 by mlapique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 #define ANGLE_CIRCLE 360
 #define ANGLE_HALF_CIRCLE 180
 #define ANGLE_QUART_CIRCLE 90
+#define FOV 90
+
 
 
 typedef struct s_player
@@ -78,7 +80,7 @@ typedef struct s_eve
 }				t_eve;
 
 
-void game(void* param, t_player *player);
+void game(void* param, t_player *player, char **str);
 
 
 //draw thingy
