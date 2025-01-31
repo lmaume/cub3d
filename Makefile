@@ -1,40 +1,49 @@
-NAME = cub3d
 
-MLX_A = MLX42/libmlx42.a
+NAME	:= cub3d
+CC 		:= cc
+CFLAGS	:= -Werror -Wextra -Wall -g3 -fsanitize=leak
+LIBMLX	:= ./MLX42
+HEADERS	:= -I ./include -I $(LIBMLX)/include
+LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+LIBFT	:= ./libft/libft.a
+SRCS	:= 	srcs/main.c \
+			parsing/init_map.c \
+			parsing/get_map.c \
+			parsing/parsing.c \
+		   	srcs/character.c \
+		   	srcs/create_a_line.c \
+		  	srcs/create_line_part_2.c \
+		  	srcs/line_utils.c \
+		  	srcs/matrix_rotation.c \
+		  	srcs/wall.c 			\
 
-HEADERS	= -I ./include -I $(LIBMLX)/include
+OBJS	:= ${SRCS:.c=.o}
 
-LIBS	= -Iinclude -ldl -lglfw -pthread -lm
+all: $(NAME)
 
-SRCS =	main.c \
-		parsing/init_map.c \
-		parsing/get_map.c \
-		parsing/parsing.c 
+.built:
+	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
+	touch .built
 
-PRINTF = ./libft/libft.a
+ %.o: %.c
+	 @$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
 
-CC = cc
+$(NAME): $(OBJS) $(LIBFT) .built
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(LIBS) -o $(NAME)
 
-CFLAGS = -Wall -Wextra -Werror -g3
+clean:
+	@rm -rf $(OBJS)
+	@rm -rf $(LIBMLX)/build
 
-RM = rm -f
+fclean: clean
+	@rm -rf $(MAKE FCLEAN) - C ./libft/*.o ./libft/*.a
+	@rm -rf $(NAME)
+	@rm -f .built
 
-OBJS = $(SRCS:.c=.o)
+$(LIBFT):
+	$(MAKE) -C ./libft
 
-all : $(NAME)
 
-$(NAME) : $(OBJS)
-	@$(MAKE) all -C ./libft
-	@cp $(PRINTF) $(NAME)
-	@cc $(CFLAGS) $(OBJS) $(PRINTF) -o $(NAME)
-#	@cc $(CFLAGS) $(LIBS)  $(OBJS) $(PRINTF) $(MLX_A) -o $(NAME)
+re: fclean all
 
-clean :
-	@$(MAKE) clean -C ./libft
-	@$(RM) $(OBJS)
-
-fclean : clean
-	@$(MAKE) fclean -C ./libft
-	@$(RM) $(NAME)
-
-re : fclean all
+.PHONY: all, clean, fclean, re, libmlx

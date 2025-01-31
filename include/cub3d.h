@@ -6,7 +6,7 @@
 /*   By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:33:03 by mlapique          #+#    #+#             */
-/*   Updated: 2025/01/29 17:19:36 by mlapique         ###   ########.fr       */
+/*   Updated: 2025/01/31 16:41:01 by mlapique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "../libft/libft.h"
 #include <stdio.h>
 #include <math.h>
+#include "parsing.h"
 #ifndef PI
 
 #define PI 3.1415926535
@@ -28,7 +29,7 @@
 #define ANGLE_CIRCLE 360
 #define ANGLE_HALF_CIRCLE 180
 #define ANGLE_QUART_CIRCLE 90
-#define FOV 90
+#define FOV 60
 
 
 
@@ -73,14 +74,15 @@ typedef struct s_line_necessary
 
 typedef struct s_eve
 {
-	t_player *player;
-	t_ray	 *ray;
-	uint8_t  *pixels;
-	t_mlx	 *mlx;
+	t_player 	*player;
+	t_ray	 	*ray;
+	uint8_t 	 *pixels;
+	t_mlx	 	*mlx;
+	t_map	 *map;
 }				t_eve;
 
 
-void game(void* param, t_player *player, char **str);
+void game(void* param, t_player *player, t_data_map map);
 
 
 //draw thingy
@@ -112,6 +114,6 @@ bool	my_mlx_pixel_put(mlx_image_t *image, int x, int y, unsigned int color);
 
 // walls
 
-int wall(char **str, mlx_image_t *image);
+int wall(t_data_map *map, mlx_image_t *image);
 
 #endif

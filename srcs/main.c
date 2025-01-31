@@ -1,4 +1,4 @@
-
+#include "../include/parsing.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -7,6 +7,19 @@
 
 // -----------------------------------------------------------------------------
 
+void	free_map(t_map data_map)
+{
+	close_textures(data_map.data);
+	free_tab(data_map.map_cpy);
+	free_tab(data_map.data.map);
+}
+
+int	ini_map(t_map *data_map, int argc, char **argv)
+{
+	(void)argc;
+	parse_struct(data_map, argv[1]);
+	return (0);
+}
 
 void	ini_player(t_player *player)
 {
@@ -18,14 +31,18 @@ void	ini_player(t_player *player)
 	player->plyr_y = 300;
 }
 
-void	ini_eve(t_eve **eve)
+void	ini_eve(t_eve **eve, int argc, char **argv)
 {
 	*eve = ft_calloc(sizeof(t_eve), 1);
 	(*eve)->mlx = ft_calloc(sizeof(t_mlx), 1);
 	(*eve)->player = ft_calloc(sizeof(t_player), 1);
 	(*eve)->ray = ft_calloc(sizeof(t_ray), 1);
 	(*eve)->pixels = ft_calloc(sizeof(uint8_t), WIDTH * HEIGHT * sizeof(uint32_t) + 1);
+	(*eve)->map = ft_calloc(sizeof(t_map), 1);
+	ini_map((*eve)->map, argc, argv);
 	ini_player((*eve)->player);
+	(void)argc;
+	(void)argv;
 }
 
 bool	my_mlx_pixel_put(mlx_image_t *image, int x, int y, unsigned int color)
@@ -82,43 +99,27 @@ void ft_hook(void* param)
 		eve->player->anglex -= 0.05;
 }
 
-void map(char **str)
-{
-	str[0] = "111111111111111111111111111111111111111";
-	str[1] = "100000000000000000000000000000000000001";
-	str[2] = "100000000000000000000000000000000000011";
-	str[3] = "100000000000000000000000000000000000011";
-	str[4] = "100011000000000011100000000000000000111";
-	str[5] = "100011000000000000000000000000000000011";
-	str[6] = "100000000000000000000010000000000000011";
-	str[7] = "100000000000000000000010000000000000001";
-	str[8] = "100000000000011110000100000000000001111";
-	str[9] = "111111111111111111111111111111111111111";
-	str[10] = NULL;
-}
-
 void game_loop(void *ev)
 {
 	t_eve *eve;
-	char **mape;
 
-	mape = ft_calloc(sizeof(char **), 10 + 1);
-	map(mape);
 	eve = ev;
 	mlx_delete_image(eve->mlx->mlx, eve->mlx->image);
 	eve->mlx->image = mlx_new_image(eve->mlx->mlx, HEIGHT, WIDTH);
-	wall(mape, eve->mlx->image);
-	game(eve->mlx->image, eve->player, mape);
+	wall(&eve->map->data, eve->mlx->image);
+	game(eve->mlx->image, eve->player, eve->map->data);
 	mlx_image_to_window(eve->mlx->mlx, eve->mlx->image, 0, 0);
 }
 // -----------------------------------------------------------------------------
 
-int32_t main(void)
+int32_t main(int argc, char **argv)
 {
 	t_eve	*eve;
 
 	eve = NULL;
-	ini_eve(&eve);
+	if (is_entry_valid(argc, argv) != 0)
+		return (printf(""), 1);
+	ini_eve(&eve, argc, argv);
 	if (!(eve->mlx->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
 	{
 		puts(mlx_strerror(mlx_errno));
@@ -140,5 +141,7 @@ int32_t main(void)
 	mlx_loop_hook(eve->mlx->mlx, ft_hook, eve);
 	mlx_loop(eve->mlx->mlx);
 	mlx_terminate(eve->mlx->mlx);
+	// free_map((*eve)->map);
 	return (EXIT_SUCCESS);
 }
+

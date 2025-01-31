@@ -1,4 +1,4 @@
-#include "parsing.h"
+#include "../include/parsing.h"
 
 //TODO CHANGER POUR RENDRE COMPATIBLE AVEC LA MLX
 int	open_texture(t_map *data_map)

@@ -6,31 +6,18 @@
 /*   By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:41:51 by mlapique          #+#    #+#             */
-/*   Updated: 2025/01/29 16:10:08 by mlapique         ###   ########.fr       */
+/*   Updated: 2025/01/31 16:54:46 by mlapique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-int get_volume(char **str)
+int get_volume(int height, int width)
 {
 	int i;
-	int width_max;
-	int height;
-	int tmp;
 
-	width_max = 0;
 	i = 0;
-	height = 0;
-	while (str && str[i])
-	{
-		tmp = ft_strlen(str[i]);
-		if (tmp > width_max)
-			width_max = tmp;
-		i++;
-	}
-	i = 0;
-	while (i * height < HEIGHT && i * width_max < WIDTH)
+	while (i * height < HEIGHT && i * width < WIDTH)
 		i++;
 	return (i); 
 }
@@ -54,20 +41,21 @@ void draw_wall(int i, int j, mlx_image_t *image, int decal)
 	}
 }
 
-int wall(char **str, mlx_image_t *image)
+int wall(t_data_map *map, mlx_image_t *image)
 {
 	int i;
 	int j;
 	int decal;
 
-	decal = get_volume(str);
+	decal = get_volume(map->height, map->width);
+	// printf("\n\t\tlargueur %d hoteur %d\n\n", map->width, map->height);
 	j = 0;
 	i = 0;
-	while (str[i])
+	while (map->map[i])
 	{
-		while (str[i][j])
+		while (map->map[i][j])
 		{
-			if (str[i][j] == '1')
+			if (map->map[i][j] == '1')
 				draw_wall(j * decal, i * decal, image, decal);
 			j++;
 		}

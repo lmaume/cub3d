@@ -1,4 +1,4 @@
-#include "parsing.h"
+#include "../include/parsing.h"
 
 static int	get_map_line(char **tab)
 {
@@ -30,14 +30,14 @@ static int	get_map_width(char **map, int start)
 	w_max = 0;
 	while (map[i] != NULL && (map[i][0] != '\0' && map[i][0] != '\n'))
 	{
-		while (isset(map[i][j], "10NSEW") == 0)
+		while (map[i][j] != '\0')
 			j++;
 		if (j > w_max)
 			w_max = j;
 		j = 0;
 		i++;
 	}
-	return (w_max);
+	return (w_max - 1);
 }
 
 static int	get_map_size(t_map *data_map, char **map, int start)
@@ -54,7 +54,7 @@ static int	get_map_size(t_map *data_map, char **map, int start)
 		j = 0;
 		i++;
 	}
-	data_map->data.height = (start - i);
+	data_map->data.height = ((i - start) - 1);
 	data_map->data.width = get_map_width(map, start);
 	return (i);
 }
