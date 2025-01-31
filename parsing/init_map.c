@@ -58,7 +58,11 @@ int	player_count(t_map *data_map)
 		while (data_map->map_cpy[i][j] != '\0')
 		{
 			if (isset(data_map->map_cpy[i][j], "NSEW") == 1)
+			{
+				data_map->data.p_x = j;
+				data_map->data.p_y = i;
 				player_count++;
+			}
 			j++;
 		}
 		j = 0;

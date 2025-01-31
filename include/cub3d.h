@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmaume <lmaume@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:33:03 by mlapique          #+#    #+#             */
-/*   Updated: 2025/01/31 16:41:01 by mlapique         ###   ########.fr       */
+/*   Updated: 2025/01/31 17:40:23 by lmaume           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,6 @@ bool	my_mlx_pixel_put(mlx_image_t *image, int x, int y, unsigned int color);
 // walls
 
 int wall(t_data_map *map, mlx_image_t *image);
+int get_volume(int height, int width);
 
 #endif

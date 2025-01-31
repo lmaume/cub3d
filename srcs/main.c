@@ -21,14 +21,17 @@ int	ini_map(t_map *data_map, int argc, char **argv)
 	return (0);
 }
 
-void	ini_player(t_player *player)
+void	ini_player(t_player *player, t_data_map *data)
 {
+	int	volume;
+
+	volume = get_volume(data->height, data->width);
 	player->anglex = 0;
 	player->angley = 0;
 	player->anglez = 0;
 	player->fov = 60;
-	player->plyr_x = 300;
-	player->plyr_y = 300;
+	player->plyr_x = (data->p_x * volume) + (volume / 2);
+	player->plyr_y = (data->p_y * volume) + (volume / 2);
 }
 
 void	ini_eve(t_eve **eve, int argc, char **argv)
@@ -40,7 +43,7 @@ void	ini_eve(t_eve **eve, int argc, char **argv)
 	(*eve)->pixels = ft_calloc(sizeof(uint8_t), WIDTH * HEIGHT * sizeof(uint32_t) + 1);
 	(*eve)->map = ft_calloc(sizeof(t_map), 1);
 	ini_map((*eve)->map, argc, argv);
-	ini_player((*eve)->player);
+	ini_player((*eve)->player, &(*eve)->map->data);
 	(void)argc;
 	(void)argv;
 }

@@ -59,6 +59,11 @@ static int	get_map_size(t_map *data_map, char **map, int start)
 	return (i);
 }
 
+// void	get_player(t_data_map *data)
+// {
+
+// }
+
 int	map_alloc(t_map *data_map, char **tab)
 {
 	int	i;
