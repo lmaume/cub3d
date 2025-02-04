@@ -18,7 +18,7 @@ static int	floodfill(int x, int y, char **map)
 	end = 0;
 	if (map[x][y] == '\0')
 		return (end++, -1);
-	if (isset(map[x][y], "10DNSEW") == 0)
+	if (isset(map[x][y], "10DONSEW") == 0)
 		return (end++, -1);
 	map[x][y] = '1';
 	if (isset(map[x + 1][y], "1\n\0") == 0)

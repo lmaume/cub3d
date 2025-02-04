@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmaume <lmaume@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:41:51 by mlapique          #+#    #+#             */
-/*   Updated: 2025/01/31 16:54:46 by mlapique         ###   ########.fr       */
+/*   Updated: 2025/02/04 18:00:01 by lmaume           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,44 @@ void draw_wall(int i, int j, mlx_image_t *image, int decal)
 	}
 }
 
+void draw_close_door(int i, int j, mlx_image_t *image, int decal)
+{
+	int	a;
+	int b;
+
+	a = 0;
+	b = 0;
+	while (a < decal)
+	{
+		while (b < decal)
+		{
+			my_mlx_pixel_put(image, i + a, j + b, 0xFFFF00FF);
+			b++;
+		}
+		b = 0;
+		a++;
+	}
+}
+
+void draw_open_door(int i, int j, mlx_image_t *image, int decal)
+{
+	int	a;
+	int b;
+
+	a = 0;
+	b = 0;
+	while (a < decal)
+	{
+		while (b < decal)
+		{
+			my_mlx_pixel_put(image, i + a, j + b, 0x777700FF);
+			b++;
+		}
+		b = 0;
+		a++;
+	}
+}
+
 int wall(t_data_map *map, mlx_image_t *image)
 {
 	int i;
@@ -48,7 +86,6 @@ int wall(t_data_map *map, mlx_image_t *image)
 	int decal;
 
 	decal = get_volume(map->height, map->width);
-	// printf("\n\t\tlargueur %d hoteur %d\n\n", map->width, map->height);
 	j = 0;
 	i = 0;
 	while (map->map[i])
@@ -57,6 +94,10 @@ int wall(t_data_map *map, mlx_image_t *image)
 		{
 			if (map->map[i][j] == '1')
 				draw_wall(j * decal, i * decal, image, decal);
+			if (map->map[i][j] == 'D')
+				draw_close_door(j * decal, i * decal, image, decal);
+			if (map->map[i][j] == 'O')
+				draw_open_door(j * decal, i * decal, image, decal);
 			j++;
 		}
 		j = 0;

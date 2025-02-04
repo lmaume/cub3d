@@ -6,7 +6,7 @@
 /*   By: lmaume <lmaume@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:33:03 by mlapique          #+#    #+#             */
-/*   Updated: 2025/01/31 17:40:23 by lmaume           ###   ########.fr       */
+/*   Updated: 2025/02/04 18:28:39 by lmaume           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ typedef struct s_eve
 }				t_eve;
 
 
-void game(void* param, t_player *player, t_data_map map);
-
+void	game(void* param, t_player *player, t_data_map map);
+void	ini_eve(t_eve **eve, int argc, char **argv);
 
 //draw thingy
 
@@ -113,8 +113,12 @@ int angle_z(t_player *player, int x, int y, int z);
 bool	my_mlx_pixel_put(mlx_image_t *image, int x, int y, unsigned int color);
 
 // walls
+int		wall(t_data_map *map, mlx_image_t *image);
+int		get_volume(int height, int width);
+bool	is_player_in_wall(t_data_map *data, int x, int y);
+bool	is_player_near_door(t_data_map *data, int x, int y);
 
-int wall(t_data_map *map, mlx_image_t *image);
-int get_volume(int height, int width);
+// gameplay
+void open_door(t_eve *eve);
 
 #endif

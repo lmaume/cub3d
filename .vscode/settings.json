@@ -1,5 +1,10 @@
 {
     "files.associations": {
-        "parsing.h": "c"
+        "parsing.h": "c",
+        "array": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "ranges": "cpp",
+        "span": "cpp"
     }
 }

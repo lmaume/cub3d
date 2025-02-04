@@ -1,21 +1,22 @@
-
 NAME	:= cub3d
-CC 		:= cc
+CC		:= cc
 CFLAGS	:= -Werror -Wextra -Wall -g3 -fsanitize=leak
 LIBMLX	:= ./MLX42
 HEADERS	:= -I ./include -I $(LIBMLX)/include
 LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 LIBFT	:= ./libft/libft.a
-SRCS	:= 	srcs/main.c \
-			parsing/init_map.c \
-			parsing/get_map.c \
-			parsing/parsing.c \
-		   	srcs/character.c \
-		   	srcs/create_a_line.c \
-		  	srcs/create_line_part_2.c \
-		  	srcs/line_utils.c \
-		  	srcs/matrix_rotation.c \
-		  	srcs/wall.c 			\
+SRCS	:= 	srcs/main.c					\
+			parsing/init_map.c			\
+			parsing/get_map.c			\
+			parsing/parsing.c			\
+			srcs/init_struct.c			\
+			srcs/character.c			\
+			srcs/collide.c				\
+			srcs/create_a_line.c		\
+			srcs/create_line_part_2.c	\
+			srcs/line_utils.c			\
+			srcs/matrix_rotation.c		\
+			srcs/wall.c					\
 
 OBJS	:= ${SRCS:.c=.o}
 
