@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   character.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmaume <lmaume@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:41:51 by mlapique          #+#    #+#             */
-/*   Updated: 2025/01/31 16:40:11 by mlapique         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:09:39 by lmaume           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int raycasting(mlx_image_t *image, t_player *player, t_data_map map)
 		line(draw_line, image);
 		i += 2;
 	}
+	free(draw_line);
 	return (0);
 }
 

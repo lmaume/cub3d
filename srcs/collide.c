@@ -39,16 +39,6 @@ void open_door(t_eve *eve)
 	}
 }
 
-bool	is_player_near_door(t_data_map *data, int x, int y)
-{
-	int	volume;
-
-	volume = get_volume(data->height, data->width);
-	if (isset(data->map[y / volume][x / volume], "DO") == 1)
-		return (true);
-	return (false);
-}
-
 //? la hitbox est sur le centre du personnage, pas sur les bords. est-ce un probleme ? pas pour l'instant. ?//
 bool	is_player_in_wall(t_data_map *data, int x, int y)
 {

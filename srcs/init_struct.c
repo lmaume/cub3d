@@ -1,10 +1,16 @@
 #include "../include/cub3d.h"
 
-void	free_map(t_map data_map)
+void	free_everything(t_eve *eve)
 {
-	close_textures(data_map.data);
-	free_tab(data_map.map_cpy);
-	free_tab(data_map.data.map);
+	close_textures(eve->map->data);
+	free_tab(eve->map->map_cpy);
+	free_tab(eve->map->data.map);
+	free(eve);
+	free(eve->mlx);
+	free(eve->player);
+	free(eve->ray);
+	free(eve->pixels);
+	free(eve->map);
 }
 
 int	ini_map(t_map *data_map, int argc, char **argv)

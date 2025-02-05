@@ -5,6 +5,22 @@
 
 // -----------------------------------------------------------------------------
 
+void mouse_move(void *param)
+{
+	static int	old_x = 0;
+	int 		x;
+	int 		y;
+	double		new_angle;
+	t_eve		*eve;
+
+	eve = param;
+	mlx_get_mouse_pos(eve->mlx->mlx, &x, &y);
+    new_angle = ((double)(x - old_x) / WIDTH) * (2 * PI);
+	old_x = x;
+    eve->player->anglez += new_angle;
+
+}
+
 void ft_hook(void* param)
 {
 	t_eve *eve;
@@ -17,20 +33,19 @@ void ft_hook(void* param)
 		shift = 2;
 	else
 		shift = 1;
-	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_W) && is_player_in_wall(&eve->map->data,eve->player->plyr_x, eve->player->plyr_y - 5 * shift) == false)
+	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_W) && is_player_in_wall(&eve->map->data, eve->player->plyr_x, eve->player->plyr_y - 5 * shift) == false)
 		eve->player->plyr_y -= 5 * shift;
-	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_S) && is_player_in_wall(&eve->map->data,eve->player->plyr_x, eve->player->plyr_y + 5 * shift) == false)
+	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_S) && is_player_in_wall(&eve->map->data, eve->player->plyr_x, eve->player->plyr_y + 5 * shift) == false)
 		eve->player->plyr_y += 5 * shift;
-	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_A) && is_player_in_wall(&eve->map->data,eve->player->plyr_x - 5 * shift, eve->player->plyr_y) == false)
+	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_A) && is_player_in_wall(&eve->map->data, eve->player->plyr_x - 5 * shift, eve->player->plyr_y) == false)
 		eve->player->plyr_x -= 5 * shift;
-	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_D) && is_player_in_wall(&eve->map->data,eve->player->plyr_x + 5 * shift, eve->player->plyr_y) == false)
+	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_D) && is_player_in_wall(&eve->map->data, eve->player->plyr_x + 5 * shift, eve->player->plyr_y) == false)
 		eve->player->plyr_x += 5 * shift;
 	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_LEFT))
 		eve->player->anglez += 0.06;
 	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_RIGHT))
 		eve->player->anglez -= 0.06;
 	open_door(eve);
-	// is_player_near_door(eve->map, eve->player->plyr_x, eve->player->plyr_x);
 	// if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_UP))
 	// 	eve->player->angley += 0.05;
 	// if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_DOWN))
@@ -81,9 +96,10 @@ int32_t main(int argc, char **argv)
 	}
 	mlx_loop_hook(eve->mlx->mlx, game_loop, eve);
 	mlx_loop_hook(eve->mlx->mlx, ft_hook, eve);
+	mlx_loop_hook(eve->mlx->mlx, mouse_move, eve);
 	mlx_loop(eve->mlx->mlx);
 	mlx_terminate(eve->mlx->mlx);
-	// free_map((*eve)->map);
+	free_everything(eve);
 	return (EXIT_SUCCESS);
 }
 

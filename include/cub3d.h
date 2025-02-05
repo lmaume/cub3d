@@ -6,7 +6,7 @@
 /*   By: lmaume <lmaume@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:33:03 by mlapique          #+#    #+#             */
-/*   Updated: 2025/02/05 12:40:48 by lmaume           ###   ########.fr       */
+/*   Updated: 2025/02/05 15:06:48 by lmaume           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,27 +33,26 @@
 
 typedef struct s_player
 {
- int  plyr_x;
- int  plyr_y;
- double anglex;
- double angley;
- double anglez;
- double fov;
-} t_player;
+	int	plyr_x;
+	int	plyr_y;
+	double	anglex;
+	double	angley;
+	double	anglez;
+	double	fov;
+}					t_player;
 
 typedef struct s_ray
 {
- double ray_angle;
- double wall_distance;
- int  flag; // maybe a bool will see
-} t_ray;
-
+	double ray_angle;
+	double wall_distance;
+	int  flag; // maybe a bool will see
+}					t_ray;
 
 typedef struct mlx_data
 {
-    mlx_t *mlx;
-    mlx_image_t* image;
-}               t_mlx;
+	mlx_t *mlx;
+	mlx_image_t* image;
+}					t_mlx;
 
 typedef struct s_point
 {
@@ -61,7 +60,7 @@ typedef struct s_point
 	int					y;
 	int					z;
 	char				*color;
-}						t_point;
+}					t_point;
 
 typedef struct s_line_necessary
 {
@@ -78,7 +77,7 @@ typedef struct s_eve
 	t_mlx	 	*mlx;
 	t_map		*map;
 	bool		e_key_released;
-}				t_eve;
+}						t_eve;
 
 
 void	game(void* param, t_player *player, t_data_map map);
@@ -115,9 +114,11 @@ bool	my_mlx_pixel_put(mlx_image_t *image, int x, int y, unsigned int color);
 int		wall(t_data_map *map, mlx_image_t *image);
 int		get_volume(int height, int width);
 bool	is_player_in_wall(t_data_map *data, int x, int y);
-bool	is_player_near_door(t_data_map *data, int x, int y);
 
 // gameplay
 void open_door(t_eve *eve);
+
+// memory
+void	free_everything(t_eve *eve);
 
 #endif
