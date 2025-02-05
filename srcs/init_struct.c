@@ -35,6 +35,7 @@ void	ini_eve(t_eve **eve, int argc, char **argv)
 	(*eve)->ray = ft_calloc(sizeof(t_ray), 1);
 	(*eve)->pixels = ft_calloc(sizeof(uint8_t), WIDTH * HEIGHT * sizeof(uint32_t) + 1);
 	(*eve)->map = ft_calloc(sizeof(t_map), 1);
+	(*eve)->e_key_released = true;
 	ini_map((*eve)->map, argc, argv);
 	ini_player((*eve)->player, &(*eve)->map->data);
 	(void)argc;

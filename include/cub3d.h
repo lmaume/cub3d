@@ -6,7 +6,7 @@
 /*   By: lmaume <lmaume@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:33:03 by mlapique          #+#    #+#             */
-/*   Updated: 2025/02/04 18:28:39 by lmaume           ###   ########.fr       */
+/*   Updated: 2025/02/05 12:40:48 by lmaume           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@
 #define ANGLE_HALF_CIRCLE 180
 #define ANGLE_QUART_CIRCLE 90
 #define FOV 60
-
-
 
 typedef struct s_player
 {
@@ -74,11 +72,12 @@ typedef struct s_line_necessary
 
 typedef struct s_eve
 {
-	t_player 	*player;
-	t_ray	 	*ray;
-	uint8_t 	 *pixels;
+	t_player	*player;
+	t_ray		*ray;
+	uint8_t		*pixels;
 	t_mlx	 	*mlx;
-	t_map	 *map;
+	t_map		*map;
+	bool		e_key_released;
 }				t_eve;
 
 

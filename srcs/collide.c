@@ -1,12 +1,20 @@
 #include "../include/cub3d.h"
 
-static void get_forward_tile(int *tile_x, int *tile_y, t_eve *eve, double distance)
+static void get_forward_tile(int *tile_x, int *tile_y, t_eve *eve)
 {
 	int	volume;
 
 	volume = get_volume(eve->map->data.height, eve->map->data.width);
-	*tile_x = (eve->player->plyr_x + cos(eve->player->anglez) * distance) / volume;
-	*tile_y = (eve->player->plyr_y + sin(eve->player->anglez) * distance) / volume;
+	*tile_x = (eve->player->plyr_x + cos(eve->player->anglez) * (volume * 0.6)) / volume;
+	*tile_y = (eve->player->plyr_y - sin(eve->player->anglez) * (volume * 0.6)) / volume;
+}
+
+static void	toggle_door(t_data_map *data, int x, int y)
+{
+	if (data->map[y][x] == 'D')
+		data->map[y][x] = 'O';
+	else if (data->map[y][x] == 'O')
+		data->map[y][x] = 'D';
 }
 
 void open_door(t_eve *eve)
@@ -16,11 +24,19 @@ void open_door(t_eve *eve)
 	int	tile_y;
 
 	volume = get_volume(eve->map->data.height, eve->map->data.width);
-	get_forward_tile(&tile_x, &tile_y, eve->player, volume);
-	if (eve->map->data.map[tile_y][tile_x] == 'D' && mlx_is_key_down(eve->mlx->mlx, MLX_KEY_E))
-		eve->map->data.map[tile_y][tile_x] = 'O';
-	if (eve->map->data.map[tile_y][tile_x] == 'O' && mlx_is_key_down(eve->mlx->mlx, MLX_KEY_E))
-		eve->map->data.map[tile_y][tile_x] = 'D';
+	get_forward_tile(&tile_x, &tile_y, eve);
+	if (isset(eve->map->data.map[tile_y][tile_x], "DO")  == 1 && mlx_is_key_down(eve->mlx->mlx, MLX_KEY_E))
+	{
+		if (eve->e_key_released == true)
+		{
+			toggle_door(&eve->map->data, tile_x, tile_y);
+			eve->e_key_released = false;
+		}
+	}
+	else
+	{
+		eve->e_key_released = true;
+	}
 }
 
 bool	is_player_near_door(t_data_map *data, int x, int y)
