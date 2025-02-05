@@ -1,5 +1,3 @@
-
-
 #include "../include/cub3d.h"
 
 int	integerpart(float x)

@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   create_a_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/06 15:51:55 by mlapique          #+#    #+#             */
-/*   Updated: 2025/01/28 15:27:07 by mlapique         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../include/cub3d.h"
 
 float	rgrad(t_line_necessary *line)
@@ -69,15 +57,15 @@ float	partone(t_line_necessary *line, float grad, mlx_image_t *image,
 		first_point_steep(line, xend, image, truc);
 	else
 	{
-			my_mlx_pixel_put(image, xend, truc, color(line->p1.color, 1));
-			my_mlx_pixel_put(image, xend, truc + 1, color(line->p1.color, 0.5));
+		my_mlx_pixel_put(image, xend, truc, color(line->p1.color, 1));
+		my_mlx_pixel_put(image, xend, truc + 1, color(line->p1.color, 0.5));
 	}
 	(void)image;
 	return (yend + grad);
 }
 
 void	parttwo(t_line_necessary *line, float grad, mlx_image_t *image,
-		int steep)
+																int steep)
 {
 	int	xend;
 	int	yend;
@@ -92,8 +80,8 @@ void	parttwo(t_line_necessary *line, float grad, mlx_image_t *image,
 		last_point_steep(line, xend, image, truc);
 	else
 	{
-			my_mlx_pixel_put(image, xend, truc, color(line->p2.color, 1));
-			my_mlx_pixel_put(image, xend, truc + 1, color(line->p2.color, 0.5));
+		my_mlx_pixel_put(image, xend, truc, color(line->p2.color, 1));
+		my_mlx_pixel_put(image, xend, truc + 1, color(line->p2.color, 0.5));
 	}
 }
 
@@ -108,9 +96,7 @@ void	line(t_line_necessary *line, mlx_image_t *image)
 	place = partone(line, grad, image, steep);
 	parttwo(line, grad, image, steep);
 	if (steep == 1)
-	{
 		not_steep_line(line, place, image, grad);
-	}
 	else
 		steepness_draw_line(line, place, image, grad);
 }

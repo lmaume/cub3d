@@ -39,7 +39,8 @@ void	ini_eve(t_eve **eve, int argc, char **argv)
 	(*eve)->mlx = ft_calloc(sizeof(t_mlx), 1);
 	(*eve)->player = ft_calloc(sizeof(t_player), 1);
 	(*eve)->ray = ft_calloc(sizeof(t_ray), 1);
-	(*eve)->pixels = ft_calloc(sizeof(uint8_t), WIDTH * HEIGHT * sizeof(uint32_t) + 1);
+	(*eve)->pixels = ft_calloc(sizeof(uint8_t), \
+			WIDTH * HEIGHT * sizeof(uint32_t) + 1);
 	(*eve)->map = ft_calloc(sizeof(t_map), 1);
 	(*eve)->e_key_released = true;
 	ini_map((*eve)->map, argc, argv);
@@ -50,12 +51,14 @@ void	ini_eve(t_eve **eve, int argc, char **argv)
 
 bool	my_mlx_pixel_put(mlx_image_t *image, int x, int y, unsigned int color)
 {
-	uint8_t* pixelstart;
+	uint8_t	*pixelstart;
 
-	if ((y * image->width + x) * 4 > 0 && (y * image->width + x) * 4 < HEIGHT * WIDTH * 4)
+	if ((y * image->width + x) * 4 > 0 && \
+							(y * image->width + x) * 4 < HEIGHT * WIDTH * 4)
 	{
 		pixelstart = &image->pixels[(y * image->width + x) * 4];
-		if ((uint8_t)pixelstart[0] == 0 && (uint8_t)pixelstart[1] == 0 && (uint8_t)pixelstart[2] == 0 && (uint8_t)pixelstart[3] == 0)
+		if ((uint8_t)pixelstart[0] == 0 && (uint8_t)pixelstart[1] \
+			== 0 && (uint8_t)pixelstart[2] == 0 && (uint8_t)pixelstart[3] == 0)
 		{
 			*(pixelstart++) = color >> 24;
 			*(pixelstart++) = color >> 16;

@@ -1,31 +1,19 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   wall.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lmaume <lmaume@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 15:41:51 by mlapique          #+#    #+#             */
-/*   Updated: 2025/02/04 18:00:01 by lmaume           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../include/cub3d.h"
 
-int get_volume(int height, int width)
+int	get_volume(int height, int width)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i * height < HEIGHT && i * width < WIDTH)
 		i++;
-	return (i); 
+	return (i);
 }
 
-void draw_wall(int i, int j, mlx_image_t *image, int decal)
+void	draw_wall(int i, int j, mlx_image_t *image, int decal)
 {
 	int	a;
-	int b;
+	int	b;
 
 	a = 0;
 	b = 0;
@@ -33,7 +21,7 @@ void draw_wall(int i, int j, mlx_image_t *image, int decal)
 	{
 		while (b < decal)
 		{
-			my_mlx_pixel_put(image, i + a, j + b, 0xFF0000FF);
+			my_mlx_pixel_put(image, i + a, j + b, 0xAA0303FF);
 			b++;
 		}
 		b = 0;
@@ -41,10 +29,10 @@ void draw_wall(int i, int j, mlx_image_t *image, int decal)
 	}
 }
 
-void draw_close_door(int i, int j, mlx_image_t *image, int decal)
+void	draw_close_door(int i, int j, mlx_image_t *image, int decal)
 {
 	int	a;
-	int b;
+	int	b;
 
 	a = 0;
 	b = 0;
@@ -52,7 +40,7 @@ void draw_close_door(int i, int j, mlx_image_t *image, int decal)
 	{
 		while (b < decal)
 		{
-			my_mlx_pixel_put(image, i + a, j + b, 0xFFFF00FF);
+			my_mlx_pixel_put(image, i + a, j + b, 0xDDDD03FF);
 			b++;
 		}
 		b = 0;
@@ -60,10 +48,10 @@ void draw_close_door(int i, int j, mlx_image_t *image, int decal)
 	}
 }
 
-void draw_open_door(int i, int j, mlx_image_t *image, int decal)
+void	draw_open_door(int i, int j, mlx_image_t *image, int decal)
 {
 	int	a;
-	int b;
+	int	b;
 
 	a = 0;
 	b = 0;
@@ -71,7 +59,7 @@ void draw_open_door(int i, int j, mlx_image_t *image, int decal)
 	{
 		while (b < decal)
 		{
-			my_mlx_pixel_put(image, i + a, j + b, 0x777700FF);
+			my_mlx_pixel_put(image, i + a, j + b, 0x888803FF);
 			b++;
 		}
 		b = 0;
@@ -79,11 +67,11 @@ void draw_open_door(int i, int j, mlx_image_t *image, int decal)
 	}
 }
 
-int wall(t_data_map *map, mlx_image_t *image)
+int	wall(t_data_map *map, mlx_image_t *image)
 {
-	int i;
-	int j;
-	int decal;
+	int	i;
+	int	j;
+	int	decal;
 
 	decal = get_volume(map->height, map->width);
 	j = 0;

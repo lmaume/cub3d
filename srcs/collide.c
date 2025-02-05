@@ -1,12 +1,14 @@
 #include "../include/cub3d.h"
 
-static void get_forward_tile(int *tile_x, int *tile_y, t_eve *eve)
+static void	get_forward_tile(int *tile_x, int *tile_y, t_eve *eve)
 {
 	int	volume;
 
 	volume = get_volume(eve->map->data.height, eve->map->data.width);
-	*tile_x = (eve->player->plyr_x + cos(eve->player->anglez) * (volume * 0.6)) / volume;
-	*tile_y = (eve->player->plyr_y - sin(eve->player->anglez) * (volume * 0.6)) / volume;
+	*tile_x = (eve->player->plyr_x + \
+				cos(eve->player->anglez) * (volume * 0.6)) / volume;
+	*tile_y = (eve->player->plyr_y - \
+				sin(eve->player->anglez) * (volume * 0.6)) / volume;
 }
 
 static void	toggle_door(t_data_map *data, int x, int y)
@@ -17,7 +19,7 @@ static void	toggle_door(t_data_map *data, int x, int y)
 		data->map[y][x] = 'D';
 }
 
-void open_door(t_eve *eve)
+void	open_door(t_eve *eve)
 {
 	int	volume;
 	int	tile_x;
@@ -25,7 +27,8 @@ void open_door(t_eve *eve)
 
 	volume = get_volume(eve->map->data.height, eve->map->data.width);
 	get_forward_tile(&tile_x, &tile_y, eve);
-	if (isset(eve->map->data.map[tile_y][tile_x], "DO")  == 1 && mlx_is_key_down(eve->mlx->mlx, MLX_KEY_E))
+	if (isset(eve->map->data.map[tile_y][tile_x], "DO") == 1 \
+					&& mlx_is_key_down(eve->mlx->mlx, MLX_KEY_E))
 	{
 		if (eve->e_key_released == true)
 		{
@@ -39,7 +42,6 @@ void open_door(t_eve *eve)
 	}
 }
 
-//? la hitbox est sur le centre du personnage, pas sur les bords. est-ce un probleme ? pas pour l'instant. ?//
 bool	is_player_in_wall(t_data_map *data, int x, int y)
 {
 	int	volume;

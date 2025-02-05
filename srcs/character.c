@@ -1,35 +1,23 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   character.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lmaume <lmaume@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 15:41:51 by mlapique          #+#    #+#             */
-/*   Updated: 2025/02/05 15:09:39 by lmaume           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../include/cub3d.h"
 #include "limits.h"
 
-void get_p2(t_player *player, t_data_map map, double i)
+void	get_p2(t_player *player, t_data_map map, double i)
 {
+	double	a;
 	// t_point	p2;
-	(void)map;
-	double a;
 
+	(void)map;
 	a = cos(player->anglez) - ((i + FOV) / 2);
 	// printf("angle = %f", a);
 }
 
-int raycasting(mlx_image_t *image, t_player *player, t_data_map map)
+int	raycasting(mlx_image_t *image, t_player *player, t_data_map map)
 {
-	t_point p1;
-	t_point p2;
-	double i;
-	double angle;
-	t_line_necessary *draw_line;
+	t_point				p1;
+	t_point				p2;
+	double				i;
+	double				angle;
+	t_line_necessary	*draw_line;
 
 	draw_line = ft_calloc(sizeof(t_line_necessary), 1);
 	p1.x = player->plyr_x;
@@ -58,12 +46,12 @@ int raycasting(mlx_image_t *image, t_player *player, t_data_map map)
 	return (0);
 }
 
-int character(mlx_image_t *image, int x, int y, int r)
+int	character(mlx_image_t *image, int x, int y, int r)
 {
-	double i;
-	double angle;
-	double x1;
-	double y1;
+	double	i;
+	double	angle;
+	double	x1;
+	double	y1;
 
 	i = 0;
 	while (r > 0)
@@ -82,12 +70,11 @@ int character(mlx_image_t *image, int x, int y, int r)
 	return (0);
 }
 
-void game(void *param, t_player *player, t_data_map map)
+void	game(void *param, t_player *player, t_data_map map)
 {
-	mlx_image_t *image;
+	mlx_image_t	*image;
 
 	image = param;
 	character(image, player->plyr_x, player->plyr_y, 10);
 	raycasting(image, player, map);
-	
 }

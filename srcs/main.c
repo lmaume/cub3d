@@ -5,26 +5,27 @@
 
 // -----------------------------------------------------------------------------
 
-void mouse_move(void *param)
+void	mouse_move(void *param)
 {
 	static int	old_x = 0;
-	int 		x;
-	int 		y;
+	int			x;
+	int			y;
 	double		new_angle;
 	t_eve		*eve;
 
 	eve = param;
 	mlx_get_mouse_pos(eve->mlx->mlx, &x, &y);
-    new_angle = ((double)(x - old_x) / WIDTH) * (2 * PI);
+	new_angle = ((double)(x - old_x) / WIDTH) * (2 * PI);
 	old_x = x;
-    eve->player->anglez += new_angle;
-
+	eve->player->anglez -= (new_angle);
+	mlx_set_cursor_mode(eve->mlx->mlx, MLX_MOUSE_HIDDEN);
+	// mlx_set_mouse_pos(eve->mlx->mlx, WIDTH / 2, HEIGHT / 2);
 }
 
-void ft_hook(void* param)
+void	ft_hook(void *param)
 {
-	t_eve *eve;
-	int shift;
+	t_eve	*eve;
+	int		shift;
 
 	eve = param;
 	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_ESCAPE))
@@ -56,7 +57,7 @@ void ft_hook(void* param)
 	// 	eve->player->anglex -= 0.05;
 }
 
-void game_loop(void *ev)
+void	game_loop(void *ev)
 {
 	t_eve *eve;
 
@@ -69,7 +70,7 @@ void game_loop(void *ev)
 }
 // -----------------------------------------------------------------------------
 
-int32_t main(int argc, char **argv)
+int32_t	main(int argc, char **argv)
 {
 	t_eve	*eve;
 
