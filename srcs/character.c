@@ -75,6 +75,6 @@ void	game(void *param, t_player *player, t_data_map map)
 	mlx_image_t	*image;
 
 	image = param;
-	character(image, player->plyr_x, player->plyr_y, 10);
+	character(image, player->plyr_x, player->plyr_y, PLAYER_WEIGHT);
 	raycasting(image, player, map);
 }

@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lmaume <lmaume@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 15:33:03 by mlapique          #+#    #+#             */
-/*   Updated: 2025/02/06 13:37:20 by lmaume           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -30,6 +18,7 @@
 #define ANGLE_HALF_CIRCLE 180
 #define ANGLE_QUART_CIRCLE 90
 #define FOV 60
+#define PLAYER_WEIGHT 6
 
 typedef struct s_player
 {
