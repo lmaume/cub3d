@@ -18,7 +18,7 @@
 #define ANGLE_HALF_CIRCLE 180
 #define ANGLE_QUART_CIRCLE 90
 #define FOV 60
-#define PLAYER_WEIGHT 6
+#define PLAYER_WEIGHT 10
 
 typedef struct s_player
 {
@@ -32,15 +32,15 @@ typedef struct s_player
 
 typedef struct s_ray
 {
-	double ray_angle;
-	double wall_distance;
-	int  flag; // maybe a bool will see
+	double	ray_angle;
+	double	wall_distance;
+	int		flag; // maybe a bool will see
 }					t_ray;
 
 typedef struct mlx_data
 {
-	mlx_t *mlx;
-	mlx_image_t* image;
+	mlx_t		*mlx;
+	mlx_image_t	*image;
 }					t_mlx;
 
 typedef struct s_point
