@@ -71,7 +71,7 @@ typedef struct s_eve
 
 
 void	game(void* param, t_player *player, t_data_map map);
-void	ini_eve(t_eve **eve, int argc, char **argv);
+int	ini_eve(t_eve **eve, int argc, char **argv);
 
 //draw thingy
 

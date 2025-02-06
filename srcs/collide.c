@@ -9,6 +9,7 @@ static void	get_forward_tile(int *tile_x, int *tile_y, t_eve *eve)
 				cos(eve->player->facing) * (volume * 0.6)) / volume;
 	*tile_y = (eve->player->plyr_y - \
 				sin(eve->player->facing) * (volume * 0.6)) / volume;
+	printf("facing tile is %c\n", eve->map->data.map[*tile_y][*tile_x]);
 }
 
 static void	toggle_door(t_data_map *data, int x, int y)
@@ -29,7 +30,7 @@ void	open_door(t_eve *eve)
 	get_forward_tile(&tile_x, &tile_y, eve);
 	if (isset(eve->map->data.map[tile_y][tile_x], "DO") == 1 \
 					&& mlx_is_key_down(eve->mlx->mlx, MLX_KEY_E))
-	{
+	{	
 		if (eve->e_key_released == true)
 		{
 			toggle_door(&eve->map->data, tile_x, tile_y);
@@ -37,9 +38,7 @@ void	open_door(t_eve *eve)
 		}
 	}
 	else
-	{
 		eve->e_key_released = true;
-	}
 }
 
 bool	is_player_in_wall(t_data_map *data, int x, int y)

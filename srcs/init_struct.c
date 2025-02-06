@@ -16,7 +16,8 @@ void	free_everything(t_eve *eve)
 int	ini_map(t_map *data_map, int argc, char **argv)
 {
 	(void)argc;
-	parse_struct(data_map, argv[1]);
+	if (parse_struct(data_map, argv[1]) != 0)
+		return (1);
 	return (0);
 }
 
@@ -28,13 +29,13 @@ void	ini_player(t_player *player, t_data_map *data)
 	player->anglex = 0;
 	player->angley = 0;
 	player->anglez = 0;
-	player->facing = player->anglez - (FOV / 2);
+	player->facing = player->anglez - ((FOV * (PI / 180)) / 2);
 	player->fov = FOV;
 	player->plyr_x = (data->p_x * volume) + (volume / 2);
 	player->plyr_y = (data->p_y * volume) + (volume / 2);
 }
 
-void	ini_eve(t_eve **eve, int argc, char **argv)
+int	ini_eve(t_eve **eve, int argc, char **argv)
 {
 	*eve = ft_calloc(sizeof(t_eve), 1);
 	(*eve)->mlx = ft_calloc(sizeof(t_mlx), 1);
@@ -44,10 +45,12 @@ void	ini_eve(t_eve **eve, int argc, char **argv)
 			WIDTH * HEIGHT * sizeof(uint32_t) + 1);
 	(*eve)->map = ft_calloc(sizeof(t_map), 1);
 	(*eve)->e_key_released = true;
-	ini_map((*eve)->map, argc, argv);
+	if (ini_map((*eve)->map, argc, argv) != 0)
+		return (ini_player((*eve)->player, &(*eve)->map->data), 1);
 	ini_player((*eve)->player, &(*eve)->map->data);
 	(void)argc;
 	(void)argv;
+	return (0);
 }
 
 bool	my_mlx_pixel_put(mlx_image_t *image, int x, int y, unsigned int color)
