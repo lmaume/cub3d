@@ -13,6 +13,7 @@ typedef struct s_data_map
 	char	**map;
 	int		p_x;
 	int		p_y;
+	char	p_side;
 	int		height;
 	int		width;
 	int		north_fd;

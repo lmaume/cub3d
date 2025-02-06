@@ -61,6 +61,7 @@ int	player_count(t_map *data_map)
 			{
 				data_map->data.p_x = j;
 				data_map->data.p_y = i;
+				data_map->data.p_side = data_map->map_cpy[i][j];
 				player_count++;
 			}
 			j++;
