@@ -29,7 +29,7 @@ void	ini_player(t_player *player, t_data_map *data)
 	player->anglex = 0;
 	player->angley = 0;
 	player->anglez = 0;
-	player->facing = player->anglez - ((FOV * (PI / 180)) / 2);
+	player->player_orientation = player->anglez - ((FOV * (PI / 180)) / 2);
 	player->fov = FOV;
 	player->plyr_x = (data->p_x * volume) + (volume / 2);
 	player->plyr_y = (data->p_y * volume) + (volume / 2);

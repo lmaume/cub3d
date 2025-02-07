@@ -17,7 +17,7 @@ void	mouse_move(void *param)
 	mlx_get_mouse_pos(eve->mlx->mlx, &x, &y);
 	new_angle = ((double)(x - old_x) / WIDTH) * (2 * PI);
 	old_x = x;
-	eve->player->facing -= (new_angle);
+	eve->player->player_orientation -= (new_angle);
 	// mlx_set_cursor_mode(eve->mlx->mlx, MLX_MOUSE_DISABLED);
 }
 
@@ -46,7 +46,7 @@ void	ft_hook(void *param)
 	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_RIGHT))
 		eve->player->anglez -= 0.06;
 	open_door(eve);
-	eve->player->facing = eve->player->anglez - ((FOV * (PI / 180)) / 2);
+	eve->player->player_orientation = eve->player->anglez - ((FOV * (PI / 180)) / 2);
 	// if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_UP))
 	// 	eve->player->angley += 0.05;
 	// if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_DOWN))
