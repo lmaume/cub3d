@@ -6,9 +6,9 @@ static void	get_forward_tile(int *tile_x, int *tile_y, t_eve *eve)
 
 	volume = get_volume(eve->map->data.height, eve->map->data.width);
 	*tile_x = (eve->player->plyr_x + \
-				cos(eve->player->player_orientation) * (volume * 0.6)) / volume;
-	*tile_y = (eve->player->plyr_y - \
-				sin(eve->player->player_orientation) * (volume * 0.6)) / volume;
+				cos(eve->player->anglez) * (volume * 0.6)) / volume;
+	*tile_y = (eve->player->plyr_y + \
+				sin(eve->player->anglez) * (volume * 0.6)) / volume;
 }
 
 static void	toggle_door(t_data_map *data, int x, int y)

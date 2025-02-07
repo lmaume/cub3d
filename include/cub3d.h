@@ -27,7 +27,6 @@ typedef struct s_player
 	double	anglex;
 	double	angley;
 	double	anglez;
-	double	player_orientation;
 	double	fov;
 }					t_player;
 

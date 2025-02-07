@@ -2,34 +2,34 @@
 
 static void	move_forward(t_eve *eve, int speed)
 {
-	if (is_player_in_wall(&eve->map->data, eve->player->plyr_x + cos(eve->player->player_orientation) * speed, eve->player->plyr_y) == false)
-		eve->player->plyr_x += cos(eve->player->player_orientation) * speed;
-	if (is_player_in_wall(&eve->map->data, eve->player->plyr_x, eve->player->plyr_y - sin(eve->player->player_orientation) * speed) == false)
-		eve->player->plyr_y -= sin(eve->player->player_orientation) * speed;
+	if (is_player_in_wall(&eve->map->data, eve->player->plyr_x + cos(eve->player->anglez) * speed, eve->player->plyr_y) == false)
+		eve->player->plyr_x += cos(eve->player->anglez) * speed;
+	if (is_player_in_wall(&eve->map->data, eve->player->plyr_x, eve->player->plyr_y + sin(eve->player->anglez) * speed) == false)
+		eve->player->plyr_y += sin(eve->player->anglez) * speed;
 }
 
 static void	move_backward(t_eve *eve)
 {
-	if (is_player_in_wall(&eve->map->data, eve->player->plyr_x - cos(eve->player->player_orientation) * 5, eve->player->plyr_y) == false)
-		eve->player->plyr_x -= cos(eve->player->player_orientation) * 5;
-	if (is_player_in_wall(&eve->map->data, eve->player->plyr_x, eve->player->plyr_y + sin(eve->player->player_orientation) * 5) == false)
-		eve->player->plyr_y += sin(eve->player->player_orientation) * 5;
+	if (is_player_in_wall(&eve->map->data, eve->player->plyr_x - cos(eve->player->anglez) * 5, eve->player->plyr_y) == false)
+		eve->player->plyr_x -= cos(eve->player->anglez) * 5;
+	if (is_player_in_wall(&eve->map->data, eve->player->plyr_x, eve->player->plyr_y - sin(eve->player->anglez) * 5) == false)
+		eve->player->plyr_y -= sin(eve->player->anglez) * 5;
 }
 
 static void	move_left(t_eve *eve)
 {
-	if (is_player_in_wall(&eve->map->data, eve->player->plyr_x + cos(eve->player->player_orientation + PI / 2) * 5, eve->player->plyr_y) == false)
-		eve->player->plyr_x += cos(eve->player->player_orientation + PI / 2) * 5;
-	if (is_player_in_wall(&eve->map->data, eve->player->plyr_x, eve->player->plyr_y - sin(eve->player->player_orientation + PI / 2) * 5) == false)
-		eve->player->plyr_y -= sin(eve->player->player_orientation + PI / 2) * 5;
+	if (is_player_in_wall(&eve->map->data, eve->player->plyr_x - cos(eve->player->anglez + PI / 2) * 5, eve->player->plyr_y) == false)
+		eve->player->plyr_x -= cos(eve->player->anglez + PI / 2) * 5;
+	if (is_player_in_wall(&eve->map->data, eve->player->plyr_x, eve->player->plyr_y + sin(eve->player->anglez + PI / 2) * 5) == false)
+		eve->player->plyr_y += sin(eve->player->anglez + PI / 2) * 5;
 }
 
 static void	move_right(t_eve *eve)
 {
-	if (is_player_in_wall(&eve->map->data, eve->player->plyr_x - cos(eve->player->player_orientation + PI / 2) * 5, eve->player->plyr_y) == false)
-		eve->player->plyr_x -= cos(eve->player->player_orientation + PI / 2) * 5;
-	if (is_player_in_wall(&eve->map->data, eve->player->plyr_x, eve->player->plyr_y + sin(eve->player->player_orientation + PI / 2) * 5) == false)
-		eve->player->plyr_y += sin(eve->player->player_orientation + PI / 2) * 5;
+	if (is_player_in_wall(&eve->map->data, eve->player->plyr_x - cos(eve->player->anglez + PI / 2) * 5, eve->player->plyr_y) == false)
+		eve->player->plyr_x += cos(eve->player->anglez + PI / 2) * 5;
+	if (is_player_in_wall(&eve->map->data, eve->player->plyr_x, eve->player->plyr_y - sin(eve->player->anglez + PI / 2) * 5) == false)
+		eve->player->plyr_y -= sin(eve->player->anglez + PI / 2) * 5;
 }
 
 void	ft_move(t_eve *eve)
