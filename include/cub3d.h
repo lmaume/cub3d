@@ -95,8 +95,8 @@ float					floatipart(float x);
 
 //matrix
 int	angle_x(t_player *player, int x, int y, int z);
-int angle_y(t_player *player, int x, int y, int z);
-int angle_z(t_player *player, int x, int y, int z);
+int	angle_y(t_player *player, int x, int y, int z);
+int	angle_z(t_player *player, int x, int y, int z);
 
 bool	my_mlx_pixel_put(mlx_image_t *image, int x, int y, unsigned int color);
 

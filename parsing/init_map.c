@@ -38,7 +38,7 @@ static int	init_var(char **tab, char **str, char *opt)
 	if (ft_tabcmp(tab, opt) != NULL)
 		tmp = &ft_tabcmp(tab, opt)[ft_strlen(opt)];
 	if (tmp == NULL)
-		return (printf("One or more identifier is not recoGnized.\n"), 1);
+		return (printf("One or more identifier is not recognized.\n"), 1);
 	tmp[ft_strlen(tmp) - 1] = '\0';
 	*str = tmp;
 	return (0);
@@ -77,8 +77,8 @@ int	init_struct(t_map *data_map, char *filename)
 	char	**tab;
 
 	tab = ft_file_to_tab(filename);
-	if (tab == NULL)
-		return (printf("File '%s' not found.\n", filename), 1);
+	if (tab == NULL || tab[0] == NULL)
+		return (printf("Incorrect or empty file.\n"), free(tab), 1);
 	if (init_var(tab, &data_map->north, "NO ") == 1)
 		return (free_tab(tab), 1);
 	if (init_var(tab, &data_map->south, "SO ") == 1)

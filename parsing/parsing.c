@@ -2,12 +2,17 @@
 
 int	is_entry_valid(int argc, char **argv)
 {
+	int	try;
+
 	if (argv[1] == NULL || argc < 2)
 		return (printf("Please select a level.\n"), 1);
 	if (ft_strlen(argv[1]) < 5)
 		return (printf("Incorrect map name. (ex. 'map.cub'.)\n"), 1);
 	if (ft_strncmp(&argv[1][ft_strlen(argv[1]) - 4], ".cub", 4) != 0)
 		return (printf("Map extension is not .cub.\n"), 1);
+	try = open(argv[1], O_RDONLY);
+	if (try == -1)
+		return (printf("Map file not found.\n"), 1);
 	return (0);
 }
 
@@ -67,6 +72,6 @@ int	parse_struct(t_map *data, char *filename)
 		return (printf("One player is needed, no more or less.\n"), 1);
 	if (is_map_surrounded_by_walls(data) == 1)
 		return \
-		(printf("Map not surrounded by walls or invalid character.\n"), 1);
+		(printf("Map not surrounded by walls or invalid char in map.\n"), 1);
 	return (0);
 }
