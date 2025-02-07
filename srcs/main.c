@@ -24,23 +24,11 @@ void	mouse_move(void *param)
 void	ft_hook(void *param)
 {
 	t_eve	*eve;
-	int		shift;
 
 	eve = param;
 	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(eve->mlx->mlx);
-	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_LEFT_SHIFT))
-		shift = 2;
-	else
-		shift = 1;
-	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_W) && is_player_in_wall(&eve->map->data, eve->player->plyr_x, eve->player->plyr_y - 5 * shift) == false)
-		eve->player->plyr_y -= 5 * shift;
-	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_S) && is_player_in_wall(&eve->map->data, eve->player->plyr_x, eve->player->plyr_y + 5 * shift) == false)
-		eve->player->plyr_y += 5 * shift;
-	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_A) && is_player_in_wall(&eve->map->data, eve->player->plyr_x - 5 * shift, eve->player->plyr_y) == false)
-		eve->player->plyr_x -= 5 * shift;
-	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_D) && is_player_in_wall(&eve->map->data, eve->player->plyr_x + 5 * shift, eve->player->plyr_y) == false)
-		eve->player->plyr_x += 5 * shift;
+	ft_move(eve);
 	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_LEFT))
 		eve->player->anglez += 0.06;
 	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_RIGHT))

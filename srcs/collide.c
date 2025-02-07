@@ -9,7 +9,6 @@ static void	get_forward_tile(int *tile_x, int *tile_y, t_eve *eve)
 				cos(eve->player->player_orientation) * (volume * 0.6)) / volume;
 	*tile_y = (eve->player->plyr_y - \
 				sin(eve->player->player_orientation) * (volume * 0.6)) / volume;
-	printf("facing tile is %c\n", eve->map->data.map[*tile_y][*tile_x]);
 }
 
 static void	toggle_door(t_data_map *data, int x, int y)

@@ -106,7 +106,8 @@ int		get_volume(int height, int width);
 bool	is_player_in_wall(t_data_map *data, int x, int y);
 
 // gameplay
-void open_door(t_eve *eve);
+void	open_door(t_eve *eve);
+void	ft_move(t_eve *eve);
 
 // memory
 void	free_everything(t_eve *eve);
