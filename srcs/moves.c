@@ -3,9 +3,9 @@
 static void	move_up(t_eve *eve, int speed)
 {
 	if (is_player_in_wall(&eve->map->data, eve->player->plyr_x + cos(eve->player->player_orientation) * speed, eve->player->plyr_y) == false)
-		eve->player->plyr_x += cos(eve->player->player_orientation) * 5;
+		eve->player->plyr_x += cos(eve->player->player_orientation) * speed;
 	if (is_player_in_wall(&eve->map->data, eve->player->plyr_x, eve->player->plyr_y - sin(eve->player->player_orientation) * speed) == false)
-		eve->player->plyr_y -= sin(eve->player->player_orientation) * 5;
+		eve->player->plyr_y -= sin(eve->player->player_orientation) * speed;
 }
 
 static void	move_down(t_eve *eve)

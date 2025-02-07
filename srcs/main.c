@@ -17,8 +17,8 @@ void	mouse_move(void *param)
 	mlx_get_mouse_pos(eve->mlx->mlx, &x, &y);
 	new_angle = ((double)(x - old_x) / WIDTH) * (2 * PI);
 	old_x = x;
-	eve->player->player_orientation -= (new_angle);
-	// mlx_set_cursor_mode(eve->mlx->mlx, MLX_MOUSE_DISABLED);
+	eve->player->anglez -= (new_angle);
+	mlx_set_cursor_mode(eve->mlx->mlx, MLX_MOUSE_DISABLED);
 }
 
 void	ft_hook(void *param)
@@ -56,6 +56,7 @@ void	game_loop(void *ev)
 	wall(&eve->map->data, eve->mlx->image);
 	mlx_image_to_window(eve->mlx->mlx, eve->mlx->image, 0, 0);
 }
+
 // -----------------------------------------------------------------------------
 
 int32_t	main(int argc, char **argv)
@@ -64,25 +65,25 @@ int32_t	main(int argc, char **argv)
 
 	eve = NULL;
 	if (is_entry_valid(argc, argv) != 0)
-		return (1);
+		return (EXIT_FAILURE);
 	if (ini_eve(&eve, argc, argv) != 0)
-		return (free_everything(eve), 1);
+		return (free_everything(eve), EXIT_FAILURE);
 	if (!(eve->mlx->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
 	{
 		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
+		return(free_everything(eve), EXIT_FAILURE);
 	}
 	if (!(eve->mlx->image = mlx_new_image(eve->mlx->mlx, HEIGHT, WIDTH)))
 	{
 		mlx_close_window(eve->mlx->mlx);
 		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
+		return(free_everything(eve), EXIT_FAILURE);
 	}
 	if (mlx_image_to_window(eve->mlx->mlx, eve->mlx->image, 0, 0) == -1)
 	{
 		mlx_close_window(eve->mlx->mlx);
 		puts(mlx_strerror(mlx_errno));
-		return(EXIT_FAILURE);
+		return(free_everything(eve), EXIT_FAILURE);
 	}
 	mlx_loop_hook(eve->mlx->mlx, game_loop, eve);
 	mlx_loop_hook(eve->mlx->mlx, ft_hook, eve);
