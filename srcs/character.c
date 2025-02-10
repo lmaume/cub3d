@@ -1,14 +1,7 @@
 #include "../include/cub3d.h"
 #include "limits.h"
 
-
-
-
-
 //! Sorry j'ai garde tes fonctions en commentaire j'voulais m'amuser et du coup ca marche
-
-
-
 
 static double	get_ray_distance(t_player *player, t_data_map map, double offset_angle)
 {
@@ -52,7 +45,6 @@ int	raycasting(mlx_image_t *image, t_player *player, t_data_map map)
 	p1.z = 0;
 	p1.color = "0xFF0000FF";
 	p2.color = "0xFF0000FF";
-
 	i = 0;
 	while (i < FOV)
 	{
@@ -69,9 +61,6 @@ int	raycasting(mlx_image_t *image, t_player *player, t_data_map map)
 	free(draw_line);
 	return (0);
 }
-
-
-
 
 // void	get_p2(t_player *player, t_data_map map, double i)
 // {
