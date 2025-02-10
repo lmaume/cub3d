@@ -73,7 +73,7 @@ int	wall(t_data_map *map, mlx_image_t *image)
 	int	j;
 	int	decal;
 
-	decal = get_volume(map->height, map->width);
+	decal = get_volume(map->height, map->width) / 4;
 	j = 0;
 	i = 0;
 	while (map->map[i])
