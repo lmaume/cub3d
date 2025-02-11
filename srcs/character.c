@@ -122,7 +122,7 @@ int	character(mlx_image_t *image, int x, int y, int r)
 			angle = i;
 			x1 = r * cos(angle * PI / ANGLE_HALF_CIRCLE);
 			y1 = r * sin(angle * PI / ANGLE_HALF_CIRCLE);
-			my_mlx_pixel_put(image, x1 + x, y1 + y, 0x00FFFFFF);
+			my_mlx_pixel_put(image, x1 + x, y1 + y, 0xFFFF00FF);
 			i += 5;
 		}
 		i = 0;
