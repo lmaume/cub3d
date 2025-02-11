@@ -18,7 +18,7 @@
 #define ANGLE_HALF_CIRCLE 180
 #define ANGLE_QUART_CIRCLE 90
 #define FOV 60
-#define PLAYER_WEIGHT 10
+#define PLAYER_WEIGHT 6
 
 typedef struct s_player
 {

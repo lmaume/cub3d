@@ -73,7 +73,7 @@ int	wall(t_data_map *map, mlx_image_t *image)
 	int	j;
 	int	decal;
 
-	decal = get_volume(map->height, map->width);
+	decal = get_volume(map->height, map->width) / 4;
 	j = 0;
 	i = 0;
 	while (map->map[i])
@@ -81,11 +81,11 @@ int	wall(t_data_map *map, mlx_image_t *image)
 		while (map->map[i][j])
 		{
 			if (map->map[i][j] == '1')
-				draw_wall(j * decal, i * decal, image, decal);
+				draw_wall(j * 1.05 * decal, i * 1.05 * decal, image, decal * 1.07);
 			if (map->map[i][j] == 'D')
-				draw_close_door(j * decal, i * decal, image, decal);
+				draw_close_door(j * 1.05 * decal, i * 1.05 * decal, image, decal * 1.07);
 			if (map->map[i][j] == 'O')
-				draw_open_door(j * decal, i * decal, image, decal);
+				draw_open_door(j * 1.05 * decal, i * 1.05 * decal, image, decal * 1.07);
 			j++;
 		}
 		j = 0;

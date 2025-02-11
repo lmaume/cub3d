@@ -18,8 +18,8 @@ static double	get_ray_distance(t_player *player, t_data_map map, double offset_a
 	ray_y = player->plyr_y;
 	while (1)
 	{
-		tile_x = (int)(ray_x / get_volume(map.height, map.width));
-		tile_y = (int)(ray_y / get_volume(map.height, map.width));
+		tile_x = floor((ray_x) / get_volume(map.height, map.width));
+		tile_y = floor((ray_y) / get_volume(map.height, map.width));
 		if (tile_y < 0 || tile_y >= map.height || tile_x < 0 || tile_x >= map.width)
 			break;
 		if (isset(map.map[tile_y][tile_x], "1D") == 1)
@@ -40,8 +40,8 @@ int	raycasting(mlx_image_t *image, t_player *player, t_data_map map)
 	t_line_necessary	*draw_line;
 
 	draw_line = ft_calloc(sizeof(t_line_necessary), 1);
-	p1.x = player->plyr_x;
-	p1.y = player->plyr_y;
+	p1.x = player->plyr_x / 4;
+	p1.y = player->plyr_y / 4;
 	p1.z = 0;
 	p1.color = "0xFF0000FF";
 	p2.color = "0xFF0000FF";
@@ -50,8 +50,8 @@ int	raycasting(mlx_image_t *image, t_player *player, t_data_map map)
 	{
 		angle_offset = ((i - (FOV / 2.0)) * (PI / 180)); 
 		distance = get_ray_distance(player, map, angle_offset);
-		p2.x = player->plyr_x + cos(player->anglez + angle_offset) * distance;
-		p2.y = player->plyr_y + sin(player->anglez + angle_offset) * distance;
+		p2.x = (player->plyr_x + cos(player->anglez + angle_offset) * distance) / 4 ;
+		p2.y = (player->plyr_y + sin(player->anglez + angle_offset) * distance) / 4;
 		p2.z = 0;
 		draw_line->p1 = p1;
 		draw_line->p2 = p2;
@@ -136,6 +136,6 @@ void	game(void *param, t_player *player, t_data_map map)
 	mlx_image_t	*image;
 
 	image = param;
-	character(image, player->plyr_x, player->plyr_y, PLAYER_WEIGHT);
+	character(image, player->plyr_x / 4, player->plyr_y / 4, PLAYER_WEIGHT);
 	raycasting(image, player, map);
 }
