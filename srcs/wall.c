@@ -1,16 +1,6 @@
 #include "../include/cub3d.h"
 
-int	get_volume(int height, int width)
-{
-	int	i;
-
-	i = 0;
-	while (i * height < HEIGHT && i * width < WIDTH)
-		i++;
-	return (i);
-}
-
-void	draw_floor(int i, int j, mlx_image_t *image, int decal)
+static void	draw_floor(int i, int j, mlx_image_t *image, int decal)
 {
 	int	a;
 	int	b;
@@ -29,7 +19,7 @@ void	draw_floor(int i, int j, mlx_image_t *image, int decal)
 	}
 }
 
-void	draw_wall(int i, int j, mlx_image_t *image, int decal)
+static void	draw_wall(int i, int j, mlx_image_t *image, int decal)
 {
 	int	a;
 	int	b;
@@ -48,7 +38,7 @@ void	draw_wall(int i, int j, mlx_image_t *image, int decal)
 	}
 }
 
-void	draw_close_door(int i, int j, mlx_image_t *image, int decal)
+static void	draw_close_door(int i, int j, mlx_image_t *image, int decal)
 {
 	int	a;
 	int	b;
@@ -67,7 +57,7 @@ void	draw_close_door(int i, int j, mlx_image_t *image, int decal)
 	}
 }
 
-void	draw_open_door(int i, int j, mlx_image_t *image, int decal)
+static void	draw_open_door(int i, int j, mlx_image_t *image, int decal)
 {
 	int	a;
 	int	b;

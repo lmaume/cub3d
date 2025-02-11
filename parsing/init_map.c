@@ -1,33 +1,44 @@
-#include "../include/parsing.h"
+#include "../include/cub3d.h"
 
-//TODO CHANGER POUR RENDRE COMPATIBLE AVEC LA MLX
 int	open_texture(t_map *data_map)
 {
-	data_map->data.north_fd = open(data_map->north, O_RDONLY);
-	if (data_map->data.north_fd < 0)
+	t_textures *north_texture;
+	t_textures *south_texture;
+	t_textures *east_texture;
+	t_textures *west_texture;
+	north_texture = mlx_load_png(data_map->north);
+	south_texture = mlx_load_png(data_map->south);
+	east_texture = mlx_load_png(data_map->east);
+	west_texture = mlx_load_png(data_map->west);
+    if (north_texture == NULL || south_texture == NULL \
+			|| east_texture == NULL || west_texture == NULL)
+        return (1);
+	data_map->data.textures.north_image = mlx_texture_to_image(data_map->eve->mlx->mlx, north_texture);
+	if (data_map->data.textures.north_image == NULL)
 		return (1);
-	data_map->data.south_fd = open(data_map->south, O_RDONLY);
-	if (data_map->data.south_fd < 0)
+	data_map->data.textures.south_image = mlx_texture_to_image(data_map->eve->mlx->mlx, south_texture);
+	if (data_map->data.textures.south_image == NULL)
 		return (1);
-	data_map->data.east_fd = open(data_map->east, O_RDONLY);
-	if (data_map->data.east_fd < 0)
+	data_map->data.textures.east_image = mlx_texture_to_image(data_map->eve->mlx->mlx, east_texture);
+	if (data_map->data.textures.east_image == NULL)
 		return (1);
-	data_map->data.west_fd = open(data_map->west, O_RDONLY);
-	if (data_map->data.west_fd < 0)
+	data_map->data.textures.west_image = mlx_texture_to_image(data_map->eve->mlx->mlx, west_texture);
+	if (data_map->data.textures.west_image == NULL)
 		return (1);
+	
 	return (0);
 }
 
-void	close_textures(t_data_map data_map)
+void	close_images(t_map *data_map)
 {
-	if (data_map.north_fd != -1)
-		close(data_map.north_fd);
-	if (data_map.south_fd != -1)
-		close(data_map.south_fd);
-	if (data_map.east_fd != -1)
-		close(data_map.east_fd);
-	if (data_map.west_fd != -1)
-		close(data_map.west_fd);
+	if (data_map->data.textures.north_image != NULL)
+		mlx_delete_image(data_map->eve->mlx->mlx, data_map->data.textures.north_image);
+	if (data_map->data.textures.south_image != NULL)
+		mlx_delete_image(data_map->eve->mlx->mlx, data_map->data.textures.south_image);
+	if (data_map->data.textures.east_image != NULL)
+		mlx_delete_image(data_map->eve->mlx->mlx, data_map->data.textures.east_image);
+	if (data_map->data.textures.west_image != NULL)
+		mlx_delete_image(data_map->eve->mlx->mlx, data_map->data.textures.west_image);
 }
 
 static int	init_var(char **tab, char **str, char *opt)

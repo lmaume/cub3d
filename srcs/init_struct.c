@@ -2,7 +2,7 @@
 
 void	free_everything(t_eve *eve)
 {
-	close_textures(eve->map->data);
+	close_images(*eve->map);
 	free_tab(eve->map->map_cpy);
 	free_tab(eve->map->data.map);
 	free(eve);

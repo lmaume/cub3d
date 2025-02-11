@@ -8,21 +8,27 @@
 # include <stdio.h>
 # include "../libft/libft.h"
 
+typedef struct s_textures
+{
+	mlx_image_t	*north_image;
+	mlx_image_t	*south_image;
+	mlx_image_t	*east_image;
+	mlx_image_t	*west_image;
+}				t_textures;
+
+
 typedef struct s_data_map
 {
-	char	**map;
-	int		p_x;
-	int		p_y;
-	char	p_side;
-	int		height;
-	int		width;
-	int		north_fd;
-	int		south_fd;
-	int		east_fd;
-	int		west_fd;
-	char	*floor;
-	char	*ceiling;
-}			t_data_map;
+	char		**map;
+	int			p_x;
+	int			p_y;
+	char		p_side;
+	int			height;
+	int			width;
+	char		*floor;
+	char		*ceiling;
+	t_textures	textures;
+}				t_data_map;
 
 typedef struct s_data_paths
 {
@@ -34,6 +40,7 @@ typedef struct s_data_paths
 	int			last_x;
 	int			last_y;
 	t_data_map	data;
+	t_eve		*eve;
 }				t_map;
 
 //?		PRINTS
@@ -48,6 +55,6 @@ int		player_count(t_map *data_map);
 
 //?		MEMORY
 int		map_alloc(t_map *data_map, char **tab);
-void	close_textures(t_data_map data_map);
+void	close_images(t_map data_map);
 
 #endif

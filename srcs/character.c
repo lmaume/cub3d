@@ -3,6 +3,16 @@
 
 //! Sorry j'ai garde tes fonctions en commentaire j'voulais m'amuser et du coup ca marche
 
+int	get_volume(int height, int width)
+{
+	int	i;
+
+	i = 0;
+	while (i * height < HEIGHT && i * width < WIDTH)
+		i++;
+	return (i);
+}
+
 static double	get_ray_distance(t_player *player, t_data_map map, double offset_angle)
 {
 	double	angle;
