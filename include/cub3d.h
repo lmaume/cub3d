@@ -69,8 +69,8 @@ typedef struct s_eve
 }						t_eve;
 
 
-void	game(void* param, t_player *player, t_data_map map);
-int	ini_eve(t_eve **eve, int argc, char **argv);
+void	game(t_eve *eve);
+int		ini_eve(t_eve **eve, int argc, char **argv);
 
 //draw thingy
 
@@ -105,7 +105,7 @@ int		get_volume(int height, int width);
 bool	is_player_in_wall(t_data_map *data, int x, int y);
 
 // 3d
-void	draw_wall(t_eve *eve, mlx_image_t *image, double distance);
+void	draw_wall_height(t_eve *eve, mlx_image_t *image, int x, double distance);
 
 // gameplay
 void	open_door(t_eve *eve);

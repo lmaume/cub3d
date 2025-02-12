@@ -27,6 +27,8 @@ uint32_t	transform(char *str)
 
 	result = 0;
 	i = 0;
+	if (str == NULL)
+		return (-1);
 	if (ft_strlen(str) > 8)
 		return (0xFFFFFF00);
 	while (str[i])

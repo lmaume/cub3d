@@ -23,7 +23,7 @@ static double	get_ray_distance(t_player *player, t_data_map map, double offset_a
 	int		tile_y;
 
 	angle = player->anglez + offset_angle;
-	step = 1.0;
+	step = 1;
 	ray_x = player->plyr_x;
 	ray_y = player->plyr_y;
 	while (1)
@@ -40,10 +40,11 @@ static double	get_ray_distance(t_player *player, t_data_map map, double offset_a
 	return (sqrt(pow(ray_x - player->plyr_x, 2) + pow(ray_y - player->plyr_y, 2)));
 }
 
-int	raycasting(mlx_image_t *image, t_player *player, t_data_map map)
+int	raycasting(mlx_image_t *image, t_player *player, t_data_map map, t_eve *eve)
 {
 	t_point				p1;
 	t_point				p2;
+	double				x;
 	double				i;
 	double				angle_offset;
 	double				distance;
@@ -56,6 +57,7 @@ int	raycasting(mlx_image_t *image, t_player *player, t_data_map map)
 	p1.color = "0xFF0000FF";
 	p2.color = "0xFF0000FF";
 	i = 0;
+	x = 0;
 	while (i < FOV)
 	{
 		angle_offset = ((i - (FOV / 2.0)) * (PI / 180)); 
@@ -65,8 +67,10 @@ int	raycasting(mlx_image_t *image, t_player *player, t_data_map map)
 		p2.z = 0;
 		draw_line->p1 = p1;
 		draw_line->p2 = p2;
+		draw_wall_height(eve, image, x, distance);
 		line(draw_line, image);
-		i += 2;
+		x += (WIDTH / (FOV / 0.3));
+		i += 0.3;
 	}
 	free(draw_line);
 	return (0);
@@ -88,7 +92,7 @@ int	character(mlx_image_t *image, int x, int y, int r)
 			x1 = r * cos(angle * PI / ANGLE_HALF_CIRCLE);
 			y1 = r * sin(angle * PI / ANGLE_HALF_CIRCLE);
 			my_mlx_pixel_put(image, x1 + x, y1 + y, 0xFFFF00FF);
-			i += 5;
+			i += 2;
 		}
 		i = 0;
 		r--;
@@ -96,11 +100,8 @@ int	character(mlx_image_t *image, int x, int y, int r)
 	return (0);
 }
 
-void	game(void *param, t_player *player, t_data_map map)
+void	game(t_eve *eve)
 {
-	mlx_image_t	*image;
-
-	image = param;
-	character(image, player->plyr_x / 4, player->plyr_y / 4, PLAYER_WEIGHT);
-	raycasting(image, player, map);
+	character(eve->mlx->image, eve->player->plyr_x / 4, eve->player->plyr_y / 4, PLAYER_WEIGHT);
+	raycasting(eve->mlx->image, eve->player, eve->map->data, eve);
 }
