@@ -104,6 +104,9 @@ int		wall(t_data_map *map, mlx_image_t *image);
 int		get_volume(int height, int width);
 bool	is_player_in_wall(t_data_map *data, int x, int y);
 
+// 3d
+void	draw_wall(t_eve *eve, mlx_image_t *image, double distance);
+
 // gameplay
 void	open_door(t_eve *eve);
 void	ft_move(t_eve *eve);

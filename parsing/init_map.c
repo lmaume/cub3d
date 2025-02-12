@@ -1,44 +1,38 @@
 #include "../include/cub3d.h"
 
-int	open_texture(t_map *data_map)
+static void	close_images(t_eve *eve)
 {
-	t_textures *north_texture;
-	t_textures *south_texture;
-	t_textures *east_texture;
-	t_textures *west_texture;
-	north_texture = mlx_load_png(data_map->north);
-	south_texture = mlx_load_png(data_map->south);
-	east_texture = mlx_load_png(data_map->east);
-	west_texture = mlx_load_png(data_map->west);
-    if (north_texture == NULL || south_texture == NULL \
-			|| east_texture == NULL || west_texture == NULL)
-        return (1);
-	data_map->data.textures.north_image = mlx_texture_to_image(data_map->eve->mlx->mlx, north_texture);
-	if (data_map->data.textures.north_image == NULL)
-		return (1);
-	data_map->data.textures.south_image = mlx_texture_to_image(data_map->eve->mlx->mlx, south_texture);
-	if (data_map->data.textures.south_image == NULL)
-		return (1);
-	data_map->data.textures.east_image = mlx_texture_to_image(data_map->eve->mlx->mlx, east_texture);
-	if (data_map->data.textures.east_image == NULL)
-		return (1);
-	data_map->data.textures.west_image = mlx_texture_to_image(data_map->eve->mlx->mlx, west_texture);
-	if (data_map->data.textures.west_image == NULL)
-		return (1);
-	
-	return (0);
+	if (!eve->map->data.textures.north_image || \
+		!eve->map->data.textures.south_image || \
+		!eve->map->data.textures.east_image || \
+		!eve->map->data.textures.west_image)
+		printf("Texture to Image fail.\n");
 }
 
-void	close_images(t_map *data_map)
+int	open_texture(t_eve *eve)
 {
-	if (data_map->data.textures.north_image != NULL)
-		mlx_delete_image(data_map->eve->mlx->mlx, data_map->data.textures.north_image);
-	if (data_map->data.textures.south_image != NULL)
-		mlx_delete_image(data_map->eve->mlx->mlx, data_map->data.textures.south_image);
-	if (data_map->data.textures.east_image != NULL)
-		mlx_delete_image(data_map->eve->mlx->mlx, data_map->data.textures.east_image);
-	if (data_map->data.textures.west_image != NULL)
-		mlx_delete_image(data_map->eve->mlx->mlx, data_map->data.textures.west_image);
+	mlx_texture_t *north_texture;
+	mlx_texture_t *south_texture;
+	mlx_texture_t *east_texture;
+	mlx_texture_t *west_texture;
+	if (!eve || !eve->mlx || !eve->mlx->mlx)
+		return (printf("MLX load fail.\n"), 1);
+	north_texture = mlx_load_png(eve->map->north);
+	south_texture = mlx_load_png(eve->map->south);
+	east_texture = mlx_load_png(eve->map->east);
+	west_texture = mlx_load_png(eve->map->west);
+	if (!north_texture || !south_texture || !east_texture || !west_texture)
+		return (printf("Texture load fail.\n"), 1);
+	eve->map->data.textures.north_image = mlx_texture_to_image(eve->mlx->mlx, north_texture);
+	eve->map->data.textures.south_image = mlx_texture_to_image(eve->mlx->mlx, south_texture);
+	eve->map->data.textures.east_image = mlx_texture_to_image(eve->mlx->mlx, east_texture);
+	eve->map->data.textures.west_image = mlx_texture_to_image(eve->mlx->mlx, west_texture);
+	close_images(eve);
+	mlx_delete_texture(north_texture);
+	mlx_delete_texture(south_texture);
+	mlx_delete_texture(east_texture);
+	mlx_delete_texture(west_texture);
+	return (0);
 }
 
 static int	init_var(char **tab, char **str, char *opt)
@@ -51,7 +45,8 @@ static int	init_var(char **tab, char **str, char *opt)
 	if (tmp == NULL)
 		return (printf("One or more identifier is not recognized.\n"), 1);
 	tmp[ft_strlen(tmp) - 1] = '\0';
-	*str = tmp;
+	*str = ft_calloc(sizeof(char *), ft_strlen(tmp));
+	ft_memcpy(*str, tmp, ft_strlen(tmp) + 1);
 	return (0);
 }
 
@@ -106,8 +101,7 @@ int	init_struct(t_map *data_map, char *filename)
 		return (free_tab(tab), 1);
 	if (map_alloc(data_map, tab) == 1)
 		return (free_tab(tab), 1);
-	if (open_texture(data_map) == 1)
-		return (printf("One or more file not found.\n"), free_tab(tab), 1);
+	data_map->data.file_content = tab;
 	free_tab(tab);
 	return (0);
 }

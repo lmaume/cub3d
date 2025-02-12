@@ -77,6 +77,8 @@ int32_t	main(int argc, char **argv)
 		puts(mlx_strerror(mlx_errno));
 		return(free_everything(eve), EXIT_FAILURE);
 	}
+	if (open_texture(eve) == 1)
+		return (printf("One or more file not found.\n"), free_everything(eve), 1);
 	if (!(eve->mlx->image = mlx_new_image(eve->mlx->mlx, HEIGHT, WIDTH)))
 	{
 		mlx_close_window(eve->mlx->mlx);

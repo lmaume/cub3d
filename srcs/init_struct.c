@@ -2,9 +2,14 @@
 
 void	free_everything(t_eve *eve)
 {
-	close_images(*eve->map);
 	free_tab(eve->map->map_cpy);
 	free_tab(eve->map->data.map);
+	free(eve->map->north);
+	free(eve->map->south);
+	free(eve->map->east);
+	free(eve->map->west);
+	free(eve->map->data.floor);
+	free(eve->map->data.ceiling);
 	free(eve);
 	free(eve->mlx);
 	if (eve->player != NULL)
@@ -53,7 +58,7 @@ int	ini_eve(t_eve **eve, int argc, char **argv)
 			WIDTH * HEIGHT * sizeof(uint32_t) + 1);
 	(*eve)->e_key_released = true;
 	if (ini_map((*eve)->map, argc, argv) != 0)
-		return (1);
+		return (printf("Struct init error.\n"), 1);
 	ini_player((*eve)->player, &(*eve)->map->data);
 	(void)argc;
 	(void)argv;
