@@ -62,12 +62,12 @@ int	raycasting(mlx_image_t *image, t_player *player, t_data_map map, t_eve *eve)
 	{
 		angle_offset = ((i - (FOV / 2.0)) * (PI / 180)); 
 		distance = get_ray_distance(player, map, angle_offset);
+		put_wall_height(eve, image, x, distance);
 		p2.x = (player->plyr_x + cos(player->anglez + angle_offset) * distance) / 4 ;
 		p2.y = (player->plyr_y + sin(player->anglez + angle_offset) * distance) / 4;
 		p2.z = 0;
 		draw_line->p1 = p1;
 		draw_line->p2 = p2;
-		draw_wall_height(eve, image, x, distance);
 		line(draw_line, image);
 		x += (WIDTH / (FOV / 0.3));
 		i += 0.3;

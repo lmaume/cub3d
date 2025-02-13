@@ -13,10 +13,14 @@ typedef struct s_eve t_eve;
 
 typedef struct s_textures
 {
-	mlx_image_t	*north_image;
-	mlx_image_t	*south_image;
-	mlx_image_t	*east_image;
-	mlx_image_t	*west_image;
+	mlx_image_t		*north_image;
+	mlx_image_t		*south_image;
+	mlx_image_t		*east_image;
+	mlx_image_t		*west_image;
+	mlx_texture_t	*north_texture;
+	mlx_texture_t	*south_texture;
+	mlx_texture_t	*east_texture;
+	mlx_texture_t	*west_texture;
 }				t_textures;
 
 typedef struct s_data_map
