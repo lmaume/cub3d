@@ -87,7 +87,7 @@ static void draw_wall_height(double wall_height, int y_end, int x, t_eve *eve)
 			y_texture = ((y - (HEIGHT / 2) + (wall_height / 2)) * eve->map->data.textures.north_texture->height) / wall_height;
 			// x_texture = x * eve->map->data.textures.north_texture->width;
 			x_texture = x % eve->map->data.textures.north_texture->width;
-			color = get_pixel_color(eve->map->data.textures.south_texture, x_texture, y_texture);	
+			color = get_pixel_color(eve->map->data.textures.north_texture, x_texture, y_texture);	
 			mlx_put_pixel(eve->mlx->image, x, y, color);
 		}
 		y++;

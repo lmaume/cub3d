@@ -57,8 +57,8 @@ void	game_loop(void *ev)
 	mlx_delete_image(eve->mlx->mlx, eve->mlx->image);
 	eve->mlx->image = mlx_new_image(eve->mlx->mlx, WIDTH, HEIGHT);
 	game(eve);
-	mlx_image_to_window(eve->mlx->mlx, eve->mlx->image, 0, 0);
 	wall(&eve->map->data, eve->mlx->image);
+	mlx_image_to_window(eve->mlx->mlx, eve->mlx->image, 0, 0);
 }
 
 // -----------------------------------------------------------------------------

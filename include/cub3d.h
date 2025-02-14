@@ -17,7 +17,7 @@
 #define ANGLE_CIRCLE 360
 #define ANGLE_HALF_CIRCLE 180
 #define ANGLE_QUART_CIRCLE 90
-#define FOV 60
+#define FOV 70
 #define PLAYER_WEIGHT 6
 
 typedef struct s_player
@@ -97,7 +97,7 @@ int	angle_x(t_player *player, int x, int y, int z);
 int	angle_y(t_player *player, int x, int y, int z);
 int	angle_z(t_player *player, int x, int y, int z);
 
-bool	my_mlx_pixel_put(mlx_image_t *image, int x, int y, unsigned int color);
+bool	my_mlx__put(mlx_image_t *image, int x, int y, unsigned int color);
 
 // walls
 int		wall(t_data_map *map, mlx_image_t *image);
@@ -113,5 +113,7 @@ void	ft_move(t_eve *eve);
 
 // memory
 void	free_everything(t_eve *eve);
+
+void	my_mlx_pixel_put(mlx_image_t *image, int x, int y, uint32_t color);
 
 #endif
