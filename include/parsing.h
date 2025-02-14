@@ -34,6 +34,7 @@ typedef struct s_data_map
 	int			width;
 	char		*floor;
 	char		*ceiling;
+	int			volume;
 	t_textures	textures;
 }				t_data_map;
 

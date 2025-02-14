@@ -38,7 +38,7 @@ static void	draw_wall(int i, int j, mlx_image_t *image, int decal)
 	}
 }
 
-static void	draw_close_door(int i, int j, mlx_image_t *image, int decal)
+static void	draw_close_door(int i, int j, mlx_image_t *image, int volume)
 {
 	int	a;
 	int	b;
@@ -57,7 +57,7 @@ static void	draw_close_door(int i, int j, mlx_image_t *image, int decal)
 	}
 }
 
-static void	draw_open_door(int i, int j, mlx_image_t *image, int decal)
+static void	draw_open_door(int i, int j, mlx_image_t *image, int volume)
 {
 	int	a;
 	int	b;
@@ -80,22 +80,24 @@ int	wall(t_data_map *map, mlx_image_t *image)
 {
 	int	i;
 	int	j;
+	int	volume;
 
-	decal = get_volume(map->height, map->width) / 4;
+	volume = map->volume / 4;
 	j = 0;
 	i = 0;
+	printf("volume = %d\n", map->volume);
 	while (map->map[i])
 	{
 		while (map->map[i][j])
 		{
 			if (map->map[i][j] == '1')
-				draw_wall(j * 1.05 * decal, i * 1.05 * decal, image, decal * 1.07);
+				draw_wall(j * 1.05 * volume, i * 1.05 * volume, image, volume * 1.07);
 			if (isset(map->map[i][j], "0NSEW") == 1)
-				draw_floor(j * 1.05 * decal, i * 1.05 * decal, image, decal * 1.07);
+				draw_floor(j * 1.05 * volume, i * 1.05 * volume, image, volume * 1.07);
 			if (map->map[i][j] == 'D')
-				draw_close_door(j * 1.05 * decal, i * 1.05 * decal, image, decal * 1.07);
+				draw_close_door(j * 1.05 * volume, i * 1.05 * volume, image, volume * 1.07);
 			if (map->map[i][j] == 'O')
-				draw_open_door(j * 1.05 * decal, i * 1.05 * decal, image, decal * 1.07);
+				draw_open_door(j * 1.05 * volume, i * 1.05 * volume, image, volume * 1.07);
 			j++;
 		}
 		j = 0;
