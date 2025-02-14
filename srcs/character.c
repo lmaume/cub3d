@@ -15,7 +15,7 @@ void	draw_raycast_minimap(t_point *p2, t_eve *eve, int limit)
 		drawline.p1.color = "0xFF0000FF";
 		drawline.p2 = p2[j];
 		line(&drawline, eve->mlx->image);
-		j++;
+		j += 20;
 	}
 }
 
@@ -66,7 +66,7 @@ int	raycasting(t_eve *eve, double *distance, double *test, t_point *p2)
 	double				x;
 
 	p2[0].color = "0xFF0000FF";
-	i = 0;
+	i = 0.3;
 	j = 0;
 	x = 0;
 	test[j] = 0;
@@ -126,4 +126,5 @@ void	game(t_eve *eve)
 	draw_raycast_minimap(p2, eve, limit);
 	free(distance);
 	free(test);
+	free(p2);
 }
