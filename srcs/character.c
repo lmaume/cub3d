@@ -4,26 +4,26 @@
 int	get_volume(int height, int width)
 {
 	int	i;
+	int j;
 
-	i = 0;
-	if (height == 0|| width == 0)
+	if (height == 0 || width == 0)
 		return (-1);
-	while (i * height < HEIGHT && i * width < WIDTH)
-		i++;
+	i = HEIGHT / height;
+	j = WIDTH / width;
+	if (i > j)
+		return (j);
 	return (i);
 }
 
 static double	get_ray_distance(t_player *player, t_data_map map, double offset_angle)
 {
 	double	angle;
-	double	step;
 	double	ray_x;
 	double	ray_y;
 	int		tile_x;
 	int		tile_y;
 
 	angle = player->anglez + offset_angle;
-	step = 1;
 	ray_x = player->plyr_x;
 	ray_y = player->plyr_y;
 	while (1)
@@ -34,8 +34,8 @@ static double	get_ray_distance(t_player *player, t_data_map map, double offset_a
 			break;
 		if (isset(map.map[tile_y][tile_x], "1D") == 1)
 			break;
-		ray_x += cos(angle) * step;
-		ray_y += sin(angle) * step;
+		ray_x += cos(angle);
+		ray_y += sin(angle);
 	}
 	return (sqrt(pow(ray_x - player->plyr_x, 2) + pow(ray_y - player->plyr_y, 2)));
 }
@@ -60,7 +60,7 @@ int	raycasting(mlx_image_t *image, t_player *player, t_data_map map, t_eve *eve)
 	x = 0;
 	while (i < FOV)
 	{
-		angle_offset = ((i - (FOV / 2.0)) * (PI / 180)); 
+		angle_offset = ((i - (FOV / 2.0)) * (PI / ANGLE_HALF_CIRCLE)); 
 		distance = get_ray_distance(player, map, angle_offset);
 		put_wall_height(eve, image, x, distance);
 		p2.x = (player->plyr_x + cos(player->anglez + angle_offset) * distance) / 4 ;

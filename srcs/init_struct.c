@@ -69,24 +69,18 @@ int	ini_eve(t_eve **eve, int argc, char **argv)
 	return (0);
 }
 
-bool	my_mlx_pixel_put(mlx_image_t *image, int x, int y, unsigned int color)
+void	my_mlx_pixel_put(mlx_image_t *image, int x, int y, uint32_t color)
 {
 	uint8_t	*pixelstart;
-
-	if ((y * image->width + x) * 4 > 0 && \
-							(y * image->width + x) * 4 < HEIGHT * WIDTH * 4)
+	int	test;
+	
+	test = (y * image->width + x) * 4;
+	if (test > 0 && test < HEIGHT * WIDTH * 4)
 	{
-		pixelstart = &image->pixels[(y * image->width + x) * 4];
-		if ((uint8_t)pixelstart[0] == 0 && (uint8_t)pixelstart[1] \
-			== 0 && (uint8_t)pixelstart[2] == 0 && (uint8_t)pixelstart[3] == 0)
-		{
-			*(pixelstart++) = color >> 24;
-			*(pixelstart++) = color >> 16;
-			*(pixelstart++) = color >> 8;
-			*(pixelstart) = color;
-		}
-		else
-			return (true);
+		pixelstart = &image->pixels[test];
+		*(pixelstart++) = color >> 24;
+		*(pixelstart++) = color >> 16;
+		*(pixelstart++) = color >> 8;
+		*(pixelstart) = color;
 	}
-	return (false);
 }
