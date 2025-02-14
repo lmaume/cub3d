@@ -57,8 +57,8 @@ float	partone(t_line_necessary *line, float grad, mlx_image_t *image,
 		first_point_steep(line, xend, image, truc);
 	else
 	{
-		my_mlx_pixel_put(image, xend, truc, color(line->p1.color, 1));
-		my_mlx_pixel_put(image, xend, truc + 1, color(line->p1.color, 0.5));
+		mlx_put_pixel(image, xend, truc, color(line->p1.color, 1));
+		mlx_put_pixel(image, xend, truc + 1, color(line->p1.color, 0.5));
 	}
 	(void)image;
 	return (yend + grad);
@@ -80,8 +80,8 @@ void	parttwo(t_line_necessary *line, float grad, mlx_image_t *image,
 		last_point_steep(line, xend, image, truc);
 	else
 	{
-		my_mlx_pixel_put(image, xend, truc, color(line->p2.color, 1));
-		my_mlx_pixel_put(image, xend, truc + 1, color(line->p2.color, 0.5));
+		mlx_put_pixel(image, xend, truc, color(line->p2.color, 1));
+		mlx_put_pixel(image, xend, truc + 1, color(line->p2.color, 0.5));
 	}
 }
 

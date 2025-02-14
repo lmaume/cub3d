@@ -94,16 +94,22 @@ static void draw_wall_height(double wall_height, int y_end, int x, t_eve *eve)
 	}
 }
 
-void put_wall_height(t_eve *eve, mlx_image_t *image, int x, double distance)
+void put_wall_height(t_eve *eve, int limit, double *x, double *distance)
 {
 	double	wall_height;
 	int		y_start;
 	int		y_end;
+	int		i;
 
-	wall_height = (HEIGHT * 30) / distance;
-	y_start = (HEIGHT / 2) - (wall_height / 2);
-	y_end = (HEIGHT / 2) + (wall_height / 2);
-	draw_ceiling(y_start, x, image);
-	draw_wall_height(wall_height, y_end, x, eve);
-	draw_floor(y_end, x, image);
+	i = 0;
+	while (i < limit)
+	{
+		wall_height = (HEIGHT * 30) / distance[i];
+		y_start = (HEIGHT / 2) - (wall_height / 2);
+		y_end = (HEIGHT / 2) + (wall_height / 2);
+		draw_ceiling(y_start, (int)x[i], eve->mlx->image);
+		draw_wall_height(wall_height, y_end, (int)x[i], eve);
+		draw_floor(y_end, (int)x[i], eve->mlx->image);
+		i++;
+	}
 }
