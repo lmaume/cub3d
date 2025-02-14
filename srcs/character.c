@@ -74,7 +74,7 @@ int	raycasting(t_eve *eve, double *distance, double *test, t_point *p2)
 	{
 		angle_offset = ((i - (FOV / 2.0)) * (PI / ANGLE_HALF_CIRCLE)); 
 		distance[j] = get_ray_distance(eve->player, eve->map->data, angle_offset);
-		p2[j].x = (eve->player->plyr_x + cos(eve->player->anglez + angle_offset) * distance[j]) / 4 ;
+		p2[j].x = (eve->player->plyr_x + cos(eve->player->anglez + angle_offset) * distance[j]) / 4 + eve->map->data.volume / 8;
 		p2[j].y = (eve->player->plyr_y + sin(eve->player->anglez + angle_offset) * distance[j]) / 4;
 		p2[j].z = 0;
 		x += (WIDTH / (FOV / 0.3));
