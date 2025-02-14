@@ -6,6 +6,7 @@
         "string_view": "cpp",
         "ranges": "cpp",
         "span": "cpp",
-        "iterator": "c"
+        "iterator": "c",
+        "cub3d.h": "c"
     }
 }

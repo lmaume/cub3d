@@ -8,7 +8,7 @@
 #include "parsing.h"
 #ifndef PI
 
-#define PI 3.1415926535
+#define PI 3.14159265358979323846
 
 #endif
 
@@ -17,13 +17,13 @@
 #define ANGLE_CIRCLE 360
 #define ANGLE_HALF_CIRCLE 180
 #define ANGLE_QUART_CIRCLE 90
-#define FOV 60
-#define PLAYER_WEIGHT 10
+#define FOV 70
+#define PLAYER_WEIGHT 6
 
 typedef struct s_player
 {
-	int	plyr_x;
-	int	plyr_y;
+	int		plyr_x;
+	int		plyr_y;
 	double	anglex;
 	double	angley;
 	double	anglez;
@@ -69,8 +69,8 @@ typedef struct s_eve
 }						t_eve;
 
 
-void	game(void* param, t_player *player, t_data_map map);
-void	ini_eve(t_eve **eve, int argc, char **argv);
+void	game(t_eve *eve);
+int		ini_eve(t_eve **eve, int argc, char **argv);
 
 //draw thingy
 
@@ -94,20 +94,26 @@ float					floatipart(float x);
 
 //matrix
 int	angle_x(t_player *player, int x, int y, int z);
-int angle_y(t_player *player, int x, int y, int z);
-int angle_z(t_player *player, int x, int y, int z);
+int	angle_y(t_player *player, int x, int y, int z);
+int	angle_z(t_player *player, int x, int y, int z);
 
-bool	my_mlx_pixel_put(mlx_image_t *image, int x, int y, unsigned int color);
+bool	my_mlx__put(mlx_image_t *image, int x, int y, unsigned int color);
 
 // walls
 int		wall(t_data_map *map, mlx_image_t *image);
 int		get_volume(int height, int width);
 bool	is_player_in_wall(t_data_map *data, int x, int y);
 
+// 3d
+void	put_wall_height(t_eve *eve, int limit, double *x, double *distance);
+
 // gameplay
-void open_door(t_eve *eve);
+void	open_door(t_eve *eve);
+void	ft_move(t_eve *eve);
 
 // memory
 void	free_everything(t_eve *eve);
+
+void	my_mlx_pixel_put(mlx_image_t *image, int x, int y, uint32_t color);
 
 #endif

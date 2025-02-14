@@ -16,7 +16,9 @@ SRCS	:= 	srcs/main.c					\
 			srcs/create_line_part_2.c	\
 			srcs/line_utils.c			\
 			srcs/matrix_rotation.c		\
+			srcs/moves.c				\
 			srcs/wall.c					\
+			srcs/third_dimention.c		\
 
 OBJS	:= ${SRCS:.c=.o}
 

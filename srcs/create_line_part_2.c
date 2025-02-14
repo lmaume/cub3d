@@ -10,10 +10,10 @@ void	not_steep_line(t_line_necessary *line, float place, mlx_image_t *image,
 	while (i < line->p2.x - 1)
 	{
 		usefull = 1 - (place - floor(place));
-		my_mlx_pixel_put(image, floor(place), i, color(line->p1.color,
+		mlx_put_pixel(image, floor(place), i, color(line->p1.color,
 				usefull));
 		usefull = (place - floor(place));
-		my_mlx_pixel_put(image, floor(place) + 1, i, color(line->p1.color,
+		mlx_put_pixel(image, floor(place) + 1, i, color(line->p1.color,
 				usefull));
 		place += grad;
 		i++;
@@ -31,10 +31,10 @@ void	steepness_draw_line(t_line_necessary *line, float place,
 	while (i < line->p2.x - 1)
 	{
 		usefull = 1 - (place - floor(place));
-		my_mlx_pixel_put(image, i, floor(place), color(line->p1.color,
+		mlx_put_pixel(image, i, floor(place), color(line->p1.color,
 				usefull));
 		usefull = (place - floor(place));
-		my_mlx_pixel_put(image, i, floor(place) + 1, color(line->p1.color,
+		mlx_put_pixel(image, i, floor(place) + 1, color(line->p1.color,
 				usefull));
 		place += grad;
 		i++;
@@ -44,13 +44,13 @@ void	steepness_draw_line(t_line_necessary *line, float place,
 void	first_point_steep(t_line_necessary *line, int xend, mlx_image_t *image,
 																	int truc)
 {
-	my_mlx_pixel_put(image, truc, xend, color(line->p1.color, 1));
-	my_mlx_pixel_put(image, truc + 1, xend, color(line->p1.color, 0.5));
+	mlx_put_pixel(image, truc, xend, color(line->p1.color, 1));
+	mlx_put_pixel(image, truc + 1, xend, color(line->p1.color, 0.5));
 }
 
 void	last_point_steep(t_line_necessary *line, int xend, mlx_image_t *image,
 																	int truc)
 {
-	my_mlx_pixel_put(image, truc, xend, color(line->p2.color, 1));
-	my_mlx_pixel_put(image, truc + 1, xend, color(line->p2.color, 0.5));
+	mlx_put_pixel(image, truc, xend, color(line->p2.color, 1));
+	mlx_put_pixel(image, truc + 1, xend, color(line->p2.color, 0.5));
 }
