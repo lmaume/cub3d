@@ -4,7 +4,7 @@ static void	get_forward_tile(int *tile_x, int *tile_y, t_eve *eve)
 {
 	int	volume;
 
-	volume = get_volume(eve->map->data.height, eve->map->data.width);
+	volume = eve->map->data.volume;
 	*tile_x = (eve->player->plyr_x + \
 				cos(eve->player->anglez) * (volume * 0.6)) / volume;
 	*tile_y = (eve->player->plyr_y + \
@@ -25,7 +25,7 @@ void	open_door(t_eve *eve)
 	int	tile_x;
 	int	tile_y;
 
-	volume = get_volume(eve->map->data.height, eve->map->data.width);
+	volume = eve->map->data.volume;
 	get_forward_tile(&tile_x, &tile_y, eve);
 	if (isset(eve->map->data.map[tile_y][tile_x], "DO") == 1 \
 					&& mlx_is_key_down(eve->mlx->mlx, MLX_KEY_E))
@@ -44,7 +44,7 @@ bool	is_player_in_wall(t_data_map *data, int x, int y)
 {
 	int	volume;
 
-	volume = get_volume(data->height, data->width);
+	volume = data->volume;
 	if (isset(data->map[y / volume][x / volume], "1D") == 1)
 		return (true);
 	return (false);

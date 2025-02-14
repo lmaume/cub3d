@@ -35,7 +35,7 @@ void	ini_player(t_player *player, t_data_map *data)
 {
 	int	volume;
 
-	volume = get_volume(data->height, data->width);
+	volume = data->volume;
 	player->anglex = 0;
 	player->angley = 0;
 	if (data->p_side == 'N')
@@ -67,6 +67,7 @@ int	ini_eve(t_eve **eve, int argc, char **argv)
 	(void)argc;
 	(void)argv;
 	return (0);
+
 }
 
 void	my_mlx_pixel_put(mlx_image_t *image, int x, int y, uint32_t color)

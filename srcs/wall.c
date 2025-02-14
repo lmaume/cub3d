@@ -45,9 +45,9 @@ static void	draw_close_door(int i, int j, mlx_image_t *image, int decal)
 
 	a = 0;
 	b = 0;
-	while (a < decal)
+	while (a < volume)
 	{
-		while (b < decal)
+		while (b < volume)
 		{
 			my_mlx_pixel_put(image, i + a, j + b, 0xC22222FF);
 			b++;
@@ -64,9 +64,9 @@ static void	draw_open_door(int i, int j, mlx_image_t *image, int decal)
 
 	a = 0;
 	b = 0;
-	while (a < decal)
+	while (a < volume)
 	{
-		while (b < decal)
+		while (b < volume)
 		{
 			my_mlx_pixel_put(image, i + a, j + b, 0x8B4513FF);
 			b++;
@@ -80,7 +80,6 @@ int	wall(t_data_map *map, mlx_image_t *image)
 {
 	int	i;
 	int	j;
-	int	decal;
 
 	decal = get_volume(map->height, map->width) / 4;
 	j = 0;
