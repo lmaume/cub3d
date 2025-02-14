@@ -47,14 +47,6 @@ void	ft_hook(void *param)
 	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_RIGHT))
 		eve->player->anglez -= 0.06;
 	open_door(eve);
-	// if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_UP))
-	// 	eve->player->angley += 0.05;
-	// if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_DOWN))
-	// 	eve->player->angley -= 0.05;
-	// if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_L))
-	// 	eve->player->anglex += 0.05;
-	// if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_K))
-	// 	eve->player->anglex -= 0.05;
 }
 
 void	game_loop(void *ev)

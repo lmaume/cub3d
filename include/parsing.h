@@ -21,6 +21,7 @@ typedef struct s_data_map
 	int		west_fd;
 	char	*floor;
 	char	*ceiling;
+	int		volume;
 }			t_data_map;
 
 typedef struct s_data_paths
