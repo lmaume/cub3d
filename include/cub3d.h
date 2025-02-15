@@ -22,8 +22,8 @@
 
 typedef struct s_player
 {
-	int		plyr_x;
-	int		plyr_y;
+	double	plyr_x;
+	double	plyr_y;
 	double	anglex;
 	double	angley;
 	double	anglez;
