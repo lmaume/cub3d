@@ -154,7 +154,10 @@ void put_wall_height(t_eve *eve, t_wall *walls)
 	i = 0;
 	while (i < walls->limit)
 	{
-		walls->walls_height = (HEIGHT * 30) / walls->distance[i];
+		if (i < walls->limit / 2)
+			walls->walls_height = ((HEIGHT * 30) / walls->distance[i]);
+		if (i > walls->limit / 2)
+			walls->walls_height = ((HEIGHT * 30) / walls->distance[i]);
 		walls->y_start = (HEIGHT / 2) - (walls->walls_height / 2);
 		walls->y_end = (HEIGHT / 2) + (walls->walls_height / 2);
 		draw_ceiling(walls->y_start, (int)walls->x_tab[i], eve->mlx->image, &eve->map->data);
