@@ -22,7 +22,7 @@
 
 typedef struct s_wall_necessary
 {
-	double	*test;
+	double	*x_tab;
 	double	*distance;
 	int		limit;
 	int		*wall_x;

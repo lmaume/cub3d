@@ -82,13 +82,13 @@ static void draw_wall_height(t_wall *walls, t_eve *eve, int i)
 	y = (HEIGHT / 2) - (walls->walls_height / 2);
 	while (y < walls->y_end)
 	{
-		if (walls->test[i] >= 0 && walls->test[i] < WIDTH && y >= 0 && y < HEIGHT)
+		if (walls->x_tab[i] >= 0 && walls->x_tab[i] < WIDTH && y >= 0 && y < HEIGHT)
 		{
 			y_texture = ((y - (HEIGHT / 2) + (walls->walls_height / 2)) * eve->map->data.textures.north_texture->height) / walls->walls_height;
 			// x_texture = x * eve->map->data.textures.north_texture->width;
-			x_texture = (int)walls->test[i] % eve->map->data.textures.north_texture->width;
+			x_texture = (int)walls->x_tab[i] % eve->map->data.textures.north_texture->width;
 			color = get_pixel_color(eve->map->data.textures.north_texture, x_texture, y_texture);
-			mlx_put_pixel(eve->mlx->image, walls->test[i], y, color);
+			mlx_put_pixel(eve->mlx->image, walls->x_tab[i], y, color);
 		}
 		y++;
 	}
@@ -103,9 +103,9 @@ void put_wall_height(t_eve *eve, t_wall *walls)
 		walls->walls_height = (HEIGHT * 30) / walls->distance[i];
 		walls->y_start = (HEIGHT / 2) - (walls->walls_height / 2);
 		walls->y_end = (HEIGHT / 2) + (walls->walls_height / 2);
-		draw_ceiling(walls->y_start, (int)walls->test[i], eve->mlx->image);
+		draw_ceiling(walls->y_start, (int)walls->x_tab[i], eve->mlx->image);
 		draw_wall_height(walls, eve, i);
-		draw_floor(walls->y_end, (int)walls->test[i], eve->mlx->image);
+		draw_floor(walls->y_end, (int)walls->x_tab[i], eve->mlx->image);
 		i++;
 	}
 }
