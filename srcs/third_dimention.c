@@ -24,12 +24,28 @@
 //     return color;
 // }
 
-static void draw_ceiling(int y_end, int x, mlx_image_t *image)
+static uint32_t 	get_color(char **colors)
 {
-	int		line_width;
-	int		x_temp;
-	int		y;
+	uint32_t	color;
 
+	color = 0;
+	color += ft_atoi(colors[0], NULL) << 24;
+	color += ft_atoi(colors[1], NULL) << 16;
+	color += ft_atoi(colors[2], NULL) << 8; 
+	color += 255;
+	return (color);
+}
+
+static void draw_ceiling(int y_end, int x, mlx_image_t *image, t_data_map *data)
+{
+	int			line_width;
+	int			x_temp;
+	int			y;
+	char		**colors;
+	uint32_t	color;
+
+	colors = ft_split(data->ceiling, ',');
+	color = get_color(colors);
 	y = 0;
 	while (y < y_end)
 	{
@@ -39,7 +55,7 @@ static void draw_ceiling(int y_end, int x, mlx_image_t *image)
 			x_temp = x;
 			while (line_width > 0)
 			{
-				mlx_put_pixel(image, x_temp, y, (0xAAFFFFFF));
+				mlx_put_pixel(image, x_temp, y, color);
 				x_temp++;
 				line_width--;
 			}
@@ -48,12 +64,16 @@ static void draw_ceiling(int y_end, int x, mlx_image_t *image)
 	}
 }
 
-static void draw_floor(int y_start, int x, mlx_image_t *image)
+static void draw_floor(int y_start, int x, mlx_image_t *image, t_data_map *data)
 {
-	int		line_width;
-	int		x_temp;
-	int		y;
+	int			line_width;
+	int			x_temp;
+	int			y;
+	char		**colors;
+	uint32_t	color;
 
+	colors = ft_split(data->floor, ',');
+	color = get_color(colors);
 	y = y_start;
 	while (y < HEIGHT)
 	{
@@ -63,7 +83,7 @@ static void draw_floor(int y_start, int x, mlx_image_t *image)
 			x_temp = x;
 			while (line_width > 0)
 			{
-				mlx_put_pixel(image, x_temp, y, (0xAADDAAFF));
+				mlx_put_pixel(image, x_temp, y, color);
 				x_temp++;
 				line_width--;
 			}
@@ -88,11 +108,11 @@ static void draw_wall_height(t_wall *walls, t_eve *eve, int i)
 			while (line_width > 0)
 			{
 				if (walls->ray_y[i]== walls->wall_y[i] * eve->map->data.volume)
-					mlx_put_pixel(eve->mlx->image, x_temp, y, (0x00FF00FF));
+					mlx_put_pixel(eve->mlx->image, x_temp, y, (0x88FF88FF));
 				else if (walls->ray_y[i] == (walls->wall_y[i] * eve->map->data.volume) + eve->map->data.volume - 1)
-					mlx_put_pixel(eve->mlx->image, x_temp, y, (0x00FFFFFF));
+					mlx_put_pixel(eve->mlx->image, x_temp, y, (0xFF88FFFF));
 				if (walls->ray_x[i]== walls->wall_x[i] * eve->map->data.volume)
-					mlx_put_pixel(eve->mlx->image, x_temp, y, (0xFFFF00FF));
+					mlx_put_pixel(eve->mlx->image, x_temp, y, (0xFFFF88FF));
 				else if (walls->ray_x[i] == (walls->wall_x[i] * eve->map->data.volume) + eve->map->data.volume - 1)
 					mlx_put_pixel(eve->mlx->image, x_temp, y, (0xFFFFFFFF));
 				x_temp++;
@@ -135,9 +155,9 @@ void put_wall_height(t_eve *eve, t_wall *walls)
 		walls->walls_height = (HEIGHT * 30) / walls->distance[i];
 		walls->y_start = (HEIGHT / 2) - (walls->walls_height / 2);
 		walls->y_end = (HEIGHT / 2) + (walls->walls_height / 2);
-		draw_ceiling(walls->y_start, (int)walls->x_tab[i], eve->mlx->image);
+		draw_ceiling(walls->y_start, (int)walls->x_tab[i], eve->mlx->image, &eve->map->data);
 		draw_wall_height(walls, eve, i);
-		draw_floor(walls->y_end, (int)walls->x_tab[i], eve->mlx->image);
+		draw_floor(walls->y_end, (int)walls->x_tab[i], eve->mlx->image, &eve->map->data);
 		i++;
 	}
 }
