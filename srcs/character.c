@@ -49,13 +49,15 @@ static double	get_ray_distance(t_player *player, t_data_map map, double offset_a
 		tile_x = floor((ray_x) / get_volume(map.height, map.width));
 		tile_y = floor((ray_y) / get_volume(map.height, map.width));
 		if (tile_y < 0 || tile_y >= map.height || tile_x < 0 || tile_x >= map.width)
-			break;
+			return (sqrt(pow(ray_x - player->plyr_x, 2) + pow(ray_y - player->plyr_y, 2)));
 		if (isset(map.map[tile_y][tile_x], "1D") == 1)
-			break;
+		{
+			return (sqrt(pow(ray_x - player->plyr_x, 2) + pow(ray_y - player->plyr_y, 2)));
+		}
 		ray_x += cos(angle);
 		ray_y += sin(angle);
 	}
-	return (sqrt(pow(ray_x - player->plyr_x, 2) + pow(ray_y - player->plyr_y, 2)));
+	
 }
 
 int	raycasting(t_eve *eve, double *distance, double *test, t_point *p2)

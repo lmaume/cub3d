@@ -38,6 +38,10 @@ void	ft_hook(void *param)
 		eve->player->anglez -= 0.06;
 	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_RIGHT))
 		eve->player->anglez += 0.06;
+	if (eve->player->anglez > 2 * PI)
+		eve->player->anglez -= 2 * PI;
+	if (eve->player->anglez < 0)
+		eve->player->anglez += 2 * PI;
 	open_door(eve);
 }
 

@@ -2,7 +2,6 @@
 
 static void	move_forward(t_eve *eve, int speed)
 {
-	
 	if (is_player_in_wall(&eve->map->data, eve->player->plyr_x + cos(eve->player->anglez) * (speed * 2), eve->player->plyr_y) == false)
 		eve->player->plyr_x += cos(eve->player->anglez) * speed;
 	if (is_player_in_wall(&eve->map->data, eve->player->plyr_x, eve->player->plyr_y + sin(eve->player->anglez) * (speed * 2)) == false)

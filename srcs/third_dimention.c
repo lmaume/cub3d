@@ -87,19 +87,23 @@ static void draw_wall_height(double wall_height, int y_end, int x, t_eve *eve)
 			y_texture = ((y - (HEIGHT / 2) + (wall_height / 2)) * eve->map->data.textures.north_texture->height) / wall_height;
 			// x_texture = x * eve->map->data.textures.north_texture->width;
 			x_texture = x % eve->map->data.textures.north_texture->width;
-			color = get_pixel_color(eve->map->data.textures.north_texture, x_texture, y_texture);	
+			color = get_pixel_color(eve->map->data.textures.north_texture, x_texture, y_texture);
 			mlx_put_pixel(eve->mlx->image, x, y, color);
 		}
 		y++;
 	}
 }
-
+// int	get_moyenne(double *distance, )
 void put_wall_height(t_eve *eve, int limit, double *x, double *distance)
 {
 	double	wall_height;
 	int		y_start;
 	int		y_end;
 	int		i;
+	int		moyenne;
+
+	i = 0;
+	moyenne = 0;
 
 	i = 0;
 	while (i < limit)
