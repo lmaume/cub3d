@@ -138,5 +138,7 @@ void	game(t_eve *eve)
 	free(p2);
 	free(walls->wall_x);
 	free(walls->wall_y);
+	free(walls->ray_x);
+	free(walls->ray_y);
 	free(walls);
 }
