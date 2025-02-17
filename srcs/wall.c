@@ -85,7 +85,6 @@ int	wall(t_data_map *map, mlx_image_t *image)
 	volume = map->volume / 4;
 	j = 0;
 	i = 0;
-	printf("volume = %d\n", map->volume);
 	while (map->map[i])
 	{
 		while (map->map[i][j])

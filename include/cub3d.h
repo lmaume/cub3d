@@ -20,10 +20,24 @@
 #define FOV 70
 #define PLAYER_WEIGHT 6
 
+typedef struct s_wall_necessary
+{
+	double	*test;
+	double	*distance;
+	int		limit;
+	int		*wall_x;
+	int		*wall_y;
+	int		nb_wall;
+	double	walls_height;
+	int		y_end;
+	int		y_start;
+}		t_wall;
+
+
 typedef struct s_player
 {
-	int		plyr_x;
-	int		plyr_y;
+	double	plyr_x;
+	double	plyr_y;
 	double	anglex;
 	double	angley;
 	double	anglez;
@@ -105,7 +119,7 @@ int		get_volume(int height, int width);
 bool	is_player_in_wall(t_data_map *data, int x, int y);
 
 // 3d
-void	put_wall_height(t_eve *eve, int limit, double *x, double *distance);
+void	put_wall_height(t_eve *eve, t_wall *walls);
 
 // gameplay
 void	open_door(t_eve *eve);
