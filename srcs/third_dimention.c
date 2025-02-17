@@ -87,14 +87,14 @@ static void draw_wall_height(t_wall *walls, t_eve *eve, int i)
 			x_temp = walls->x_tab[i];
 			while (line_width > 0)
 			{
-				if (walls->ray_y[i] % eve->map->data.volume == 0)
+				if (walls->ray_y[i]== walls->wall_y[i] * eve->map->data.volume)
 					mlx_put_pixel(eve->mlx->image, x_temp, y, (0x00FF00FF));
-				else if (walls->ray_x[i] % eve->map->data.volume == 0)
+				else if (walls->ray_y[i] == (walls->wall_y[i] * eve->map->data.volume) + eve->map->data.volume - 1)
 					mlx_put_pixel(eve->mlx->image, x_temp, y, (0x00FFFFFF));
-				// else if (walls->ray_x[i] % eve->map->data.volume != 0)
-				// 	mlx_put_pixel(eve->mlx->image, x_temp, y, (0xFF0000FF));
-				// if (walls->ray_x[i] % eve->map->data.volume == 0)
-				// 	mlx_put_pixel(eve->mlx->image, x_temp, y, (0xFF88FFFF));
+				if (walls->ray_x[i]== walls->wall_x[i] * eve->map->data.volume)
+					mlx_put_pixel(eve->mlx->image, x_temp, y, (0xFFFF00FF));
+				else if (walls->ray_x[i] == (walls->wall_x[i] * eve->map->data.volume) + eve->map->data.volume - 1)
+					mlx_put_pixel(eve->mlx->image, x_temp, y, (0xFFFFFFFF));
 				x_temp++;
 				line_width--;
 			}
