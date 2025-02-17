@@ -62,6 +62,7 @@ static void draw_ceiling(int y_end, int x, mlx_image_t *image, t_data_map *data)
 		}
 		y++;
 	}
+	free_tab(colors);
 }
 
 static void draw_floor(int y_start, int x, mlx_image_t *image, t_data_map *data)
@@ -90,6 +91,7 @@ static void draw_floor(int y_start, int x, mlx_image_t *image, t_data_map *data)
 		}
 		y++;
 	}
+	free_tab(colors);
 }
 
 static void draw_wall_height(t_wall *walls, t_eve *eve, int i)
