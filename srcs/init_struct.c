@@ -17,10 +17,13 @@ void	free_everything(t_eve *eve)
 	free(eve->ray);
 	free(eve->pixels);
 	free(eve->map);
-	mlx_delete_texture(eve->map->data.textures.north_texture);
-	mlx_delete_texture(eve->map->data.textures.south_texture);
-	mlx_delete_texture(eve->map->data.textures.east_texture);
-	mlx_delete_texture(eve->map->data.textures.west_texture);
+	if (eve->map->data.textures.north_texture != NULL)
+	{
+		mlx_delete_texture(eve->map->data.textures.north_texture);
+		mlx_delete_texture(eve->map->data.textures.south_texture);
+		mlx_delete_texture(eve->map->data.textures.east_texture);
+		mlx_delete_texture(eve->map->data.textures.west_texture);
+	}
 }
 
 int	ini_map(t_map *data_map, int argc, char **argv)
@@ -28,6 +31,9 @@ int	ini_map(t_map *data_map, int argc, char **argv)
 	(void)argc;
 	if (parse_struct(data_map, argv[1]) == 1)
 		return (1);
+	if (data_map->data.width > 128 || data_map->data.height > 128)
+		return (printf("Map too large. (%d/%d, max 128)\n", \
+					data_map->data.width, data_map->data.height), 1);
 	return (0);
 }
 
@@ -45,6 +51,7 @@ void	ini_player(t_player *player, t_data_map *data)
 	else if (data->p_side == 'W')
 		player->anglez = PI;
 	player->fov = FOV;
+	printf("%d\n", data->volume);
 	player->plyr_x = (data->p_x * data->volume) + (data->volume / 2);
 	player->plyr_y = (data->p_y * data->volume) + (data->volume / 2);
 }

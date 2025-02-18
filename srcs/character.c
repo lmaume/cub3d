@@ -29,8 +29,8 @@ int	get_volume(int height, int width)
 	i = HEIGHT / height;
 	j = WIDTH / width;
 	if (i > j)
-		return (j);
-	return (i);
+		return (48);
+	return (48);
 }
 
 static double	get_ray_distance(t_player *player, t_data_map map, double offset_angle, t_wall *walls)
@@ -89,7 +89,7 @@ int	raycasting(t_eve *eve, t_wall *walls, t_point *p2)
 	return (j);
 }
 
-int	character(mlx_image_t *image, int x, int y, int r)
+static int	character(mlx_image_t *image, double x, double y, int r)
 {
 	double	i;
 	double	angle;
@@ -132,7 +132,6 @@ void	game(t_eve *eve)
 	wall(&eve->map->data, eve->mlx->image);
 	character(eve->mlx->image, eve->player->plyr_x / 4, eve->player->plyr_y / 4, PLAYER_WEIGHT);
 	draw_raycast_minimap(p2, eve, walls->limit);
-	// printf("%f   %f\n", eve->player->plyr_x, eve->player->plyr_y);
 	free(walls->distance);
 	free(walls->x_tab);
 	free(p2);
