@@ -46,8 +46,8 @@ static double	get_ray_distance(t_player *player, t_data_map map, double offset_a
 	ray_y = player->plyr_y;
 	while (1)
 	{
-		tile_x = floor((ray_x) / get_volume(map.height, map.width));
-		tile_y = floor((ray_y) / get_volume(map.height, map.width));
+		tile_x = floor((ray_x) / 48);
+		tile_y = floor((ray_y) / 48);
 		if (isset(map.map[tile_y][tile_x], "1D") == 1)
 		{
 			walls->wall_x[walls->nb_wall] = tile_x;

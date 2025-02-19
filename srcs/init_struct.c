@@ -39,7 +39,7 @@ int	ini_map(t_map *data_map, int argc, char **argv)
 
 void	ini_player(t_player *player, t_data_map *data)
 {
-	data->volume = get_volume(data->height, data->width);
+	data->volume = 48;
 	player->anglex = 0;
 	player->angley = 0;
 	if (data->p_side == 'N')
@@ -51,7 +51,6 @@ void	ini_player(t_player *player, t_data_map *data)
 	else if (data->p_side == 'W')
 		player->anglez = PI;
 	player->fov = FOV;
-	printf("%d\n", data->volume);
 	player->plyr_x = (data->p_x * data->volume) + (data->volume / 2);
 	player->plyr_y = (data->p_y * data->volume) + (data->volume / 2);
 }

@@ -83,7 +83,6 @@ int	wall(t_data_map *map, mlx_image_t *image)
 	double	volume;
 
 	volume = 12;
-	printf("vol %f\n", volume);
 	j = 0;
 	i = 0;
 	while (map->map[i])
