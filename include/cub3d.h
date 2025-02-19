@@ -22,16 +22,18 @@
 
 typedef struct s_wall_necessary
 {
-	double	*test;
+	double	*x_tab;
 	double	*distance;
 	int		limit;
 	int		*wall_x;
 	int		*wall_y;
+	int		*ray_x;
+	int		*ray_y;
 	int		nb_wall;
 	double	walls_height;
 	int		y_end;
 	int		y_start;
-}		t_wall;
+}					t_wall;
 
 
 typedef struct s_player
@@ -70,7 +72,7 @@ typedef struct s_line_necessary
 	t_point				p1;
 	t_point				p2;
 	float				grad;
-}						t_line_necessary;
+}					t_line_necessary;
 
 typedef struct s_eve
 {
@@ -80,7 +82,7 @@ typedef struct s_eve
 	t_mlx	 	*mlx;
 	t_map		*map;
 	bool		e_key_released;
-}						t_eve;
+}					t_eve;
 
 
 void	game(t_eve *eve);
