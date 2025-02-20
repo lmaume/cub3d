@@ -36,7 +36,7 @@ static uint32_t 	get_color(char **colors)
 	return (color);
 }
 
-static void draw_ceiling(int y_end, int x, mlx_image_t *image, t_data_map *data)
+static void draw_ceiling(double y_end, double x, mlx_image_t *image, t_data_map *data)
 {
 	int			line_width;
 	int			x_temp;
@@ -51,8 +51,8 @@ static void draw_ceiling(int y_end, int x, mlx_image_t *image, t_data_map *data)
 	{
 		if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
 		{
-			line_width = 11;
 			x_temp = x;
+			line_width = 15;
 			while (line_width > 0)
 			{
 				mlx_put_pixel(image, x_temp, y, color);
@@ -65,7 +65,7 @@ static void draw_ceiling(int y_end, int x, mlx_image_t *image, t_data_map *data)
 	free_tab(colors);
 }
 
-static void draw_floor(int y_start, int x, mlx_image_t *image, t_data_map *data)
+static void draw_floor(double y_start, int x, mlx_image_t *image, t_data_map *data)
 {
 	int			line_width;
 	int			x_temp;
@@ -80,8 +80,8 @@ static void draw_floor(int y_start, int x, mlx_image_t *image, t_data_map *data)
 	{
 		if (x >= 0 && x < WIDTH && y >= 0 && y <= HEIGHT)
 		{
-			line_width = 11;
 			x_temp = x;
+			line_width = 15;
 			while (line_width > 0)
 			{
 				mlx_put_pixel(image, x_temp, y, color);
@@ -94,19 +94,23 @@ static void draw_floor(int y_start, int x, mlx_image_t *image, t_data_map *data)
 	free_tab(colors);
 }
 
-static void draw_wall_height(t_wall *walls, t_eve *eve, int i)
+static void draw_wall_height(t_wall *walls, t_eve *eve, int i, double test, double test2)
 {
 	int		line_width;
 	int		x_temp;
-	int		y;
+	double	y;
+	int		truc;
+	double	pas;
 
-	y = (HEIGHT / 2) - (walls->walls_height / 2);;
+	y = (HEIGHT / 2) - (test / 2);
+	truc = (HEIGHT / 2) - (test2 / 2);
+	pas = y / truc;
 	while (y < walls->y_end)
 	{
 		if (walls->x_tab[i] >= 0 && walls->x_tab[i] < WIDTH && y >= 0 && y < HEIGHT)
 		{
-			line_width = 11;
 			x_temp = walls->x_tab[i];
+			line_width = 17;
 			while (line_width > 0)
 			{
 				if (walls->ray_y[i]== walls->wall_y[i] * eve->map->data.volume)
@@ -125,41 +129,50 @@ static void draw_wall_height(t_wall *walls, t_eve *eve, int i)
 	}
 }
 
-// static void draw_wall_height(t_wall *walls, t_eve *eve, int i)
-// {
-// 	uint32_t	color;
-// 	int			y_texture;
-// 	int			x_texture;
-// 	int			y;
-
-// 	y = (HEIGHT / 2) - (walls->walls_height / 2);
-// 	while (y < walls->y_end)
-// 	{
-// 		if (walls->x_tab[i] >= 0 && walls->x_tab[i] < WIDTH && y >= 0 && y < HEIGHT)
-// 		{
-// 			y_texture = ((y - (HEIGHT / 2) + (walls->walls_height / 2)) * eve->map->data.textures.north_texture->height) / walls->walls_height;
-// 			// x_texture = x * eve->map->data.textures.north_texture->width;
-// 			x_texture = (int)walls->x_tab[i] % eve->map->data.textures.north_texture->width;
-// 			color = get_pixel_color(eve->map->data.textures.north_texture, x_texture, y_texture);
-// 			mlx_put_pixel(eve->mlx->image, walls->x_tab[i], y, color);
-// 		}
-// 		y++;
-// 	}
-// }
-
 void put_wall_height(t_eve *eve, t_wall *walls)
 {
 	int		i;
+	double	test;
+	double 	test2;
+	int		wallx;
+	int		wally;
+	double pas;
 
 	i = 0;
+	wallx = walls->wall_x[i];
+	wally = walls->wall_y[i];
+	test = ((HEIGHT * 30) / (walls->distance[i]));
+	while (wallx == walls->wall_x[i] && wally == walls->wall_y[i])
+		i++;
+	test2 = ((HEIGHT * 30) / (walls->distance[i]));
+	pas = (test2 / test);
+	i = 0;
+	printf("%f   %f    %f\n", test, test2, pas);
+	walls->walls_height = ((HEIGHT * 30) / (walls->distance[i]));
 	while (i < walls->limit)
 	{
-		walls->walls_height = ((HEIGHT * 30) / walls->distance[i]);
-		walls->y_start = (HEIGHT / 2) - (walls->walls_height / 2);
+		if (walls->wall_x[i] == wallx && wally == walls->wall_y[i])
+		{
+			if (i < walls->limit / 2)
+				test -= pas;
+			walls->walls_height = test;
+		}
+		else
+		{
+			wallx = walls->wall_x[i];
+			wally = walls->wall_y[i];
+			test = walls->walls_height = ((HEIGHT * 30) / (walls->distance[i]));
+			if (i + 20 < walls->limit)
+				test2 = walls->walls_height = ((HEIGHT * 30) / (walls->distance[i + 20]));
+			else
+				test2 = walls->walls_height = ((HEIGHT * 30) / (walls->distance[walls->limit - 1]));
+			pas = (test2 / test); 
+		}
 		walls->y_end = (HEIGHT / 2) + (walls->walls_height / 2);
-		draw_ceiling(walls->y_start, (int)walls->x_tab[i], eve->mlx->image, &eve->map->data);
-		draw_wall_height(walls, eve, i);
+		walls->y_start = (HEIGHT / 2) - (walls->walls_height / 2);
+		draw_ceiling(walls->y_start, walls->x_tab[i], eve->mlx->image, &eve->map->data);
 		draw_floor(walls->y_end, (int)walls->x_tab[i], eve->mlx->image, &eve->map->data);
+		draw_wall_height(walls, eve, i, test, test2);
 		i++;
 	}
 }

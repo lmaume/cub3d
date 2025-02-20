@@ -29,8 +29,8 @@ int	get_volume(int height, int width)
 	i = HEIGHT / height;
 	j = WIDTH / width;
 	if (i > j)
-		return (48);
-	return (48);
+		return (j);
+	return (i);
 }
 
 static double	get_ray_distance(t_player *player, t_data_map map, double offset_angle, t_wall *walls)
@@ -70,21 +70,22 @@ int	raycasting(t_eve *eve, t_wall *walls, t_point *p2)
 	double				x;
 
 	p2[0].color = "0xFF0000FF";
-	i = 0.3;
+	i = PRECISION;
 	j = 0;
 	x = 0;
 	walls->x_tab[j] = 0;
 	while (i < FOV)
 	{
-		angle_offset = ((i - (FOV / 2.0)) * (PI / ANGLE_HALF_CIRCLE)); 
-		walls->distance[j] = get_ray_distance(eve->player, eve->map->data, angle_offset, walls) * cos(angle_offset);
+		angle_offset = ((i - (FOV / 2)) * (PI / ANGLE_HALF_CIRCLE));
+		walls->distance[j] = get_ray_distance(eve->player, eve->map->data, angle_offset, walls) * (cos(angle_offset));
+		printf("test = %f\n",(cos(angle_offset)));
 		p2[j].x = (eve->player->plyr_x + cos(eve->player->anglez + angle_offset) * walls->distance[j]) / 4 + eve->map->data.volume / 8;
 		p2[j].y = (eve->player->plyr_y + sin(eve->player->anglez + angle_offset) * walls->distance[j]) / 4;
 		p2[j].z = 0;
-		x += (WIDTH / (FOV / 0.3));
+		x += (WIDTH / (FOV / PRECISION));
 		j++;
 		walls->x_tab[j] = x;
-		i += 0.3;
+		i += PRECISION;
 	}
 	return (j);
 }
@@ -119,14 +120,14 @@ void	game(t_eve *eve)
 	t_point *p2;
 
 	walls = ft_calloc(sizeof(t_wall), 1);
-	walls->wall_x = ft_calloc(sizeof(int *), FOV/0.3 + 1);
-	walls->wall_y = ft_calloc(sizeof(int *), FOV/0.3 + 1);
-	walls->ray_x = ft_calloc(sizeof(int *), FOV/0.3 + 1);
-	walls->ray_y = ft_calloc(sizeof(int *), FOV/0.3 + 1);
+	walls->wall_x = ft_calloc(sizeof(int *), FOV/PRECISION + 1);
+	walls->wall_y = ft_calloc(sizeof(int *), FOV/PRECISION + 1);
+	walls->ray_x = ft_calloc(sizeof(int *), FOV/PRECISION + 1);
+	walls->ray_y = ft_calloc(sizeof(int *), FOV/PRECISION + 1);
 	walls->nb_wall = 0;
-	p2 = ft_calloc(sizeof(t_point), FOV/0.3 + 1);
-	walls->distance = ft_calloc(FOV/0.3 + 1, sizeof(double));
-	walls->x_tab = ft_calloc((WIDTH / (FOV / 0.3) * FOV), sizeof(double));
+	p2 = ft_calloc(sizeof(t_point), FOV/PRECISION + 1);
+	walls->distance = ft_calloc(FOV/PRECISION + 1, sizeof(double));
+	walls->x_tab = ft_calloc((WIDTH / (FOV / PRECISION) * FOV), sizeof(double));
 	walls->limit = raycasting(eve, walls, p2);
 	put_wall_height(eve, walls);
 	wall(&eve->map->data, eve->mlx->image);

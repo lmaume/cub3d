@@ -26,9 +26,8 @@ void	free_everything(t_eve *eve)
 	}
 }
 
-int	ini_map(t_map *data_map, int argc, char **argv)
+int	ini_map(t_map *data_map, char **argv)
 {
-	(void)argc;
 	if (parse_struct(data_map, argv[1]) == 1)
 		return (1);
 	if (data_map->data.width > 128 || data_map->data.height > 128)
@@ -51,12 +50,12 @@ void	ini_player(t_player *player, t_data_map *data)
 	else if (data->p_side == 'W')
 		player->anglez = PI;
 	player->fov = FOV;
-	printf("%d\n", data->volume);
+	// printf("%d\n", data->volume);
 	player->plyr_x = (data->p_x * data->volume) + (data->volume / 2);
 	player->plyr_y = (data->p_y * data->volume) + (data->volume / 2);
 }
 
-int	ini_eve(t_eve **eve, int argc, char **argv)
+int	ini_eve(t_eve **eve, char **argv)
 {
 	*eve = ft_calloc(sizeof(t_eve), 1);
 	(*eve)->map = ft_calloc(sizeof(t_map), 1);
@@ -66,11 +65,9 @@ int	ini_eve(t_eve **eve, int argc, char **argv)
 	(*eve)->pixels = ft_calloc(sizeof(uint8_t), \
 			WIDTH * HEIGHT * sizeof(uint32_t) + 1);
 	(*eve)->e_key_released = true;
-	if (ini_map((*eve)->map, argc, argv) != 0)
+	if (ini_map((*eve)->map, argv) != 0)
 		return (printf("Struct init error.\n"), 1);
 	ini_player((*eve)->player, &(*eve)->map->data);
-	(void)argc;
-	(void)argv;
 	return (0);
 
 }

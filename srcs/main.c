@@ -65,7 +65,7 @@ int32_t	main(int argc, char **argv)
 	eve = NULL;
 	if (is_entry_valid(argc, argv) != 0)
 		return (EXIT_FAILURE);
-	if (ini_eve(&eve, argc, argv) != 0)
+	if (ini_eve(&eve, argv) != 0)
 		return (free_everything(eve), EXIT_FAILURE);
 	if (!(eve->mlx->mlx = mlx_init(WIDTH, HEIGHT, "MLX42", true)))
 	{

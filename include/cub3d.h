@@ -14,11 +14,13 @@
 
 #define WIDTH 2048
 #define HEIGHT 2048
-#define ANGLE_CIRCLE 360
-#define ANGLE_HALF_CIRCLE 180
-#define ANGLE_QUART_CIRCLE 90
+#define ANGLE_CIRCLE 360.0
+#define ANGLE_HALF_CIRCLE 180.0
+#define ANGLE_QUART_CIRCLE 90.0
 #define FOV 70
 #define PLAYER_WEIGHT 6
+#define PRECISION 0.3
+
 
 typedef struct s_wall_necessary
 {
@@ -31,8 +33,8 @@ typedef struct s_wall_necessary
 	int		*ray_y;
 	int		nb_wall;
 	double	walls_height;
-	int		y_end;
-	int		y_start;
+	double	y_end;
+	double	y_start;
 }					t_wall;
 
 
@@ -86,7 +88,7 @@ typedef struct s_eve
 
 
 void	game(t_eve *eve);
-int		ini_eve(t_eve **eve, int argc, char **argv);
+int		ini_eve(t_eve **eve, char **argv);
 
 //draw thingy
 
@@ -112,8 +114,6 @@ float					floatipart(float x);
 int	angle_x(t_player *player, int x, int y, int z);
 int	angle_y(t_player *player, int x, int y, int z);
 int	angle_z(t_player *player, int x, int y, int z);
-
-bool	my_mlx__put(mlx_image_t *image, int x, int y, unsigned int color);
 
 // walls
 int		wall(t_data_map *map, mlx_image_t *image);
