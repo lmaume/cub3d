@@ -103,14 +103,14 @@ static void	draw_north_south_textures(t_eve *eve, t_wall *walls, int *y, int *i)
 	if (walls->ray_y[*i] == walls->wall_y[*i] * eve->map->data.volume)
 	{
 		y_texture = ((*y) - (HEIGHT / 2) + (walls->walls_height / 2)) * eve->map->data.textures.south_texture->height / walls->walls_height;
-		x_texture = (int)walls->x_tab[*i] % eve->map->data.textures.south_texture->width;
+		x_texture = ((walls->ray_x[*i] % eve->map->data.volume) * eve->map->data.textures.south_texture->width) / eve->map->data.volume;
 		color = get_pixel_color(eve->map->data.textures.south_texture, x_texture, y_texture);
 		mlx_put_pixel(eve->mlx->image, walls->x_tab[*i], *y, color);
 	}
 	else if (walls->ray_y[*i] == (walls->wall_y[*i] * eve->map->data.volume) + eve->map->data.volume - 1)
 	{
 		y_texture = ((*y) - (HEIGHT / 2) + (walls->walls_height / 2)) * eve->map->data.textures.north_texture->height / walls->walls_height;
-		x_texture = (int)walls->x_tab[*i] % eve->map->data.textures.north_texture->width;
+		x_texture = ((walls->ray_x[*i] % eve->map->data.volume) * eve->map->data.textures.north_texture->width) / eve->map->data.volume;
 		color = get_pixel_color(eve->map->data.textures.north_texture, x_texture, y_texture);
 		mlx_put_pixel(eve->mlx->image, walls->x_tab[*i], *y, color);
 	}
@@ -125,14 +125,14 @@ static void	draw_east_west_textures(t_eve *eve, t_wall *walls, int *y, int *i)
 	if (walls->ray_x[*i]== walls->wall_x[*i] * eve->map->data.volume)
 	{
 		y_texture = ((*y) - (HEIGHT / 2) + (walls->walls_height / 2)) * eve->map->data.textures.east_texture->height / walls->walls_height;
-		x_texture = (int)walls->x_tab[*i] % eve->map->data.textures.east_texture->width;
+		x_texture = ((walls->ray_x[*i] % eve->map->data.volume) * eve->map->data.textures.east_texture->width) / eve->map->data.volume;
 		color = get_pixel_color(eve->map->data.textures.east_texture, x_texture, y_texture);
 		mlx_put_pixel(eve->mlx->image, walls->x_tab[*i], *y, color);
 	}
 	else if (walls->ray_x[*i] == (walls->wall_x[*i] * eve->map->data.volume) + eve->map->data.volume - 1)
 	{
 		y_texture = ((*y) - (HEIGHT / 2) + (walls->walls_height / 2)) * eve->map->data.textures.west_texture->height / walls->walls_height;
-		x_texture = (int)walls->x_tab[*i] % eve->map->data.textures.west_texture->width;
+		x_texture = ((int)(walls->ray_x[*i]) % eve->map->data.volume) * (eve->map->data.textures.north_texture->width % eve->map->data.volume) / eve->map->data.volume;
 		color = get_pixel_color(eve->map->data.textures.west_texture, x_texture, y_texture);
 		mlx_put_pixel(eve->mlx->image, walls->x_tab[*i], *y, color);
 	}
