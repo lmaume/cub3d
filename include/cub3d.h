@@ -121,7 +121,7 @@ int		get_volume(int height, int width);
 bool	is_player_in_wall(t_data_map *data, int x, int y);
 
 // 3d
-void	put_wall_height(t_eve *eve, t_wall *walls);
+void	put_walls(t_eve *eve, t_wall *walls);
 
 // gameplay
 void	open_door(t_eve *eve);

@@ -31,8 +31,8 @@ int	ini_map(t_map *data_map, int argc, char **argv)
 	(void)argc;
 	if (parse_struct(data_map, argv[1]) == 1)
 		return (1);
-	if (data_map->data.width > 128 || data_map->data.height > 128)
-		return (printf("Map too large. (%d/%d, max 128)\n", \
+	if (data_map->data.width > 84 || data_map->data.height > 64)
+		return (printf("Map too large. (%d/%d, max 84/64)\n", \
 					data_map->data.width, data_map->data.height), 1);
 	return (0);
 }

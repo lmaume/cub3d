@@ -28,7 +28,7 @@ static int	get_map_width(char **map, int start)
 	i = start;
 	j = 0;
 	w_max = 0;
-	while (map[i] != NULL && (map[i][0] != '\0' && map[i][0] != '\n'))
+	while (map[i] != NULL && (map[i][0] != '\0'))
 	{
 		while (map[i][j] != '\0')
 			j++;

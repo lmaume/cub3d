@@ -57,8 +57,8 @@ static double	get_ray_distance(t_player *player, t_data_map map, double offset_a
 			walls->nb_wall += 1;
 			return (sqrt(pow(ray_x - player->plyr_x, 2) + pow(ray_y - player->plyr_y, 2)));
 		}
-		ray_x += cos(angle);
-		ray_y += sin(angle);
+		ray_x += cos(angle) * 0.1;
+		ray_y += sin(angle) * 0.1;
 	}
 }
 
@@ -113,6 +113,18 @@ static int	character(mlx_image_t *image, double x, double y, int r)
 	return (0);
 }
 
+static void	free_game(t_wall *walls, t_point *p2)
+{
+	free(walls->distance);
+	free(walls->x_tab);
+	free(p2);
+	free(walls->wall_x);
+	free(walls->wall_y);
+	free(walls->ray_x);
+	free(walls->ray_y);
+	free(walls);
+}
+
 void	game(t_eve *eve)
 {
 	t_wall	*walls;
@@ -128,16 +140,9 @@ void	game(t_eve *eve)
 	walls->distance = ft_calloc(FOV/0.3 + 1, sizeof(double));
 	walls->x_tab = ft_calloc((WIDTH / (FOV / 0.3) * FOV), sizeof(double));
 	walls->limit = raycasting(eve, walls, p2);
-	put_wall_height(eve, walls);
+	put_walls(eve, walls);
 	wall(&eve->map->data, eve->mlx->image);
 	character(eve->mlx->image, eve->player->plyr_x / 4, eve->player->plyr_y / 4, PLAYER_WEIGHT);
 	draw_raycast_minimap(p2, eve, walls->limit);
-	free(walls->distance);
-	free(walls->x_tab);
-	free(p2);
-	free(walls->wall_x);
-	free(walls->wall_y);
-	free(walls->ray_x);
-	free(walls->ray_y);
-	free(walls);
+	free_game(walls, p2);
 }
