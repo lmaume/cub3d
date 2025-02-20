@@ -100,7 +100,7 @@ static void	draw_north_south_textures(t_eve *eve, t_wall *walls, int *y, int *i)
 	int			y_texture;
 	int			x_texture;
 
-	if (walls->ray_y[*i]== walls->wall_y[*i] * eve->map->data.volume)
+	if (walls->ray_y[*i] == walls->wall_y[*i] * eve->map->data.volume)
 	{
 		y_texture = ((*y) - (HEIGHT / 2) + (walls->walls_height / 2)) * eve->map->data.textures.south_texture->height / walls->walls_height;
 		x_texture = (int)walls->x_tab[*i] % eve->map->data.textures.south_texture->width;
