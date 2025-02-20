@@ -16,7 +16,7 @@ void	mouse_move(void *param)
 	eve = param;
 	mlx_set_cursor_mode(eve->mlx->mlx, MLX_MOUSE_DISABLED);
 	mlx_get_mouse_pos(eve->mlx->mlx, &x, &y);
-	new_angle = ((double)(x - old_x) / WIDTH) * (2 * PI) * 50;
+	new_angle = ((double)(x - old_x) / WIDTH) * (2 * M_PI) * 50;
 	if (old_x == INT8_MIN)
 	{
 		old_x = x;
@@ -38,10 +38,10 @@ void	ft_hook(void *param)
 		eve->player->anglez -= 0.06;
 	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_RIGHT))
 		eve->player->anglez += 0.06;
-	if (eve->player->anglez > 2 * PI)
-		eve->player->anglez -= 2 * PI;
+	if (eve->player->anglez > 2 * M_PI)
+		eve->player->anglez -= 2 * M_PI;
 	if (eve->player->anglez < 0)
-		eve->player->anglez += 2 * PI;
+		eve->player->anglez += 2 * M_PI;
 	open_door(eve);
 }
 

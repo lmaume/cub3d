@@ -18,8 +18,6 @@
 # define M_2_PI		0.63661977236758134308	/* 2/pi */
 # define M_2_SQRTPI	1.12837916709551257390	/* 2/sqrt(pi) */
 
-#endif
-
 #define WIDTH 2048
 #define HEIGHT 2048
 #define ANGLE_CIRCLE 360.0

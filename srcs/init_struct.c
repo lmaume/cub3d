@@ -50,13 +50,13 @@ void	ini_player(t_player *player, t_data_map *data)
 	player->anglex = 0;
 	player->angley = 0;
 	if (data->p_side == 'N')
-		player->anglez = 3 * (PI / 2);
+		player->anglez = 3 * (M_PI / 2);
 	else if (data->p_side == 'S')
-		player->anglez = PI / 2;
+		player->anglez = M_PI / 2;
 	else if (data->p_side == 'E')
-		player->anglez = PI * 2;
+		player->anglez = M_PI * 2;
 	else if (data->p_side == 'W')
-		player->anglez = PI;
+		player->anglez = M_PI;
 	player->fov = FOV;
 	// printf("%d\n", data->volume);
 	player->plyr_x = (data->p_x * data->volume) + (data->volume / 2);
