@@ -48,6 +48,8 @@ static double	get_ray_distance(t_player *player, t_data_map map, double offset_a
 	{
 		tile_x = floor((ray_x) / get_volume(map.height, map.width));
 		tile_y = floor((ray_y) / get_volume(map.height, map.width));
+		if (ray_x > WIDTH || ray_x < 0 || ray_y > HEIGHT || ray_y < 0)
+			return (sqrt(pow(ray_x - player->plyr_x, 2) + pow(ray_y - player->plyr_y, 2)));
 		if (isset(map.map[tile_y][tile_x], "1D") == 1)
 		{
 			walls->wall_x[walls->nb_wall] = tile_x;
@@ -57,8 +59,8 @@ static double	get_ray_distance(t_player *player, t_data_map map, double offset_a
 			walls->nb_wall += 1;
 			return (sqrt(pow(ray_x - player->plyr_x, 2) + pow(ray_y - player->plyr_y, 2)));
 		}
-		ray_x += cos(angle);
-		ray_y += sin(angle);
+		ray_x += cos(angle) * 0.1;
+		ray_y += sin(angle) * 0.1;
 	}
 }
 
@@ -76,9 +78,10 @@ int	raycasting(t_eve *eve, t_wall *walls, t_point *p2)
 	walls->x_tab[j] = 0;
 	while (i < FOV)
 	{
-		angle_offset = ((i - (FOV / 2)) * (PI / ANGLE_HALF_CIRCLE));
-		walls->distance[j] = get_ray_distance(eve->player, eve->map->data, angle_offset, walls) * (cos(angle_offset));
-		printf("test = %f\n",(cos(angle_offset)));
+		angle_offset = ((i - (FOV / 2)) * (M_PI / ANGLE_HALF_CIRCLE));
+		walls->distance[j] = get_ray_distance(eve->player, eve->map->data, angle_offset, walls) * cos(angle_offset);
+		if (walls->distance[j] == 0)
+			printf("distance = %f\n",walls->distance[j]);
 		p2[j].x = (eve->player->plyr_x + cos(eve->player->anglez + angle_offset) * walls->distance[j]) / 4 + eve->map->data.volume / 8;
 		p2[j].y = (eve->player->plyr_y + sin(eve->player->anglez + angle_offset) * walls->distance[j]) / 4;
 		p2[j].z = 0;
@@ -103,8 +106,8 @@ static int	character(mlx_image_t *image, double x, double y, int r)
 		while (i < ANGLE_CIRCLE)
 		{
 			angle = i;
-			x1 = r * cos(angle * PI / ANGLE_HALF_CIRCLE);
-			y1 = r * sin(angle * PI / ANGLE_HALF_CIRCLE);
+			x1 = r * cos(angle * M_PI / ANGLE_HALF_CIRCLE);
+			y1 = r * sin(angle * M_PI / ANGLE_HALF_CIRCLE);
 			mlx_put_pixel(image, x1 + x, y1 + y, 0xFFFF00FF);
 			i += 2;
 		}
@@ -116,29 +119,11 @@ static int	character(mlx_image_t *image, double x, double y, int r)
 
 void	game(t_eve *eve)
 {
-	t_wall	*walls;
-	t_point *p2;
-
-	walls = ft_calloc(sizeof(t_wall), 1);
-	walls->wall_x = ft_calloc(sizeof(int *), FOV/PRECISION + 1);
-	walls->wall_y = ft_calloc(sizeof(int *), FOV/PRECISION + 1);
-	walls->ray_x = ft_calloc(sizeof(int *), FOV/PRECISION + 1);
-	walls->ray_y = ft_calloc(sizeof(int *), FOV/PRECISION + 1);
-	walls->nb_wall = 0;
-	p2 = ft_calloc(sizeof(t_point), FOV/PRECISION + 1);
-	walls->distance = ft_calloc(FOV/PRECISION + 1, sizeof(double));
-	walls->x_tab = ft_calloc((WIDTH / (FOV / PRECISION) * FOV), sizeof(double));
-	walls->limit = raycasting(eve, walls, p2);
-	put_wall_height(eve, walls);
+	eve->walls->limit = raycasting(eve, eve->walls, eve->p2);
+	// printf("distance = %f\n", eve->walls->distance[1]);
+	put_wall_height(eve, eve->walls);
 	wall(&eve->map->data, eve->mlx->image);
 	character(eve->mlx->image, eve->player->plyr_x / 4, eve->player->plyr_y / 4, PLAYER_WEIGHT);
-	draw_raycast_minimap(p2, eve, walls->limit);
-	free(walls->distance);
-	free(walls->x_tab);
-	free(p2);
-	free(walls->wall_x);
-	free(walls->wall_y);
-	free(walls->ray_x);
-	free(walls->ray_y);
-	free(walls);
+	draw_raycast_minimap(eve->p2, eve, eve->walls->limit);
+	eve->walls->nb_wall = 0;
 }

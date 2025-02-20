@@ -17,6 +17,14 @@ void	free_everything(t_eve *eve)
 	free(eve->ray);
 	free(eve->pixels);
 	free(eve->map);
+	free(eve->walls->distance);
+	free(eve->walls->x_tab);
+	free(eve->p2);
+	free(eve->walls->wall_x);
+	free(eve->walls->wall_y);
+	free(eve->walls->ray_x);
+	free(eve->walls->ray_y);
+	free(eve->walls);
 	if (eve->map->data.textures.north_texture != NULL)
 	{
 		mlx_delete_texture(eve->map->data.textures.north_texture);
@@ -68,6 +76,15 @@ int	ini_eve(t_eve **eve, char **argv)
 	if (ini_map((*eve)->map, argv) != 0)
 		return (printf("Struct init error.\n"), 1);
 	ini_player((*eve)->player, &(*eve)->map->data);
+	(*eve)->walls = ft_calloc(sizeof(t_wall), 1);
+	(*eve)->walls->wall_x = ft_calloc(sizeof(int *), FOV/PRECISION + 1);
+	(*eve)->walls->wall_y = ft_calloc(sizeof(int *), FOV/PRECISION + 1);
+	(*eve)->walls->ray_x = ft_calloc(sizeof(int *), FOV/PRECISION + 1);
+	(*eve)->walls->ray_y = ft_calloc(sizeof(int *), FOV/PRECISION + 1);
+	(*eve)->walls->nb_wall = 0;
+	(*eve)->p2 = ft_calloc(sizeof(t_point), FOV/PRECISION + 1);
+	(*eve)->walls->distance = ft_calloc(FOV/PRECISION + 1, sizeof(double));
+	(*eve)->walls->x_tab = ft_calloc((WIDTH / (FOV / PRECISION) * FOV), sizeof(double));
 	return (0);
 
 }
