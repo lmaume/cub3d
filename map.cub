@@ -1,10 +1,10 @@
 
 NO ./textures/trgaspar.png
-SO ./textures/mlapique.png
-WE ./textures/dave.png
-EA ./textures/tonton.png
-C 88,180,200
-F 150,120,88
+SO ./textures/dave.png
+WE ./textures/ekrebs.png
+EA ./textures/lmaume.png
+C 90,110,9999
+F 98,94,90
 
    11   1111111111111111111111111111
   1  1  11100001110000000000000000011
