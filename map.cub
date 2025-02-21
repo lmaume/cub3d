@@ -2,7 +2,7 @@
 NO ./textures/trgaspar.png
 SO ./textures/dave.png
 WE ./textures/ekrebs.png
-EA ./textures/lmaume.png
+EA ./textures/mlapique.png
 C 90,110,9999
 F 98,94,90
 
@@ -29,5 +29,4 @@ F 98,94,90
    1    1001000000000000000011111
    1    100100000000000000001
         111111111111111111111
- 
 
