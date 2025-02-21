@@ -9,6 +9,7 @@ SRCS	:= 	srcs/main.c					\
 			parsing/init_map.c			\
 			parsing/get_map.c			\
 			parsing/parsing.c			\
+			srcs/maths_utils.c			\
 			srcs/init_struct.c			\
 			srcs/character.c			\
 			srcs/collide.c				\
@@ -18,6 +19,8 @@ SRCS	:= 	srcs/main.c					\
 			srcs/matrix_rotation.c		\
 			srcs/moves.c				\
 			srcs/wall.c					\
+			srcs/walls_utils.c			\
+			srcs/colors.c				\
 			srcs/third_dimention.c		\
 
 OBJS	:= ${SRCS:.c=.o}
