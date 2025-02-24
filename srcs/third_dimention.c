@@ -108,33 +108,39 @@ static void draw_floor(double y_start, int x, mlx_image_t *image, t_data_map *da
 // 	mlx_image_to_window(eve->mlx->mlx, img, 0, 0);
 // }
 
-static void draw_wall_height(t_wall *walls, t_eve *eve, int i)
+static void draw_wall_height(t_wall *walls, t_eve *eve, int i, int j)
 {
 	int		line_width;
 	int		x_temp;
 	int		y;
+	int		tr;
 
 
 	y = (HEIGHT / 2) - (walls->walls_height / 2);;
+	tr = 0;
 	while (y < walls->y_end)
 	{
-		if (walls->x_tab[i] >= 0 && walls->x_tab[i] < WIDTH && y >= 0 && y < HEIGHT)
+		while (tr < j)
 		{
-			line_width = 17;
-			x_temp = walls->x_tab[i];
-			while (line_width > 0)
+			if (walls->x_tab[i] >= 0 && walls->x_tab[i] < WIDTH && y >= 0 && y < HEIGHT)
 			{
-				if (walls->ray_y[i]== walls->wall_y[i] * eve->map->data.volume)
-					mlx_put_pixel(eve->mlx->image, x_temp, y, (0x88FF88FF));
-				else if (walls->ray_y[i] == (walls->wall_y[i] * eve->map->data.volume) + eve->map->data.volume - 1)
-					mlx_put_pixel(eve->mlx->image, x_temp, y, (0xFF88FFFF));
-				if (walls->ray_x[i]== walls->wall_x[i] * eve->map->data.volume)
-					mlx_put_pixel(eve->mlx->image, x_temp, y, (0xFFFF88FF));
-				else if (walls->ray_x[i] == (walls->wall_x[i] * eve->map->data.volume) + eve->map->data.volume - 1)
-					mlx_put_pixel(eve->mlx->image, x_temp, y, (0xFFFFFFFF));
-				x_temp++;
-				line_width--;
+				line_width = 1;
+				x_temp = walls->x_tab[i] + tr;
+				while (line_width > 0)
+				{
+					if (walls->ray_y[i]== walls->wall_y[i] * eve->map->data.volume)
+						mlx_put_pixel(eve->mlx->image, x_temp, y, (0x88FF88FF));
+					else if (walls->ray_y[i] == (walls->wall_y[i] * eve->map->data.volume) + eve->map->data.volume - 1)
+						mlx_put_pixel(eve->mlx->image, x_temp, y, (0xFF88FFFF));
+					if (walls->ray_x[i]== walls->wall_x[i] * eve->map->data.volume)
+						mlx_put_pixel(eve->mlx->image, x_temp, y, (0xFFFF88FF));
+					else if (walls->ray_x[i] == (walls->wall_x[i] * eve->map->data.volume) + eve->map->data.volume - 1)
+						mlx_put_pixel(eve->mlx->image, x_temp, y, (0xFFFFFFFF));
+					x_temp++;
+					line_width--;
+				}
 			}
+			tr++;
 		}
 		y++;
 	}
@@ -143,11 +149,12 @@ static void draw_wall_height(t_wall *walls, t_eve *eve, int i)
 void put_wall_height(t_eve *eve, t_wall *walls)
 {
 	int		i;
-	// int		j;
-	// double	pas;
+	int		j;
+	int		pas;
 
 	i = 0;
-	// j = 0;
+	pas = 2048 / walls->limit;
+	printf("limit = %d", pas);
 	while (i < walls->limit)
 	{
 		walls->walls_height = ((HEIGHT * 30) / walls->distance[i]);
@@ -162,10 +169,17 @@ void put_wall_height(t_eve *eve, t_wall *walls)
 		// 	walls->x_tab[i] += 1;
 		// 	j++;
 		// }
-		draw_wall_height(walls, eve, i);
-		draw_ceiling(walls->y_start, (int)walls->x_tab[i], eve->mlx->image, &eve->map->data);
-		draw_floor(walls->y_end, (int)walls->x_tab[i], eve->mlx->image, &eve->map->data);
-		// j = 0;
+		if (walls->distance[i] > 0)
+		{
+			while (j < pas)
+			{
+				draw_wall_height(walls, eve, i, j);
+				draw_ceiling(walls->y_start, (int)walls->x_tab[i] + j, eve->mlx->image, &eve->map->data);
+				draw_floor(walls->y_end, (int)walls->x_tab[i] + j, eve->mlx->image, &eve->map->data);
+				j++;
+			}
+		}
+		j = 0;
 		i++;
 	}
 }

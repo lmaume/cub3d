@@ -9,10 +9,10 @@ void	not_steep_line(t_line_necessary *line, float place, mlx_image_t *image,
 	i = line->p1.x + 1;
 	while (i < line->p2.x - 1)
 	{
-		usefull = 1 - (place - floor(place));
+		usefull = 1;
 		mlx_put_pixel(image, floor(place), i, color(line->p1.color,
 				usefull));
-		usefull = (place - floor(place));
+		usefull = 1;
 		mlx_put_pixel(image, floor(place) + 1, i, color(line->p1.color,
 				usefull));
 		place += grad;
@@ -30,10 +30,10 @@ void	steepness_draw_line(t_line_necessary *line, float place,
 	i = line->p1.x + 1;
 	while (i < line->p2.x - 1)
 	{
-		usefull = 1 - (place - floor(place));
+		usefull = 1;
 		mlx_put_pixel(image, i, floor(place), color(line->p1.color,
 				usefull));
-		usefull = (place - floor(place));
+		usefull = 1;
 		mlx_put_pixel(image, i, floor(place) + 1, color(line->p1.color,
 				usefull));
 		place += grad;

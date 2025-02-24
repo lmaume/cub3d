@@ -41,6 +41,12 @@ typedef struct s_wall_necessary
 	double	walls_height;
 	double	y_end;
 	double	y_start;
+	double	distancex;
+	double	distancey;
+	double	distance2x;
+	double	distance2y;
+	double	*where_raycast_begin_x;
+	double	*where_raycast_begin_y;
 }					t_wall;
 
 
