@@ -78,9 +78,9 @@ static void	draw_open_door(int i, int j, mlx_image_t *image, int volume)
 
 int	wall(t_data_map *map, mlx_image_t *image)
 {
-	int	i;
-	int	j;
-	int	volume;
+	int		i;
+	int		j;
+	double	volume;
 
 	volume = 12;
 	j = 0;

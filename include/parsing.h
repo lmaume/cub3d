@@ -9,7 +9,7 @@
 # include "MLX42/MLX42.h"
 # include "../libft/libft.h"
 
-typedef struct s_eve t_eve;
+typedef struct s_eve	t_eve;
 
 typedef struct s_textures
 {

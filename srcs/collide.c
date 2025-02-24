@@ -1,5 +1,26 @@
 #include "../include/cub3d.h"
 
+void	mouse_move(void *param)
+{
+	static int	old_x = INT8_MIN;
+	int			x;
+	int			y;
+	double		new_angle;
+	t_eve		*eve;
+
+	eve = param;
+	mlx_set_cursor_mode(eve->mlx->mlx, MLX_MOUSE_DISABLED);
+	mlx_get_mouse_pos(eve->mlx->mlx, &x, &y);
+	new_angle = ((double)(x - old_x) / WIDTH) * (2 * PI) / 5;
+	if (old_x == INT8_MIN)
+	{
+		old_x = x;
+		return ;
+	}
+	old_x = x;
+	eve->player->anglez += (new_angle);
+}
+
 static void	get_forward_tile(int *tile_x, int *tile_y, t_eve *eve)
 {
 	int	volume;
@@ -29,11 +50,15 @@ void	open_door(t_eve *eve)
 	get_forward_tile(&tile_x, &tile_y, eve);
 	if (isset(eve->map->data.map[tile_y][tile_x], "DO") == 1 \
 					&& mlx_is_key_down(eve->mlx->mlx, MLX_KEY_E))
-	{	
+	{
 		if (eve->e_key_released == true)
 		{
-			toggle_door(&eve->map->data, tile_x, tile_y);
-			eve->e_key_released = false;
+			if ((int)eve->player->plyr_x / volume != \
+			tile_x || (int)eve->player->plyr_y / volume != tile_y)
+			{
+				toggle_door(&eve->map->data, tile_x, tile_y);
+				eve->e_key_released = false;
+			}
 		}
 	}
 	else

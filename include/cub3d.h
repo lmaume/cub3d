@@ -1,24 +1,24 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include "MLX42/MLX42.h"
-#include "../libft/libft.h"
-#include <stdio.h>
-#include <math.h>
-#include "parsing.h"
-#ifndef PI
+# include "MLX42/MLX42.h"
+# include "../libft/libft.h"
+# include <stdio.h>
+# include <math.h>
+# include "parsing.h"
+# ifndef PI
 
-#define PI 3.14159265358979323846
+#  define PI 3.14159265358979323846
 
-#endif
+# endif
 
-#define WIDTH 2048
-#define HEIGHT 2048
-#define ANGLE_CIRCLE 360
-#define ANGLE_HALF_CIRCLE 180
-#define ANGLE_QUART_CIRCLE 90
-#define FOV 70
-#define PLAYER_WEIGHT 6
+# define WIDTH 2048
+# define HEIGHT 2048
+# define ANGLE_CIRCLE 360
+# define ANGLE_HALF_CIRCLE 180
+# define ANGLE_QUART_CIRCLE 90
+# define FOV 70
+# define PLAYER_WEIGHT 6
 
 typedef struct s_wall_necessary
 {
@@ -78,57 +78,74 @@ typedef struct s_eve
 	t_player	*player;
 	t_ray		*ray;
 	uint8_t		*pixels;
-	t_mlx	 	*mlx;
+	t_mlx		*mlx;
 	t_map		*map;
 	bool		e_key_released;
 }						t_eve;
 
-
-void	game(t_eve *eve);
-int		ini_eve(t_eve **eve, int argc, char **argv);
+void		game(t_eve *eve);
+int			ini_eve(t_eve **eve, int argc, char **argv);
+double		init_distance(t_eve *eve, t_wall *walls, \
+							double ray_x, double ray_y);
 
 //draw thingy
 
-void					last_point_steep(t_line_necessary *line, int xend,
-							mlx_image_t *image, int truc);
-void					first_point_steep(t_line_necessary *line, int xend,
-							mlx_image_t *image, int truc);
-void					line(t_line_necessary *line, mlx_image_t *image);
-void					steepness_draw_line(t_line_necessary *line, float place,
-							mlx_image_t *image, float grad);
-void					not_steep_line(t_line_necessary *line, float place,
-							mlx_image_t *image, float grad);
-uint32_t				color(char *colorpoint, float opacity);
+void		last_point_steep(t_line_necessary *line, int xend, \
+									mlx_image_t *image, int truc);
+void		first_point_steep(t_line_necessary *line, int xend, \
+									mlx_image_t *image, int truc);
+void		line(t_line_necessary *line, mlx_image_t *image);
+void		steepness_draw_line(t_line_necessary *line, float place, \
+										mlx_image_t *image, float grad);
+void		not_steep_line(t_line_necessary *line, float place, \
+									mlx_image_t *image, float grad);
+uint32_t	color(char *colorpoint, float opacity);
 
 // the usefull math base
 
-int						integerpart(float x);
-int						roundbottom(float x);
-float					floatpart(float x);
-float					floatipart(float x);
+int			integerpart(float x);
+int			roundbottom(float x);
+float		floatpart(float x);
+float		floatipart(float x);
 
 //matrix
-int	angle_x(t_player *player, int x, int y, int z);
-int	angle_y(t_player *player, int x, int y, int z);
-int	angle_z(t_player *player, int x, int y, int z);
 
-bool	my_mlx__put(mlx_image_t *image, int x, int y, unsigned int color);
+int			angle_x(t_player *player, int x, int y, int z);
+int			angle_y(t_player *player, int x, int y, int z);
+int			angle_z(t_player *player, int x, int y, int z);
+bool		my_mlx__put(mlx_image_t *image, int x, int y, unsigned int color);
 
 // walls
-int		wall(t_data_map *map, mlx_image_t *image);
-int		get_volume(int height, int width);
-bool	is_player_in_wall(t_data_map *data, int x, int y);
+
+void		draw_wall_height(t_wall *walls, t_eve *eve, int i);
+void		draw_east_west_textures(t_eve *eve, t_wall *walls, int *y, int *i);
+void		draw_north_south_textures(t_eve *eve, t_wall *walls, int *y, \
+																	int *i);
+void		draw_raycast_minimap(t_point *p2, t_eve *eve, int limit);
+int			wall(t_data_map *map, mlx_image_t *image);
+int			get_volume(int height, int width);
+bool		is_player_in_wall(t_data_map *data, int x, int y);
 
 // 3d
-void	put_walls(t_eve *eve, t_wall *walls);
+
+void		put_walls(t_eve *eve, t_wall *walls);
 
 // gameplay
-void	open_door(t_eve *eve);
-void	ft_move(t_eve *eve);
+
+void		open_door(t_eve *eve);
+void		ft_move(t_eve *eve);
+void		mouse_move(void *param);
 
 // memory
-void	free_everything(t_eve *eve);
 
-void	my_mlx_pixel_put(mlx_image_t *image, int x, int y, uint32_t color);
+void		free_everything(t_eve *eve);
+
+// colors
+
+void		my_mlx_pixel_put(mlx_image_t *image, int x, int y, \
+													uint32_t color);
+void		limit_colors(int *red, int *green, int *blue);
+uint32_t	get_pixel(mlx_texture_t *texture, uint32_t x, uint32_t y);
+uint32_t	get_color(char **colors);
 
 #endif

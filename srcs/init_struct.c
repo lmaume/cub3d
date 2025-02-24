@@ -10,17 +10,21 @@ void	free_everything(t_eve *eve)
 	free(eve->map->west);
 	free(eve->map->data.floor);
 	free(eve->map->data.ceiling);
-	free(eve);
 	free(eve->mlx);
 	if (eve->player != NULL)
 		free(eve->player);
 	free(eve->ray);
 	free(eve->pixels);
+	if (eve->map->data.textures.north_texture != NULL)
+		mlx_delete_texture(eve->map->data.textures.north_texture);
+	if (eve->map->data.textures.south_texture != NULL)
+		mlx_delete_texture(eve->map->data.textures.south_texture);
+	if (eve->map->data.textures.east_texture != NULL)
+		mlx_delete_texture(eve->map->data.textures.east_texture);
+	if (eve->map->data.textures.west_texture != NULL)
+		mlx_delete_texture(eve->map->data.textures.west_texture);
 	free(eve->map);
-	mlx_delete_texture(eve->map->data.textures.north_texture);
-	mlx_delete_texture(eve->map->data.textures.south_texture);
-	mlx_delete_texture(eve->map->data.textures.east_texture);
-	mlx_delete_texture(eve->map->data.textures.west_texture);
+	free(eve);
 }
 
 int	ini_map(t_map *data_map, int argc, char **argv)
@@ -68,14 +72,13 @@ int	ini_eve(t_eve **eve, int argc, char **argv)
 	(void)argc;
 	(void)argv;
 	return (0);
-
 }
 
 void	my_mlx_pixel_put(mlx_image_t *image, int x, int y, uint32_t color)
 {
 	uint8_t	*pixelstart;
-	int	test;
-	
+	int		test;
+
 	test = (y * image->width + x) * 4;
 	if (test > 0 && test < HEIGHT * WIDTH * 4)
 	{
