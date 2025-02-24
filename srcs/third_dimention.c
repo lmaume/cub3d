@@ -2,28 +2,6 @@
 #include "MLX42/MLX42.h"
 #include <stdint.h>
 
-static uint32_t get_pixel_color(mlx_texture_t* texture, uint32_t x, uint32_t y)
-{
-    if (x >= texture->width || y >= texture->height)
-    {
-        // Coordonnées en dehors de la texture
-        return 0;
-    }
-
-    // Calculer l'index du pixel dans le tableau
-    uint32_t index = (y * texture->width + x) * 4;
-
-    // Récupérer les valeurs RGBA
-    uint8_t r = texture->pixels[index];
-    uint8_t g = texture->pixels[index + 1];
-    uint8_t b = texture->pixels[index + 2];
-    uint8_t a = texture->pixels[index + 3];
-
-    // Combiner les canaux en une seule valeur uint32_t
-    uint32_t color = (r << 24) | (g << 16) | (b << 8) | a;
-    return color;
-}
-
 static uint32_t 	get_color(char **colors)
 {
 	uint32_t	color;

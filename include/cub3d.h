@@ -35,11 +35,10 @@ typedef struct s_wall_necessary
 	int		y_start;
 }					t_wall;
 
-
 typedef struct s_player
 {
-	double	plyr_x;
-	double	plyr_y;
+	double		plyr_x;
+	double		plyr_y;
 	double	anglex;
 	double	angley;
 	double	anglez;
@@ -72,7 +71,7 @@ typedef struct s_line_necessary
 	t_point				p1;
 	t_point				p2;
 	float				grad;
-}					t_line_necessary;
+}						t_line_necessary;
 
 typedef struct s_eve
 {
@@ -82,7 +81,7 @@ typedef struct s_eve
 	t_mlx	 	*mlx;
 	t_map		*map;
 	bool		e_key_released;
-}					t_eve;
+}						t_eve;
 
 
 void	game(t_eve *eve);

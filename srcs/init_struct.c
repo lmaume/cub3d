@@ -17,13 +17,10 @@ void	free_everything(t_eve *eve)
 	free(eve->ray);
 	free(eve->pixels);
 	free(eve->map);
-	if (eve->map->data.textures.north_texture != NULL)
-	{
-		mlx_delete_texture(eve->map->data.textures.north_texture);
-		mlx_delete_texture(eve->map->data.textures.south_texture);
-		mlx_delete_texture(eve->map->data.textures.east_texture);
-		mlx_delete_texture(eve->map->data.textures.west_texture);
-	}
+	mlx_delete_texture(eve->map->data.textures.north_texture);
+	mlx_delete_texture(eve->map->data.textures.south_texture);
+	mlx_delete_texture(eve->map->data.textures.east_texture);
+	mlx_delete_texture(eve->map->data.textures.west_texture);
 }
 
 int	ini_map(t_map *data_map, int argc, char **argv)

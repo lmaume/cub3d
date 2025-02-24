@@ -80,7 +80,7 @@ int	wall(t_data_map *map, mlx_image_t *image)
 {
 	int	i;
 	int	j;
-	double	volume;
+	int	volume;
 
 	volume = 12;
 	j = 0;
@@ -90,13 +90,13 @@ int	wall(t_data_map *map, mlx_image_t *image)
 		while (map->map[i][j])
 		{
 			if (map->map[i][j] == '1')
-				draw_wall(j * volume, i * volume, image, volume);
+				draw_wall(j * 1.05 * volume, i * 1.05 * volume, image, volume * 1.07);
 			if (isset(map->map[i][j], "0NSEW") == 1)
-				draw_floor(j * volume, i * volume, image, volume);
+				draw_floor(j * 1.05 * volume, i * 1.05 * volume, image, volume * 1.07);
 			if (map->map[i][j] == 'D')
-				draw_close_door(j * volume, i * volume, image, volume);
+				draw_close_door(j * 1.05 * volume, i * 1.05 * volume, image, volume * 1.07);
 			if (map->map[i][j] == 'O')
-				draw_open_door(j * volume, i * volume, image, volume);
+				draw_open_door(j * 1.05 * volume, i * 1.05 * volume, image, volume * 1.07);
 			j++;
 		}
 		j = 0;

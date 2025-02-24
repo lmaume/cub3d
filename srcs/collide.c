@@ -32,11 +32,8 @@ void	open_door(t_eve *eve)
 	{	
 		if (eve->e_key_released == true)
 		{
-			if ((int)eve->player->plyr_x / volume != tile_x || (int)eve->player->plyr_y / volume != tile_y)
-			{
-				toggle_door(&eve->map->data, tile_x, tile_y);
-				eve->e_key_released = false;
-			}
+			toggle_door(&eve->map->data, tile_x, tile_y);
+			eve->e_key_released = false;
 		}
 	}
 	else

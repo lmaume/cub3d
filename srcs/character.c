@@ -1,6 +1,7 @@
 #include "../include/cub3d.h"
 #include "limits.h"
 
+
 void	draw_raycast_minimap(t_point *p2, t_eve *eve, int limit)
 {
 	int					j;
@@ -78,7 +79,7 @@ int	raycasting(t_eve *eve, t_wall *walls, t_point *p2)
 	walls->x_tab[j] = 0;
 	while (i < FOV)
 	{
-		angle_offset = ((i - (FOV / 2.0)) * (PI / ANGLE_HALF_CIRCLE)); 
+		angle_offset = ((i - (FOV / 2.0)) * (PI / ANGLE_CIRCLE)); 
 		walls->distance[j] = get_ray_distance(eve->player, eve->map->data, angle_offset, walls) * cos(angle_offset);
 		p2[j].x = (eve->player->plyr_x + cos(eve->player->anglez + angle_offset) * walls->distance[j]) / 4 + eve->map->data.volume / 8;
 		p2[j].y = (eve->player->plyr_y + sin(eve->player->anglez + angle_offset) * walls->distance[j]) / 4;
