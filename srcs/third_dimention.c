@@ -114,6 +114,7 @@ void	draw_east_west_textures(t_eve *eve, t_wall *walls, int *y, int *i)
 	}
 }
 
+//! les textures s'affichent comme de la merde quand la map est grande !//
 void	put_walls(t_eve *eve, t_wall *walls)
 {
 	int		i;
