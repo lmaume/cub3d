@@ -40,10 +40,13 @@ uint32_t	get_color(char **colors)
 	int			red;
 	int			green;
 	int			blue;
+	int			error;
 
-	red = ft_atoi(colors[0], NULL);
-	green = ft_atoi(colors[1], NULL);
-	blue = ft_atoi(colors[2], NULL);
+	red = ft_atoi(colors[0], &error);
+	green = ft_atoi(colors[1], &error);
+	blue = ft_atoi(colors[2], &error);
+	if (error == 1)
+		return (353638911);
 	limit_colors(&red, &blue, &green);
 	color = 0;
 	color += red << 24;

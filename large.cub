@@ -1,9 +1,9 @@
 
 NO ./textures/trgaspar.png
-SO ./textures/mlapique.png
-WE ./textures/dave.png
-EA ./textures/tonton.png
+SO ./textures/dave.png
 C 88,200,200
+WE ./textures/ekrebs.png
+EA ./textures/mlapique.png
 F 150,120,88
 
 
