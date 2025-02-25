@@ -1,6 +1,6 @@
 NAME	:= cub3d
 CC		:= cc
-CFLAGS	:= -Werror -Wextra -Wall -g3 -fsanitize=leak
+CFLAGS	:= -Werror -Wextra -Wall -g3 #-fsanitize=leak
 LIBMLX	:= ./MLX42
 HEADERS	:= -I ./include -I $(LIBMLX)/include
 LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
@@ -22,6 +22,7 @@ SRCS	:= 	srcs/main.c					\
 			srcs/walls_utils.c			\
 			srcs/colors.c				\
 			srcs/third_dimention.c		\
+			srcs/draw_textures.c		\
 
 OBJS	:= ${SRCS:.c=.o}
 

@@ -2,6 +2,7 @@
 
 void	free_everything(t_eve *eve)
 {
+	free_game(eve->walls, eve->p2);
 	free_tab(eve->map->map_cpy);
 	free_tab(eve->map->data.map);
 	free(eve->map->north);
@@ -69,6 +70,15 @@ int	ini_eve(t_eve **eve, int argc, char **argv)
 	if (ini_map((*eve)->map, argc, argv) != 0)
 		return (printf("Struct init error.\n"), 1);
 	ini_player((*eve)->player, &(*eve)->map->data);
+	(*eve)->walls = ft_calloc(sizeof(t_wall), 1);
+	(*eve)->walls->wall_x = ft_calloc(sizeof(int *), FOV / PRECISION + 1);
+	(*eve)->walls->wall_y = ft_calloc(sizeof(int *), FOV / PRECISION + 1);
+	(*eve)->walls->ray_x = ft_calloc(sizeof(int *), FOV / PRECISION + 1);
+	(*eve)->walls->ray_y = ft_calloc(sizeof(int *), FOV / PRECISION + 1);
+	(*eve)->walls->nb_wall = 0;
+	(*eve)->p2 = ft_calloc(sizeof(t_point), FOV / PRECISION + 1);
+	(*eve)->walls->distance = ft_calloc(FOV / PRECISION + 1, sizeof(double));
+	(*eve)->walls->x_tab = ft_calloc((WIDTH / (FOV / PRECISION) * FOV), sizeof(double));
 	(void)argc;
 	(void)argv;
 	return (0);

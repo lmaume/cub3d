@@ -13,18 +13,20 @@ static double	get_ray_distance(t_eve *eve, t_wall *walls, \
 	angle = eve->player->anglez + offset_angle;
 	ray_x = eve->player->plyr_x;
 	ray_y = eve->player->plyr_y;
+	ray_x += cos(angle) / (eve->player->plyr_x - floor((int)eve->player->plyr_x / 48) * 48);
+	ray_y += sin(angle) / (eve->player->plyr_y - floor((int)eve->player->plyr_y / 48) * 48);
 	while (1)
 	{
 		tile_x = floor((ray_x) / 48);
 		tile_y = floor((ray_y) / 48);
-		if (ray_x > WIDTH || ray_x < 0 || ray_y > HEIGHT || ray_y < 0)
+		if (ray_x > WIDTH * 48 || ray_x < 0 || ray_y > HEIGHT * 48 || ray_y < 0)
 			return (sqrt(pow(ray_x - eve->player->plyr_x, 2) + \
 								pow(ray_y - eve->player->plyr_y, 2)));
 		if (isset(eve->map->data.map[tile_y][tile_x], "1D") == 1)
 		{
 			walls->wall_x[walls->nb_wall] = tile_x;
 			walls->wall_y[walls->nb_wall] = tile_y;
-			return (init_distance(eve, walls, ray_x, ray_y));
+			return (init_distance(eve, walls, ray_x, ray_y, angle));
 		}
 		ray_x += cos(angle) * 0.1;
 		ray_y += sin(angle) * 0.1;
@@ -39,7 +41,7 @@ int	raycasting(t_eve *eve, t_wall *walls, t_point *p2)
 	double				x;
 
 	p2[0].color = "0xFF0000FF";
-	i = 0.3;
+	i = PRECISION;
 	j = 0;
 	x = 0;
 	walls->x_tab[j] = 0;
@@ -53,10 +55,10 @@ int	raycasting(t_eve *eve, t_wall *walls, t_point *p2)
 		p2[j].y = (eve->player->plyr_y + sin(eve->player->anglez + \
 									angle_offset) * walls->distance[j]) / 4;
 		p2[j].z = 0;
-		x += (WIDTH / (FOV / 0.3));
+		x += (WIDTH / (FOV / PRECISION));
 		j++;
 		walls->x_tab[j] = x;
-		i += 0.3;
+		i += PRECISION;
 	}
 	return (j);
 }
@@ -85,7 +87,7 @@ static int	character(mlx_image_t *image, double x, double y, int r)
 	return (0);
 }
 
-static void	free_game(t_wall *walls, t_point *p2)
+void	free_game(t_wall *walls, t_point *p2)
 {
 	free(walls->distance);
 	free(walls->x_tab);
@@ -99,23 +101,11 @@ static void	free_game(t_wall *walls, t_point *p2)
 
 void	game(t_eve *eve)
 {
-	t_wall	*walls;
-	t_point	*p2;
-
-	walls = ft_calloc(sizeof(t_wall), 1);
-	walls->wall_x = ft_calloc(sizeof(int *), FOV / 0.3 + 1);
-	walls->wall_y = ft_calloc(sizeof(int *), FOV / 0.3 + 1);
-	walls->ray_x = ft_calloc(sizeof(int *), FOV / 0.3 + 1);
-	walls->ray_y = ft_calloc(sizeof(int *), FOV / 0.3 + 1);
-	walls->nb_wall = 0;
-	p2 = ft_calloc(sizeof(t_point), FOV / 0.3 + 1);
-	walls->distance = ft_calloc(FOV / 0.3 + 1, sizeof(double));
-	walls->x_tab = ft_calloc((WIDTH / (FOV / 0.3) * FOV), sizeof(double));
-	walls->limit = raycasting(eve, walls, p2);
-	put_walls(eve, walls);
+	eve->walls->limit = raycasting(eve, eve->walls, eve->p2);
+	put_walls(eve, eve->walls);
 	wall(&eve->map->data, eve->mlx->image);
 	character(eve->mlx->image, eve->player->plyr_x / 4, \
 					eve->player->plyr_y / 4, PLAYER_WEIGHT);
-	draw_raycast_minimap(p2, eve, walls->limit);
-	free_game(walls, p2);
+	draw_raycast_minimap(eve->p2, eve, eve->walls->limit);
+	eve->walls->nb_wall = 0;
 }
