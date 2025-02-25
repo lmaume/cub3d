@@ -103,9 +103,12 @@ void	game(t_eve *eve)
 {
 	eve->walls->limit = raycasting(eve, eve->walls, eve->p2);
 	put_walls(eve, eve->walls);
-	wall(&eve->map->data, eve->mlx->image);
-	character(eve->mlx->image, eve->player->plyr_x / 4, \
-					eve->player->plyr_y / 4, PLAYER_WEIGHT);
-	draw_raycast_minimap(eve->p2, eve, eve->walls->limit);
+	if (eve->minimap == true)
+	{
+		wall(&eve->map->data, eve->mlx->image);
+		character(eve->mlx->image, eve->player->plyr_x / 4, \
+						eve->player->plyr_y / 4, PLAYER_WEIGHT);
+		draw_raycast_minimap(eve->p2, eve, eve->walls->limit);
+	}
 	eve->walls->nb_wall = 0;
 }

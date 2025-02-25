@@ -13,11 +13,11 @@ static void	draw_ceiling(int y_end, int x, mlx_image_t *image, t_data_map *data)
 	colors = ft_split(data->ceiling, ',');
 	color = get_color(colors);
 	y = 0;
-	while (y < y_end)
+	while (y <= y_end)
 	{
 		if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
 		{
-			line_width = 11;
+			line_width = WIDTH * PRECISION / 48;
 			x_temp = x;
 			while (line_width > 0)
 			{
@@ -44,7 +44,7 @@ static void	draw_floor(int y, int x, mlx_image_t *image, t_data_map *data)
 	{
 		if (x >= 0 && x < WIDTH && y >= 0 && y <= HEIGHT)
 		{
-			line_width = 11;
+			line_width = WIDTH * PRECISION / 48;
 			x_temp = x;
 			while (line_width > 0)
 			{

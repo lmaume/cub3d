@@ -18,6 +18,19 @@ static void	ft_hook(void *param)
 	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_RIGHT))
 		eve->player->anglez += 0.06;
 	open_door(eve);
+	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_M))
+	{
+		if (eve->map_key_released == true)
+		{
+			if (eve->minimap == false)
+				eve->minimap = true;
+			else if (eve->minimap == true)
+				eve->minimap = false;
+			eve->map_key_released = false;
+		}
+	}
+	else
+		eve->map_key_released = true;
 }
 
 static void	game_loop(void *ev)

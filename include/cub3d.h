@@ -19,7 +19,7 @@
 # define ANGLE_QUART_CIRCLE 90
 # define FOV 60
 # define PLAYER_WEIGHT 6
-# define PRECISION 0.3
+# define PRECISION 0.5
 
 typedef struct s_wall_necessary
 {
@@ -84,6 +84,8 @@ typedef struct s_eve
 	t_wall		*walls;
 	t_point		*p2;
 	bool		e_key_released;
+	bool		map_key_released;
+	bool		minimap;
 }						t_eve;
 
 void		game(t_eve *eve);
