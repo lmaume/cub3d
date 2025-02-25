@@ -68,7 +68,7 @@ int	ini_eve(t_eve **eve, int argc, char **argv)
 			WIDTH * HEIGHT * sizeof(uint32_t) + 1);
 	(*eve)->e_key_released = true;
 	(*eve)->map_key_released = true;
-	(*eve)->minimap = true;
+	(*eve)->minimap = false;
 	if (ini_map((*eve)->map, argc, argv) != 0)
 		return (printf("Struct init error.\n"), 1);
 	ini_player((*eve)->player, &(*eve)->map->data);

@@ -108,6 +108,7 @@ void	game(t_eve *eve)
 		wall(&eve->map->data, eve->mlx->image);
 		character(eve->mlx->image, eve->player->plyr_x / 4, \
 						eve->player->plyr_y / 4, PLAYER_WEIGHT);
+		printf("x=%f y=%f\n", eve->player->plyr_x, eve->player->plyr_x);
 		draw_raycast_minimap(eve->p2, eve, eve->walls->limit);
 	}
 	eve->walls->nb_wall = 0;

@@ -8,6 +8,8 @@ void	draw_raycast_minimap(t_point *p2, t_eve *eve, int limit)
 	j = 0;
 	while (j < limit)
 	{
+		if (p2[j].x < 0 || p2[j].y < 0 || p2[j].x > WIDTH || p2[j].y > HEIGHT)
+			return ;
 		drawline.p1.x = eve->player->plyr_x / 4;
 		drawline.p1.y = eve->player->plyr_y / 4;
 		drawline.p1.z = 0;
