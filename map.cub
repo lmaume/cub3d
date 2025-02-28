@@ -2,13 +2,8 @@
 NO ./textures/trgaspar.png
 SO ./textures/dave.png
 WE ./textures/ekrebs.png
-<<<<<<< HEAD
 EA ./textures/tonton.png
 C 90,110,9999
-=======
-EA ./textures/mlapique.png
-C 90,110,999900000000000
->>>>>>> 8a3b49599dcc69b57021919679052ecd1f541e3d
 F 98,94,90
 
    11   111111111111111111111111111111111111111111
