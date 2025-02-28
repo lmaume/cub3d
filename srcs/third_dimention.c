@@ -13,7 +13,7 @@ static void	draw_ceiling(int y_end, int x, mlx_image_t *image, t_data_map *data)
 	colors = ft_split(data->ceiling, ',');
 	color = get_color(colors);
 	y = 0;
-	while (y <= y_end)
+	while (y <= y_end + 8)
 	{
 		if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
 		{
@@ -70,9 +70,9 @@ void	put_walls(t_eve *eve, t_wall *walls)
 		walls->y_end = (HEIGHT / 2) + (walls->walls_height / 2);
 		draw_ceiling(walls->y_start, (int)walls->x_tab[i], \
 							eve->mlx->image, &eve->map->data);
-		draw_wall_height(walls, eve, i);
-		draw_floor(walls->y_end, (int)walls->x_tab[i], \
+		draw_floor(walls->y_end - 8, (int)walls->x_tab[i], \
 							eve->mlx->image, &eve->map->data);
+		draw_wall_height(walls, eve, i);
 		i++;
 	}
 }
