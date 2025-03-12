@@ -21,3 +21,12 @@ int	angle_z(t_player *player, int x, int y, int z)
 			(cos(player->anglez) * x))))) - (sin(player->anglex) * \
 										((cos(player->anglez) * x))));
 }
+
+double	angle(double angle)
+{
+	if (angle < 0)
+		angle += (2 * PI);
+	if (angle > (2 * PI))
+		angle -= (2 * PI);
+	return (angle);
+}

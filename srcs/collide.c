@@ -11,7 +11,7 @@ void	mouse_move(void *param)
 	eve = param;
 	mlx_set_cursor_mode(eve->mlx->mlx, MLX_MOUSE_DISABLED);
 	mlx_get_mouse_pos(eve->mlx->mlx, &x, &y);
-	new_angle = ((double)(x - old_x) / WIDTH) * (2 * PI) / 5;
+	new_angle = ((double)(x - old_x) / WIDTH) * (2 * PI) / 10;
 	if (old_x == INT8_MIN)
 	{
 		old_x = x;

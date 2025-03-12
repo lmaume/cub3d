@@ -58,4 +58,8 @@ void	ft_move(t_eve *eve)
 		move_left(eve);
 	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_D))
 		move_right(eve);
+	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_N))
+		eve->walls->mo_zaik = true;
+	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_M))
+		eve->walls->mo_zaik = false;
 }

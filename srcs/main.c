@@ -18,6 +18,7 @@ static void	ft_hook(void *param)
 	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_RIGHT))
 		eve->player->anglez += 0.06;
 	open_door(eve);
+	eve->player->anglez = angle(eve->player->anglez);
 	if (mlx_is_key_down(eve->mlx->mlx, MLX_KEY_M))
 	{
 		if (eve->map_key_released == true)
@@ -41,6 +42,7 @@ static void	game_loop(void *ev)
 	mlx_delete_image(eve->mlx->mlx, eve->mlx->image);
 	eve->mlx->image = mlx_new_image(eve->mlx->mlx, WIDTH, HEIGHT);
 	game(eve);
+	eve->time.new_time++;
 	mlx_image_to_window(eve->mlx->mlx, eve->mlx->image, 0, 0);
 }
 
@@ -91,6 +93,7 @@ int32_t	main(int argc, char **argv)
 		return (free_everything(eve), EXIT_FAILURE);
 	if (mlx_start(eve) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
+	eve->time.old_time = mlx_get_time();
 	game_start(eve);
 	mlx_terminate(eve->mlx->mlx);
 	free_everything(eve);
