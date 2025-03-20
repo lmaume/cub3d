@@ -26,9 +26,9 @@ static int	floodfill(int x, int y, char **map)
 	if (isset(map[x][y], "10DONSEW") == 0)
 		return (end++, -1);
 	map[x][y] = '1';
-	if (isset(map[x + 1][y], "1\n\0") == 0)
+	if (map[x + 1][0] != '\n' && isset(map[x + 1][y], "1\n\0") == 0)
 		end += floodfill(x + 1, y, map);
-	if (isset(map[x - 1][y], "1\n\0") == 0)
+	if (x > 0 && map[x - 1][0] != '\n' && isset(map[x - 1][y], "1\n\0") == 0)
 		end += floodfill(x - 1, y, map);
 	if (isset(map[x][y + 1], "1\n\0") == 0)
 		end += floodfill(x, y + 1, map);
@@ -43,7 +43,7 @@ int	get_next_floor_pos(t_map *data_map)
 	{
 		while (data_map->map_cpy[data_map->last_y][data_map->last_x] != '\0')
 		{
-			if (data_map->map_cpy[data_map->last_y][data_map->last_x] == '0')
+			if (isset(data_map->map_cpy[data_map->last_y][data_map->last_x], "0NSEW"))
 				return (0);
 			data_map->last_x++;
 		}

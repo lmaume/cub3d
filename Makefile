@@ -23,6 +23,8 @@ SRCS	:= 	srcs/main.c					\
 			srcs/colors.c				\
 			srcs/third_dimention.c		\
 			srcs/draw_textures.c		\
+			srcs/draw_textures_2.c		\
+			srcs/raycasting.c			\
 
 OBJS	:= ${SRCS:.c=.o}
 
