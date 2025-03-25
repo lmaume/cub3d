@@ -6,7 +6,7 @@
 /*   By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:52:48 by mlapique          #+#    #+#             */
-/*   Updated: 2025/03/24 15:43:37 by mlapique         ###   ########.fr       */
+/*   Updated: 2025/03/25 15:05:35 by mlapique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # endif
 
 # define VOLUME 48
-# define WIDTH 1080
-# define HEIGHT 720
+# define WIDTH 2048
+# define HEIGHT 1080
 # define ANGLE_CIRCLE 360
 # define ANGLE_HALF_CIRCLE 180
 # define ANGLE_QUART_CIRCLE 90

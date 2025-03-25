@@ -6,7 +6,7 @@
 /*   By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:53:01 by mlapique          #+#    #+#             */
-/*   Updated: 2025/03/21 17:53:03 by mlapique         ###   ########.fr       */
+/*   Updated: 2025/03/25 16:23:18 by mlapique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	is_entry_valid(int argc, char **argv)
 	try = open(argv[1], O_RDONLY);
 	if (try == -1)
 		return (printf("Map file not found.\n"), 1);
+	close(try);
 	return (0);
 }
 
@@ -57,7 +58,8 @@ int	get_next_floor_pos(t_map *data_map)
 	{
 		while (data_map->map_cpy[data_map->last_y][data_map->last_x] != '\0')
 		{
-			if (isset(data_map->map_cpy[data_map->last_y][data_map->last_x], "0NSEWDO"))
+			if (isset(data_map->map_cpy[data_map->last_y] \
+				[data_map->last_x], "0NSEWDO"))
 				return (0);
 			data_map->last_x++;
 		}

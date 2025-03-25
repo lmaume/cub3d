@@ -6,7 +6,7 @@
 /*   By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:53:26 by mlapique          #+#    #+#             */
-/*   Updated: 2025/03/21 17:53:28 by mlapique         ###   ########.fr       */
+/*   Updated: 2025/03/25 17:53:50 by mlapique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ int	ini_map(t_map *data_map, int argc, char **argv)
 		return (printf("Map too large. (You: y:%d/x:%d\t Max y:84/x:64)\n", \
 					data_map->data.width, data_map->data.height), 1);
 	color = ft_split(data_map->data.ceiling, ',');
-	if (!color)
-		return (1);
+	if (!color || !color[0] || !color[1] || !color[2] || color[3])
+		return (free_tab(color), 1);
 	data_map->data.color_ceiling = get_color(color);
 	free_tab(color);
 	color = ft_split(data_map->data.floor, ',');
-	if (!color)
-		return (1);
+	if (!color || !color[0] || !color[1] || !color[2] || color[3])
+		return (free_tab(color), 1);
 	data_map->data.colot_floor = get_color(color);
 	free_tab(color);
 	return (0);
@@ -82,8 +82,6 @@ int	ini_wall(t_eve *eve)
 
 int	ini_eve_calloc(t_eve **eve, int argc, char **argv)
 {
-	char	**color;
-
 	(*eve)->map = ft_calloc(sizeof(t_map), 1);
 	(*eve)->walls = ft_calloc(sizeof(t_wall), 1);
 	(*eve)->mlx = ft_calloc(sizeof(t_mlx), 1);
