@@ -6,7 +6,7 @@
 #    By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/06 15:13:38 by lmaume            #+#    #+#              #
-#    Updated: 2025/03/21 14:15:33 by mlapique         ###   ########.fr        #
+#    Updated: 2025/03/26 17:44:37 by mlapique         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,7 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -g3
 
-RM = rm -f
+RM = rm -fR
 
 OBJS = $(SRCS:.c=.o)
 

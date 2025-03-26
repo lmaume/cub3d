@@ -58,7 +58,7 @@ clean:
 	@rm -rf $(OBJS)
 
 fclean: clean
-	@rm -rf $(LIBFT) - C ./libft/*.o ./libft/*.a
+	@rm -rf $(LIBFT) - C ./libft/*.o ./libft/*.a ./libft/*/*.o
 	@rm -rf $(NAME)
 
 $(LIBFT):
