@@ -6,13 +6,13 @@
 /*   By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:52:55 by mlapique          #+#    #+#             */
-/*   Updated: 2025/03/21 17:52:57 by mlapique         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:32:37 by mlapique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/parsing.h"
 
-static int	get_map_line(char **tab)
+int	get_map_line(char **tab)
 {
 	int	i;
 	int	j;

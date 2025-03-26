@@ -6,7 +6,7 @@
 /*   By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:53:01 by mlapique          #+#    #+#             */
-/*   Updated: 2025/03/25 16:23:18 by mlapique         ###   ########.fr       */
+/*   Updated: 2025/03/26 17:40:19 by mlapique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ static int	floodfill(int x, int y, char **map)
 		return (end++, -1);
 	if (isset(map[x][y], "10DONSEW") == 0)
 		return (end++, -1);
-	if (isset(map[x][y], "EWSND0O") == 1 && y == 0)
+	if (isset(map[x][y], "EWSND0O") == 1 && (y == 0 || x == 0))
+		return (end++, -1);
+	if ((int)ft_strlen(map[x]) - 1 <= y + 1)
 		return (end++, -1);
 	map[x][y] = '1';
 	if (map[x + 1][0] != '\n' && isset(map[x + 1][y], "1\n\0") == 0)
