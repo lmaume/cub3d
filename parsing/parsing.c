@@ -6,7 +6,7 @@
 /*   By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:53:01 by mlapique          #+#    #+#             */
-/*   Updated: 2025/03/26 17:40:19 by mlapique         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:59:59 by mlapique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@ int	is_entry_valid(int argc, char **argv)
 	return (0);
 }
 
-static int	floodfill(int x, int y, char **map)
+static int	floodfill(int x, int y, char **map, t_data_map data)
 {
 	int	end;
 
 	end = 0;
+	if (x + 1 == data.height && ft_strset(map[x], "EWSND0O"))
+		return(end++, -1);
 	if (map[x][y] == '\0')
 		return (end++, -1);
 	if (isset(map[x][y], "10DONSEW") == 0)
@@ -44,13 +46,13 @@ static int	floodfill(int x, int y, char **map)
 		return (end++, -1);
 	map[x][y] = '1';
 	if (map[x + 1][0] != '\n' && isset(map[x + 1][y], "1\n\0") == 0)
-		end += floodfill(x + 1, y, map);
+		end += floodfill(x + 1, y, map, data);
 	if (x > 0 && map[x - 1][0] != '\n' && isset(map[x - 1][y], "1\n\0") == 0)
-		end += floodfill(x - 1, y, map);
+		end += floodfill(x - 1, y, map, data);
 	if (isset(map[x][y + 1], "1\n\0") == 0)
-		end += floodfill(x, y + 1, map);
+		end += floodfill(x, y + 1, map, data);
 	if (y > 0 && isset(map[x][y - 1], "1\n\0") == 0)
-		end += floodfill(x, y - 1, map);
+		end += floodfill(x, y - 1, map, data);
 	return (end);
 }
 
@@ -77,7 +79,7 @@ int	is_map_surrounded_by_walls(t_map *data_map)
 	data_map->last_y = 0;
 	while (get_next_floor_pos(data_map) == 0)
 		if (floodfill(data_map->last_y, \
-						data_map->last_x, data_map->map_cpy) != 0)
+						data_map->last_x, data_map->map_cpy, data_map->data) != 0)
 			return (1);
 	return (0);
 }

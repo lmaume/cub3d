@@ -6,7 +6,7 @@
 /*   By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:52:51 by mlapique          #+#    #+#             */
-/*   Updated: 2025/03/26 16:33:12 by mlapique         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:29:45 by mlapique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int		player_count(t_map *data_map);
 
 //?		MEMORY
 int		map_alloc(t_map *data_map, char **tab);
-
+int		get_map_size(t_map *data_map, char **map, int start);
 int		get_map_line(char **tab);
 
 #endif

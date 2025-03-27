@@ -6,7 +6,7 @@
 /*   By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:52:55 by mlapique          #+#    #+#             */
-/*   Updated: 2025/03/26 16:32:37 by mlapique         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:29:32 by mlapique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	get_map_width(char **map, int start)
 	return (w_max - 1);
 }
 
-static int	get_map_size(t_map *data_map, char **map, int start)
+int	get_map_size(t_map *data_map, char **map, int start)
 {
 	int	i;
 	int	j;

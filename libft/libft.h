@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmaume <lmaume@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 17:25:30 by lmaume            #+#    #+#             */
-/*   Updated: 2025/01/28 15:07:04 by lmaume           ###   ########.fr       */
+/*   Updated: 2025/03/27 17:59:30 by mlapique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int		ft_isprint(int c);
 int		ft_iswhite_space(int c);
 int		isset(char c, const char *set);
 int		isset_tab(char *str, char **set);
+int		ft_strset(const char *s, const char *set);
 
 bool	is_line_full_of_c(char *str, char c);
 bool	is_started_and_finished_by_c(char *str, char c);
