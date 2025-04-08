@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmaume <lmaume@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:52:58 by mlapique          #+#    #+#             */
-/*   Updated: 2025/03/26 16:46:32 by mlapique         ###   ########.fr       */
+/*   Updated: 2025/04/08 16:53:16 by lmaume           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ static void	close_images(t_eve *eve)
 		!eve->map->data.textures.south_image || \
 		!eve->map->data.textures.east_image || \
 		!eve->map->data.textures.west_image)
-		printf("Texture to Image fail.\n");
+		printf("Error\nTexture to Image fail.\n");
 }
 
 int	open_texture(t_eve *eve)
 {
 	if (!eve || !eve->mlx || !eve->mlx->mlx)
-		return (printf("MLX load fail.\n"), 1);
+		return (printf("Error\nMLX load fail.\n"), 1);
 	eve->map->data.textures.north_texture = mlx_load_png(eve->map->north);
 	eve->map->data.textures.south_texture = mlx_load_png(eve->map->south);
 	eve->map->data.textures.east_texture = mlx_load_png(eve->map->east);
@@ -33,7 +33,7 @@ int	open_texture(t_eve *eve)
 		!eve->map->data.textures.south_texture || \
 		!eve->map->data.textures.east_texture || \
 		!eve->map->data.textures.west_texture)
-		return (printf("Texture load fail.\n"), 1);
+		return (printf("Error\nTexture load fail.\n"), 1);
 	eve->map->data.textures.north_image = mlx_texture_to_image(eve->mlx->mlx, \
 		eve->map->data.textures.north_texture);
 	eve->map->data.textures.south_image = mlx_texture_to_image(eve->mlx->mlx, \
@@ -56,11 +56,13 @@ static int	init_var(char **tab, char **str, char *opt)
 	if (ft_tabcmp(tab, opt) != NULL)
 		tmp = &ft_tabcmp(tab, opt)[ft_strlen(opt)];
 	if (tmp == NULL)
-		return (printf("One or more identifier is not recognized.\n"), 1);
+		return \
+		(printf("Error\nOne or more identifier is not recognized.\n"), 1);
 	while (ft_strncmp(tab[i], opt, ft_strlen(opt)) != 0)
 		i++;
 	if (i > get_map_line(tab))
-		return (printf("Identifier after map or inside the map wtf.\n"), 1);
+		return \
+		(printf("Error\nIdentifier after map or inside the map wtf.\n"), 1);
 	tmp[ft_strlen(tmp) - 1] = '\0';
 	*str = ft_calloc(sizeof(char *), ft_strlen(tmp));
 	if (!*str)

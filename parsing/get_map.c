@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmaume <lmaume@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:52:55 by mlapique          #+#    #+#             */
-/*   Updated: 2025/03/27 17:29:32 by mlapique         ###   ########.fr       */
+/*   Updated: 2025/04/08 15:45:01 by lmaume           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,15 @@ int	map_alloc(t_map *data_map, char **tab)
 	j = 0;
 	i = get_map_line(tab) - 1;
 	size = get_map_size(data_map, tab, i);
-	data_map->data.map = ft_calloc(sizeof(char **), size - (i - 1));
-	data_map->map_cpy = ft_calloc(sizeof(char **), size - (i - 1));
+	data_map->data.map = ft_calloc(sizeof(char *), size - (i - 1));
+	data_map->map_cpy = ft_calloc(sizeof(char *), size - (i - 1));
 	if (data_map->data.map == NULL || data_map->map_cpy == NULL)
 		return (1);
 	while (++i < size)
 	{
 		len = ft_strlen(tab[i]);
-		data_map->data.map[j] = ft_calloc(sizeof(char *), len);
-		data_map->map_cpy[j] = ft_calloc(sizeof(char *), len);
+		data_map->data.map[j] = ft_calloc(sizeof(char), len);
+		data_map->map_cpy[j] = ft_calloc(sizeof(char), len);
 		if (data_map->data.map[j] == NULL || data_map->map_cpy[j] == NULL)
 			return (1);
 		ft_memcpy(data_map->data.map[j], tab[i], len);

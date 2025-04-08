@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lmaume <lmaume@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:53:01 by mlapique          #+#    #+#             */
-/*   Updated: 2025/04/02 16:41:12 by mlapique         ###   ########.fr       */
+/*   Updated: 2025/04/08 17:02:19 by lmaume           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,19 @@ static int	floodfill(int x, int y, char **map, t_data_map data)
 	end = 0;
 	if (x + 1 == data.height && ft_strset(map[x], "EWSND0O"))
 		return (end++, -1);
-	if (map[x][y] == '\0')
-		return (end++, -1);
 	if (isset(map[x][y], "10DONSEW") == 0)
 		return (end++, -1);
-	if (isset(map[x][y], "EWSND0O") == 1 && (y == 0 || x == 0))
+	if (((int)ft_strlen(map[x]) - 1 <= y + 1) || \
+		(isset(map[x][y], "EWSND0O") == 1 && (y == 0 || x == 0)))
 		return (end++, -1);
-	if ((int)ft_strlen(map[x]) - 1 <= y + 1)
+	if (map[x - 1][y] == '\n' || map[x + 1][y] == '\n')
+		return (end++, -1);
+	if ((int)ft_strlen(map[x - 1]) <= x || (int)ft_strlen(map[x + 1]) <= x)
 		return (end++, -1);
 	map[x][y] = '1';
 	if (map[x + 1][0] != '\n' && isset(map[x + 1][y], "1\n\0") == 0)
 		end += floodfill(x + 1, y, map, data);
-	if (x > 0 && map[x - 1][0] != '\n' && isset(map[x - 1][y], "1\n\0") == 0)
+	if (x > 0 && map[x - 1][y] != '\n' && isset(map[x - 1][y], "1\n\0") == 0)
 		end += floodfill(x - 1, y, map, data);
 	if (isset(map[x][y + 1], "1\n\0") == 0)
 		end += floodfill(x, y + 1, map, data);
@@ -86,12 +87,28 @@ int	is_map_surrounded_by_walls(t_map *data_map)
 
 int	parse_struct(t_map *data, char *filename)
 {
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
 	if (init_struct(data, filename) == 1)
 		return (1);
 	if (player_count(data) != 1)
 		return (printf("One player is needed, no more or less.\n"), 1);
+	while (i <= data->data.height)
+	{
+		while (j < (int)ft_strlen(data->map_cpy[i]) - 1)
+		{
+			if (isset(data->map_cpy[i][j], "10DONSEW \n") == false)
+				return (printf("Error\nInvalid char in map (%c).\n", \
+											data->map_cpy[i][j]), 1);
+			j++;
+		}
+		i++;
+	}
 	if (is_map_surrounded_by_walls(data) == 1)
 		return \
-		(printf("Map not surrounded by walls or invalid char in map.\n"), 1);
+	(printf("Error\nMap not surrounded by walls\n"), 1);
 	return (0);
 }
