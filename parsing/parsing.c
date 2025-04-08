@@ -6,7 +6,7 @@
 /*   By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:53:01 by mlapique          #+#    #+#             */
-/*   Updated: 2025/03/27 17:59:59 by mlapique         ###   ########.fr       */
+/*   Updated: 2025/04/02 16:41:12 by mlapique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	floodfill(int x, int y, char **map, t_data_map data)
 
 	end = 0;
 	if (x + 1 == data.height && ft_strset(map[x], "EWSND0O"))
-		return(end++, -1);
+		return (end++, -1);
 	if (map[x][y] == '\0')
 		return (end++, -1);
 	if (isset(map[x][y], "10DONSEW") == 0)
@@ -79,7 +79,7 @@ int	is_map_surrounded_by_walls(t_map *data_map)
 	data_map->last_y = 0;
 	while (get_next_floor_pos(data_map) == 0)
 		if (floodfill(data_map->last_y, \
-						data_map->last_x, data_map->map_cpy, data_map->data) != 0)
+			data_map->last_x, data_map->map_cpy, data_map->data) != 0)
 			return (1);
 	return (0);
 }
