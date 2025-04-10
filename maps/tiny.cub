@@ -1,11 +1,9 @@
-
-NO ./textures/trgaspar.png
+NO ./textures/cmetg_lunettes.png
 SO ./textures/dave.png
-WE ./textures/ekrebs.png
-EA ./textures/illbeokay.png
-C 90,110,9999
+WE ./textures/illbeokay.png
+EA ./textures/tonton.png
+C 90,110,254
 F 111,94,90
-
 
 111
 1N1

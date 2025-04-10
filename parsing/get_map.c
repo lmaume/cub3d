@@ -6,7 +6,7 @@
 /*   By: lmaume <lmaume@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:52:55 by mlapique          #+#    #+#             */
-/*   Updated: 2025/04/08 15:45:01 by lmaume           ###   ########.fr       */
+/*   Updated: 2025/04/09 17:23:11 by lmaume           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ int	map_alloc(t_map *data_map, char **tab)
 	while (++i < size)
 	{
 		len = ft_strlen(tab[i]);
-		data_map->data.map[j] = ft_calloc(sizeof(char), len);
-		data_map->map_cpy[j] = ft_calloc(sizeof(char), len);
+		data_map->data.map[j] = ft_calloc(sizeof(char), len + 1);
+		data_map->map_cpy[j] = ft_calloc(sizeof(char), len + 1);
 		if (data_map->data.map[j] == NULL || data_map->map_cpy[j] == NULL)
 			return (1);
 		ft_memcpy(data_map->data.map[j], tab[i], len);

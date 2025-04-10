@@ -6,7 +6,7 @@
 /*   By: lmaume <lmaume@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:53:01 by mlapique          #+#    #+#             */
-/*   Updated: 2025/04/08 17:02:19 by lmaume           ###   ########.fr       */
+/*   Updated: 2025/04/10 13:51:46 by lmaume           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,13 @@ int	parse_struct(t_map *data, char *filename)
 	int	j;
 
 	i = 0;
-	j = 0;
 	if (init_struct(data, filename) == 1)
 		return (1);
 	if (player_count(data) != 1)
 		return (printf("One player is needed, no more or less.\n"), 1);
 	while (i <= data->data.height)
 	{
+		j = 0;
 		while (j < (int)ft_strlen(data->map_cpy[i]) - 1)
 		{
 			if (isset(data->map_cpy[i][j], "10DONSEW \n") == false)
