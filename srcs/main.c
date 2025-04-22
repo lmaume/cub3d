@@ -6,7 +6,7 @@
 /*   By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:53:36 by mlapique          #+#    #+#             */
-/*   Updated: 2025/03/24 16:00:48 by mlapique         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:07:52 by mlapique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ static void	game_loop(void *ev)
 static void	game_start(t_eve *eve)
 {
 	mlx_set_cursor_mode(eve->mlx->mlx, MLX_MOUSE_DISABLED);
-	mlx_loop_hook(eve->mlx->mlx, mouse_move, eve);
-	mlx_loop_hook(eve->mlx->mlx, game_loop, eve);
-	mlx_loop_hook(eve->mlx->mlx, ft_hook, eve);
-	mlx_loop(eve->mlx->mlx);
+	if (mlx_loop_hook(eve->mlx->mlx, mouse_move, eve) && \
+	mlx_loop_hook(eve->mlx->mlx, game_loop, eve) && \
+	mlx_loop_hook(eve->mlx->mlx, ft_hook, eve))
+		mlx_loop(eve->mlx->mlx);
 }
 
 static int	mlx_start(t_eve *eve)
@@ -78,18 +78,20 @@ static int	mlx_start(t_eve *eve)
 	}
 	if (open_texture(eve) == 1)
 		return (printf("One or more file not found.\n"), \
-									free_everything(eve), 1);
+		mlx_terminate(eve->mlx->mlx), free_everything(eve), 1);
 	if (eve->mlx->image == NULL)
 	{
 		mlx_close_window(eve->mlx->mlx);
 		puts(mlx_strerror(mlx_errno));
-		return (free_everything(eve), EXIT_FAILURE);
+		return (mlx_terminate(eve->mlx->mlx), free_everything(eve), \
+		EXIT_FAILURE);
 	}
 	if (mlx_image_to_window(eve->mlx->mlx, eve->mlx->image, 0, 0) == -1)
 	{
 		mlx_close_window(eve->mlx->mlx);
 		puts(mlx_strerror(mlx_errno));
-		return (free_everything(eve), EXIT_FAILURE);
+		return (mlx_terminate(eve->mlx->mlx), free_everything(eve), \
+		EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }

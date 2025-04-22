@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmaume <lmaume@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:53:01 by mlapique          #+#    #+#             */
-/*   Updated: 2025/04/10 13:51:46 by lmaume           ###   ########.fr       */
+/*   Updated: 2025/04/16 16:29:21 by mlapique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ static int	floodfill(int x, int y, char **map, t_data_map data)
 	if (((int)ft_strlen(map[x]) - 1 <= y + 1) || \
 		(isset(map[x][y], "EWSND0O") == 1 && (y == 0 || x == 0)))
 		return (end++, -1);
-	if (map[x - 1][y] == '\n' || map[x + 1][y] == '\n')
+	if ((int)ft_strlen(map[x - 1]) <= y || (int)ft_strlen(map[x + 1]) <= y)
 		return (end++, -1);
-	if ((int)ft_strlen(map[x - 1]) <= x || (int)ft_strlen(map[x + 1]) <= x)
+	if (map[x - 1][y] == '\n' || map[x + 1][y] == '\n')
 		return (end++, -1);
 	map[x][y] = '1';
 	if (map[x + 1][0] != '\n' && isset(map[x + 1][y], "1\n\0") == 0)

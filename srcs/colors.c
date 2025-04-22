@@ -6,7 +6,7 @@
 /*   By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:53:10 by mlapique          #+#    #+#             */
-/*   Updated: 2025/03/21 17:53:12 by mlapique         ###   ########.fr       */
+/*   Updated: 2025/04/17 18:14:34 by mlapique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ uint32_t	get_color(char **colors)
 	green = ft_atoi(colors[1], &error);
 	blue = ft_atoi(colors[2], &error);
 	if (error == 1)
-		return (353638911);
+		return (printf("Error\n"), 353638911);
 	limit_colors(&red, &blue, &green);
 	color = 0;
 	color += red << 24;

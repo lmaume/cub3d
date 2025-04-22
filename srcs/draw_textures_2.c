@@ -6,7 +6,7 @@
 /*   By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 17:21:07 by mlapique          #+#    #+#             */
-/*   Updated: 2025/03/21 17:53:22 by mlapique         ###   ########.fr       */
+/*   Updated: 2025/04/17 18:08:42 by mlapique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ void	east(t_eve *eve, int *i, int *y)
 	int				x_tex;
 
 	y_tex = ((*y) - (HEIGHT * 0.5) + (eve->walls->walls_height * 0.5)) * \
-	eve->map->data.textures.east_texture->height / eve->walls->walls_height;
+	eve->map->data.textures.west_texture->height / eve->walls->walls_height;
 	x_tex = (fmod(eve->walls->y_touch[*i], VOLUME) * \
-	(eve->map->data.textures.east_texture->width) / VOLUME);
-	color = get_pixel(&*eve->map->data.textures.east_texture, x_tex, y_tex);
+	(eve->map->data.textures.west_texture->width) / VOLUME);
+	color = get_pixel(&*eve->map->data.textures.west_texture, x_tex, y_tex);
 	mlx_put_pixel(eve->mlx->image, *i, *y, color);
 }
 
@@ -61,9 +61,9 @@ void	west(t_eve *eve, int *i, int *y)
 	int				x_tex;
 
 	y_tex = ((*y) - (HEIGHT * 0.5) + (eve->walls->walls_height * 0.5)) * \
-	eve->map->data.textures.west_texture->height / eve->walls->walls_height;
+	eve->map->data.textures.east_texture->height / eve->walls->walls_height;
 	x_tex = (fmod(eve->walls->y_touch[*i], VOLUME) * \
-	(eve->map->data.textures.west_texture->width) / VOLUME);
-	color = get_pixel(&*eve->map->data.textures.west_texture, x_tex, y_tex);
+	(eve->map->data.textures.east_texture->width) / VOLUME);
+	color = get_pixel(&*eve->map->data.textures.east_texture, x_tex, y_tex);
 	mlx_put_pixel(eve->mlx->image, *i, *y, color);
 }

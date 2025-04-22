@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmaume <lmaume@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mlapique <mlapique@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 17:52:58 by mlapique          #+#    #+#             */
-/*   Updated: 2025/04/09 18:00:53 by lmaume           ###   ########.fr       */
+/*   Updated: 2025/04/17 17:44:46 by mlapique         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-static void	close_images(t_eve *eve)
+static int	close_images(t_eve *eve)
 {
 	if (!eve->map->data.textures.north_image || \
 		!eve->map->data.textures.south_image || \
 		!eve->map->data.textures.east_image || \
 		!eve->map->data.textures.west_image)
-		printf("Error\nTexture to Image fail.\n");
+		return (printf("Error\nTexture to Image fail.\n"), 1);
+	return (0);
 }
 
 int	open_texture(t_eve *eve)
@@ -42,8 +43,7 @@ int	open_texture(t_eve *eve)
 		eve->map->data.textures.east_texture);
 	eve->map->data.textures.west_image = mlx_texture_to_image(eve->mlx->mlx, \
 		eve->map->data.textures.west_texture);
-	close_images(eve);
-	return (0);
+	return (close_images(eve));
 }
 
 static int	init_var(char **tab, char **str, char *opt)
